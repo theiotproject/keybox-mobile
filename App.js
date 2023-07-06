@@ -1,0 +1,46 @@
+// import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import HomeScreen from './screens/HomeScreen';
+import { PaperProvider, useTheme } from 'react-native-paper';
+import themes from './utils/themes';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
+  // getting current theme
+
+  const currentTheme = theme;
+
+
+  // Elements are in navigation containee so you can change between screens (like in android studio)
+  return (
+    // PaperProvider is used for setting app theme
+    <PaperProvider theme={currentTheme}>
+      {/* NavigationContainer is used for navigating app*/}
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
+          <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
+          <Stack.Screen name="Home" options={{ headerBackVisible: false }} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+ 
+});
