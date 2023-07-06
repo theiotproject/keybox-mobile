@@ -1,11 +1,12 @@
-import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, StyleSheet,  TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, ImageBackground, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Button, Checkbox, Text, TextInput } from 'react-native-paper';
+import {  Button, Checkbox } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
+import WrappedTextInput from '../components/WrappedTextInput';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -15,14 +16,13 @@ const SignInScreen = () => {
     // Variables used for setting an email
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    
     const [rememberUser, setRememberUser] = useState(false);
 
 
     const navigation = useNavigation();
 
 
-  
 
     
     // Go to home screen on login
@@ -80,26 +80,20 @@ const SignInScreen = () => {
             {/* CONTAINER FOR INPUTS */}
             <View style={styles.inputContainer}>
 
-                <View style={styles.inputWrapper}>
-                    <TextInput
-                        label="Email Address"
-                        value={ email }
-                        style={ styles.input }
-                        
-                        onChangeText={ text => setEmail(text)}
+                <WrappedTextInput
+                    label="Email Address"
+                    value={ email }
+                    onChangeText={text => setEmail(text)}
+                    canHide={false}
+                />
 
-                    />
-                </View>
-               
-                <View style={styles.inputWrapper}>
-                    <TextInput
-                        label="Password"
-                        value={ password }
-                        onChangeText={ text => setPassword(text)}
-                        secureTextEntry
-                        right={<TextInput.Icon icon="eye" />}
-                    />
-                </View>
+                <WrappedTextInput
+                    label="Password"
+                    value={ password }
+                    onChangeText={ text => setPassword(text)}
+                    canHide={true}
+                />
+
 
                 <View style={styles.checkboxContainer}>
                     <Checkbox.Item
@@ -140,7 +134,7 @@ const SignInScreen = () => {
                 />
 
                 <ClickableText
-                    text="Forgot Password?"
+                    text="Don't have an account? Sign Up"
                     handlePress={handleSignUp}
                 />
             </View>
@@ -223,7 +217,7 @@ const styles = StyleSheet.create({
     // IMAGE STYLES
 
     logoContainer: {
-        marginBottom: 25,
+        marginVertical: 50,
         width: 150,
         height: 150,
         alignItems: 'center',

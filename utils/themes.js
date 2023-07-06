@@ -8,5 +8,12 @@ export default theme = {
     ...DefaultTheme.colors,
     primary: '#3AA090',
     secondary: 'yellow',
+    // onSecondary: 'red',
+    tertiary: 'white',
+    surfaceVariant: 'white',
+    // onSurfaceVariant: 'white',//On TextInput etc
+    // outline: 'red', //Something
+    // surface: 'red',
+    onSurface:'#EEE'//Checkbox
   },
 }
