@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, Button, Checkbox, Text, TextInput } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
+import ClickableText from '../components/ClickableText';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -68,7 +69,6 @@ const SignInScreen = () => {
             style={styles.container}
             source={backgroundMain} 
         >
-
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
             <View style={styles.logoContainer}>
                 <Image 
@@ -129,33 +129,21 @@ const SignInScreen = () => {
                     >
                         SIGN IN
                 </Button>
-        
             </View>
 
              {/* CHANGE PASSWORD, REGISTER */}
              <View style={styles.clickableTextContainer}>
-                    {/* Forgot Password */}
-                    <TouchableOpacity 
-                        onPress={handleSignUp}
-                        style={[styles.clickableText]}
-                    >
-                        <Text> 
-                            Forgot Password?
-                        </Text>
-                    </TouchableOpacity>
+                {/* Forgot Password */}
+                <ClickableText
+                    text="Forgot Password?"
+                    handlePress={handleSignUp}
+                />
 
-                    {/* Sign Up*/}
-                    <TouchableOpacity
-                        onPress={handleSignUp}
-                        style={[styles.clickableText]}
-                    >
-                        <Text > 
-                            Sign Up!
-                        </Text>
-                    </TouchableOpacity>
-
-                </View>
-
+                <ClickableText
+                    text="Forgot Password?"
+                    handlePress={handleSignUp}
+                />
+            </View>
         </ImageBackground>
     )
 }
