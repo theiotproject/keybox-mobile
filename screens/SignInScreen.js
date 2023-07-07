@@ -1,12 +1,13 @@
-import { Dimensions, Image, ImageBackground, StyleSheet, View } from 'react-native'
+import { Dimensions, Image, ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import {  Button, Checkbox } from 'react-native-paper';
+import {  Button, Checkbox, TouchableRipple } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
+
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -38,13 +39,15 @@ const SignInScreen = () => {
 
     // Used for signing-up (used on button register)
     const handleSignUp = () => {
+        navigation.navigate('SignUp') 
+
         //Create user (NO EMAIL VALIDATION YET)
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                const user = auth.currentUser;
-                console.log('Registered with: ', user.email);
-            })
-            .catch(error => alert(error.message));
+        // createUserWithEmailAndPassword(auth, email, password)
+        //     .then(() => {
+        //         const user = auth.currentUser;
+        //         console.log('Registered with: ', user.email);
+        //     })
+        //     .catch(error => alert(error.message));
 
     }
 
@@ -52,13 +55,13 @@ const SignInScreen = () => {
     const handleSignIn = () => {
         // Sign in to app
         signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                const user = auth.currentUser;
-                console.log('Logged in with: ', user.email);
-            })
-            .catch(error => alert(error.message));
+        .then(() => {
+            const user = auth.currentUser;
+            console.log('Logged in with: ', user.email);
+        })
+        .catch(error => alert(error.message));
         
-            // Change TextInput value "error" to true while not valid
+        // Change TextInput value "error" to true while not valid
 
     }
 
@@ -74,7 +77,6 @@ const SignInScreen = () => {
                 <Image 
                     style={styles.logoImage} 
                     source={logo} />
-
             </View>
 
             {/* CONTAINER FOR INPUTS */}
@@ -106,8 +108,7 @@ const SignInScreen = () => {
                         }}
                     />
                 </View>
-               
-
+            
             </View>
 
 
@@ -130,7 +131,7 @@ const SignInScreen = () => {
                 {/* Forgot Password */}
                 <ClickableText
                     text="Forgot Password?"
-                    handlePress={handleSignUp}
+                    handlePress={() => alert("Here will be passwor recovery")}
                 />
 
                 <ClickableText

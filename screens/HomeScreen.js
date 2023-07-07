@@ -1,31 +1,51 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { backgroundMain, logo } from '../assets';
-
+import { ImageBackground, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { backgroundMain } from '../assets';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import SignInScreen from './SignInScreen'
+import SignUpScreen from './SignUpScreen'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-paper';
 
 const HomeScreen = () => {
+  
+  const navigation = useNavigation();
+  
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  
+  const openDrawer = () => {
+    setIsDrawerOpen(true);
+  };
+  
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+  
+  const Drawer = createDrawerNavigator();
+
+
   return (
-    <ImageBackground
-            style={styles.container}
-            source={backgroundMain} >
+    <ImageBackground style={styles.container} source={backgroundMain}>  
+
+      <Button mode='contained' title='open' onPress={openDrawer}/>
+      <Button mode='contained' title='close' onPress={closeDrawer}/>
 
     </ImageBackground>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-
   container: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-    
 
-
-
-
-})
+  drawer: {
+    width: '70%',
+    backgroundColor: 'transparent',
+  },
+});

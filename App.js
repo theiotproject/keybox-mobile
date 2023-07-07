@@ -6,8 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
-import { PaperProvider, useTheme } from 'react-native-paper';
+import { Button, IconButton, PaperProvider, useTheme } from 'react-native-paper';
 import themes from './utils/themes';
+import { logo } from './assets';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
           <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
-          <Stack.Screen name="Home" options={{ headerBackVisible: false }} component={HomeScreen} />
+          <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
