@@ -9,8 +9,9 @@ import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
 
 
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
+
+
+
 
 const SignInScreen = () => {
 
@@ -51,7 +52,7 @@ const SignInScreen = () => {
 
     }
 
-    // Used for signing-up (used on button register)
+    // SIGNING IN WITH EMAIL AND PASSWORD
     const handleSignIn = () => {
         // Sign in to app
         signInWithEmailAndPassword(auth, email, password)
@@ -124,6 +125,7 @@ const SignInScreen = () => {
                     >
                         SIGN IN
                 </Button>
+
             </View>
 
              {/* CHANGE PASSWORD, REGISTER */}
@@ -146,6 +148,7 @@ const SignInScreen = () => {
 export default SignInScreen
 
 const styles = StyleSheet.create({
+    
     container: {
         width: '100%',
         height: '100%',

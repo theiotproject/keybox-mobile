@@ -10,10 +10,9 @@ import WrappedTextInput from '../components/WrappedTextInput';
 import { useForm, Controller } from "react-hook-form"
 import validationSchema from '../utils/yup';
 import * as yup from 'yup';
-import { yupResolver } from "@hookform/resolvers/yup"
 
 
-// ToDo Replace TextInput with WrappedTextInput
+
 const SignUpScreen = () => {
 
     // USER VARIABLES
@@ -26,39 +25,32 @@ const SignUpScreen = () => {
     const [sendExtraEmails, setSendExtraEmails] = useState(false);
     const navigation = useNavigation();
 
-    
-    
-
     // FORM VARIABLES
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(validationSchema),
+    const { register, handleSubmit, setValue, errors } = useForm({
+        validationSchema,
         defaultValues: {
           username: '',
           email: '',
           password: '',
           passwordRepeat: '',
         },
-    });
+      });
 
-    const onSubmit = (data) => console.log(data);
-
-
-
-    
+    const onSubmit = (data) => console.log(data)
 
     // -------------
 
 
     const handleSignUp = () => {
-        
-        //CreateUser
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            const user = auth.currentUser;
-            console.log('Registered with: ', user.email);
-        })
-        .catch(error => alert(error.message));
-      
+        if(validateData()) {
+            //CreateUser
+            createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                const user = auth.currentUser;
+                console.log('Registered with: ', user.email);
+            })
+            .catch(error => alert(error.message));
+        }
 
     }
 
@@ -88,107 +80,44 @@ const SignUpScreen = () => {
         {/* CONTAINER FOR INPUTS */}
         <View style={styles.inputContainer}>
 
-            {/* USERNAME */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                <>
-                    <TextInput
-                        label='username'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Username"
-                        error={errors.username ? errors.username.message : null}
-                    />
-                    {errors.username && (
-                    <Text style={{ color: 'red' }}>{errors.username.message}</Text>
-                    )}
-                </>
-                )}
+           {/* USERNAME */}
+            <WrappedTextInput
+                label="Username"
+                onChangeText={(text) => setValue('username', text)}
+                error={errors.username?.message}
+                ref={register}
                 name="username"
-                rules={{ required: true }}
-                defaultValue=""
+                canHide={false}
             />
 
             {/* EMAIL */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Email'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Email Address"
-                        error={errors.email ? errors.email.message : null}
-
-                    />
-                    {errors.email && (
-                    <Text style={{ color: 'red' }}>{errors.email.message}</Text>
-                    )}
-                </>
-                )}
+            <WrappedTextInput
+                label="Email Address"
+                onChangeText={(text) => setValue('email', text)}
+                error={errors.email?.message}
+                ref={register}
                 name="email"
-                rules={{ required: true }}
-                defaultValue=""
+                canHide={false}
             />
 
             {/* PASSWORD */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Password'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Password"
-                        error={errors.password ? errors.password.message : null}
-                        secureTextEntry
-                    />
-                    {errors.password && (
-                    <Text style={{ color: 'red' }}>{errors.password.message}</Text>
-                    )}
-                </>
-                )}
+            <WrappedTextInput
+                label="Password"
+                onChangeText={(text) => setValue('password', text)}
+                error={errors.password?.message}
+                ref={register}
                 name="password"
-                rules={{ required: true }}
-                defaultValue=""
+                canHide={true}
             />
 
             {/* REPEAT PASSWORD */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Repeat Password'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Repeat Password"
-                        error={errors.repeatPassword ? errors.repeatPassword.message : null}
-                        secureTextEntry
-                    />
-                    {errors.passwordRepeat && (
-                    <Text style={{ color: 'red' }}>{errors.passwordRepeat.message}</Text>
-                    )}
-                </>
-                )}
+            <WrappedTextInput
+                label="Repeat Password"
+                onChangeText={(text) => setValue('passwordRepeat', text)}
+                error={errors.passwordRepeat?.message}
+                ref={register}
                 name="passwordRepeat"
-                rules={{ required: true }}
-                defaultValue=""
+                canHide={true}
             />
         
         </View>
@@ -266,12 +195,6 @@ const styles = StyleSheet.create({
         marginTop: 25,
     },  
 
-    // CONTROLLERS - input
-   
-    controller: {
-        paddingVertical: 20,
-    },
-
     
     // BUTTON STYLES
 
@@ -334,8 +257,7 @@ const styles = StyleSheet.create({
     },
 
 
-    // CLICKABLE TEXT
-
+    // CLICKABLE TEXT CONTAINER
     clickableTextContainer: {
         padding: 10,
         flexDirection: 'row',
@@ -348,9 +270,6 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
     },
-
-    
-
 
 
 })
