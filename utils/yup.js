@@ -7,10 +7,10 @@ const validationSchema = yup.object().shape({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password is required'),
-  repeatPassword: yup
+  confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Repeat Password is required'),
+    // .oneOf([yup.ref('password'), null], 'Passwords must match')
+    // .required('Password confirmation is required'),
 });
 
 export default validationSchema;

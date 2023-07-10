@@ -1,7 +1,7 @@
 import { Image, ImageBackground, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import {  Button, Checkbox, Text, TextInput } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
@@ -20,7 +20,7 @@ const SignUpScreen = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     
     const [sendExtraEmails, setSendExtraEmails] = useState(false);
@@ -36,11 +36,20 @@ const SignUpScreen = () => {
           username: '',
           email: '',
           password: '',
-          passwordRepeat: '',
+          confirmPassword: '',
         },
     });
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        setUsername(data.username);
+        setEmail(data.email);
+        setPassword(data.password);
+        console.log(errors);
+
+        signUp();
+    
+    };
 
 
 
@@ -49,13 +58,17 @@ const SignUpScreen = () => {
     // -------------
 
 
-    const handleSignUp = () => {
+    const signUp = () => {
         
         //CreateUser
         createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
             const user = auth.currentUser;
             console.log('Registered with: ', user.email);
+            // Setting Username
+            user.updateProfile({
+                displayName: username,
+            })
         })
         .catch(error => alert(error.message));
       
@@ -177,12 +190,12 @@ const SignUpScreen = () => {
                         onChangeText={field.onChange}
                         onBlur={field.onBlur}
                         value={field.value}
-                        placeholder="Repeat Password"
-                        error={errors.repeatPassword ? errors.repeatPassword.message : null}
+                        placeholder="Confirm Password"
+                        error={errors.confirmPassword ? errors.confirmPassword.message : null}
                         secureTextEntry
                     />
-                    {errors.passwordRepeat && (
-                    <Text style={{ color: 'red' }}>{errors.passwordRepeat.message}</Text>
+                    {errors.confirmPassword && (
+                    <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
                     )}
                 </>
                 )}
@@ -227,7 +240,7 @@ const SignUpScreen = () => {
             {/* Forgot Password */}
             <ClickableText
                 text="Forgot Password?"
-                handlePress={handleSignUp}
+                handlePress={null}
             />
 
             <ClickableText
