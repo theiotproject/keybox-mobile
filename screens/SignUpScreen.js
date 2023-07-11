@@ -12,7 +12,8 @@ import validationSchema from '../utils/yupShema';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import Spacer from '../components/Spacer';
-import { signUp } from '../utils/signUp';
+import { signUp } from '../utils/userHandler';
+
 
 
 
@@ -54,8 +55,6 @@ const SignUpScreen = () => {
         // Sign Up
         signUp(auth, data.email, data.password, data.username);
 
-      
-    
     };
 
 

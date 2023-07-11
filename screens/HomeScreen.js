@@ -8,6 +8,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button, Text } from 'react-native-paper';
 import { auth } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
+import { signOut } from '../utils/userHandler';
 
 const HomeScreen = () => {
   
@@ -42,8 +43,15 @@ const HomeScreen = () => {
   return (
     <ImageBackground style={styles.container} source={backgroundMain}>  
 
-      <Button mode='contained' title='open' onPress={openDrawer}/>
-      <Button mode='contained' title='close' onPress={closeDrawer}/>
+      <Button mode='contained' title='open' onPress={openDrawer}>
+        OPEN DRAWER
+      </Button>
+      <Button mode='contained' title='close' onPress={closeDrawer}>
+        CLOSE DRAWER
+      </Button>
+      <Button mode='contained' title='LogOut' text="LogOut" onPress={() => signOut()}>
+        LOG OUT
+      </Button>
 
       <Text>{username}</Text> 
 
