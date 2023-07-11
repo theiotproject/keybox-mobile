@@ -7,10 +7,7 @@ import {  Button, Checkbox, TouchableRipple } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
-import signIn from '../utils/signIn';
-
-
-
+import { signIn, signInGoogle } from '../utils/signIn';
 
 
 

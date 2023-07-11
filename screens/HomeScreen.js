@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { backgroundMain } from '../assets';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import SignInScreen from './SignInScreen'
@@ -15,14 +15,15 @@ const HomeScreen = () => {
   
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
 
-  // If no user, then go back to login
-  if (!user) {
-    console.log('you are not logged in')
-    navigation.navigate('SignIn')
-    return null;
-  }
-
+  //If not logged in go to sign in screen 
+  useEffect(() => {
+    if (!user && navigation) {
+      navigation.navigate('SignIn');
+      alert('You are not logged in. Please log in.');
+    }
+  }, [ user, navigation ]);
 
   // DRAWER CONTROL
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -44,7 +45,7 @@ const HomeScreen = () => {
       <Button mode='contained' title='open' onPress={openDrawer}/>
       <Button mode='contained' title='close' onPress={closeDrawer}/>
 
-      {/* <Text>{auth.currentUser.displayName}</Text>  */}
+      <Text>{username}</Text> 
 
     </ImageBackground>
   );

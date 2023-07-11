@@ -30,9 +30,9 @@ export default function App() {
         <AuthProvider >
           {/* Navigation */}
           <Stack.Navigator>
-            <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
             <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
+            <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
           </Stack.Navigator>
         </AuthProvider>
       </NavigationContainer>

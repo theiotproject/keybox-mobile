@@ -20,6 +20,8 @@ export default {
       "supportsTablet": true
     },
     "android": {
+      "package": process.env.ANDROID_PACKAGE_NAME,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -36,6 +38,6 @@ export default {
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
       firebaseGoogleWebClientId: process.env.FIREBASE_GOOGLE_WEB_CLIENT_ID
-    }
+    },
   }
 }
