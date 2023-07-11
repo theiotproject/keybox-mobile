@@ -12,7 +12,9 @@ import validationSchema from '../utils/yupShema';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import Spacer from '../components/Spacer';
-import signUp from '../utils/signUp';
+import { signUp } from '../utils/signUp';
+
+
 
 
 // ToDo Replace TextInput with WrappedTextInput
@@ -50,7 +52,9 @@ const SignUpScreen = () => {
         console.log(errors);
 
         // Sign Up
-        signUp(data.email, data.password, data.username);
+        signUp(auth, data.email, data.password, data.username);
+
+      
     
     };
 
