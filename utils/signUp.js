@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-export default signUp = ( auth, email, password, username ) => {
+export const signUp = ( auth, email, password, username ) => {
         
     //Create user + return user or error
     return (
