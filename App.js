@@ -9,6 +9,7 @@ import HomeScreen from './screens/HomeScreen';
 import { Button, IconButton, PaperProvider, useTheme } from 'react-native-paper';
 import themes from './utils/themes';
 import { logo } from './assets';
+import { AuthProvider } from './context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +26,15 @@ export default function App() {
     <PaperProvider theme={currentTheme}>
       {/* NavigationContainer is used for navigating app*/}
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
-          <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
-          <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
-        </Stack.Navigator>
+        {/* Provider for authentication */}
+        <AuthProvider >
+          {/* Navigation */}
+          <Stack.Navigator>
+            <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
+            <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
+            <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
+          </Stack.Navigator>
+        </AuthProvider>
       </NavigationContainer>
     </PaperProvider>
   );
