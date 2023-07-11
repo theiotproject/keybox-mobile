@@ -24,3 +24,4 @@ A repository for KeyBox Mobile App
 * @react-native-google-signin/google-signin - `10.0.1^`
 * yup - `1.2.0^`
 * dotenv - `16.3.1^`
+* @babel/core - `7.20.0^`
