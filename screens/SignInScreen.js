@@ -7,6 +7,7 @@ import {  Button, Checkbox, TouchableRipple } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
+import signIn from '../utils/signIn';
 
 
 
@@ -54,16 +55,8 @@ const SignInScreen = () => {
 
     // SIGNING IN WITH EMAIL AND PASSWORD
     const handleSignIn = () => {
-        // Sign in to app
-        signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            const user = auth.currentUser;
-            console.log('Logged in with: ', user.email);
-        })
-        .catch(error => alert(error.message));
         
-        // Change TextInput value "error" to true while not valid
-
+        signIn(email, password);
     }
 
 

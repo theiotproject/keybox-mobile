@@ -8,9 +8,11 @@ import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
 import { useForm, Controller } from "react-hook-form"
-import validationSchema from '../utils/yup';
+import validationSchema from '../utils/yupShema';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
+import Spacer from '../components/Spacer';
+import signUp from '../utils/signUp';
 
 
 // ToDo Replace TextInput with WrappedTextInput
@@ -47,7 +49,8 @@ const SignUpScreen = () => {
         setPassword(data.password);
         console.log(errors);
 
-        signUp();
+        // Sign Up
+        signUp(data.email, data.password, data.username);
     
     };
 
@@ -58,22 +61,7 @@ const SignUpScreen = () => {
     // -------------
 
 
-    const signUp = () => {
-        
-        //CreateUser
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            const user = auth.currentUser;
-            console.log('Registered with: ', user.email);
-            // Setting Username
-            user.updateProfile({
-                displayName: username,
-            })
-        })
-        .catch(error => alert(error.message));
-      
-
-    }
+    
 
     const handleSignIn = () => {
         navigation.navigate('SignIn')
@@ -90,11 +78,10 @@ const SignUpScreen = () => {
     >
         {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
         <View style={styles.logoContainer}>
-
+           
             <Image 
                 style={styles.logoImage} 
                 source={logo} />
-
 
         </View>
 
@@ -106,100 +93,105 @@ const SignUpScreen = () => {
                 style={styles.controller}
                 control={control}
                 render={({ field }) => (
-                <>
-                    <TextInput
-                        label='username'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Username"
-                        error={errors.username ? errors.username.message : null}
-                    />
-                    {errors.username && (
-                    <Text style={{ color: 'red' }}>{errors.username.message}</Text>
-                    )}
-                </>
+                    <>
+                        <TextInput
+                            label='Username'
+                            mode='flat'
+                            onChangeText={field.onChange}
+                            onBlur={field.onBlur}
+                            value={field.value}
+                            placeholder="Username"
+                            error={errors.username ? errors.username.message : null}
+                        />
+                        {errors.username && (
+                        <Text style={{ color: 'red' }}>{errors.username.message}</Text>
+                        )}
+                    </>
                 )}
                 name="username"
                 rules={{ required: true }}
                 defaultValue=""
             />
 
+            <Spacer/>
+
             {/* EMAIL */}
             <Controller
                 style={styles.controller}
                 control={control}
                 render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Email'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Email Address"
-                        error={errors.email ? errors.email.message : null}
-
-                    />
-                    {errors.email && (
-                    <Text style={{ color: 'red' }}>{errors.email.message}</Text>
-                    )}
-                </>
+                    <>
+                        <TextInput
+                            label='Email'
+                            mode='flat'
+                            onChangeText={field.onChange}
+                            onBlur={field.onBlur}
+                            value={field.value}
+                            placeholder="Email Address"
+                            error={errors.email ? errors.email.message : null}
+                        />
+                        {errors.email && (
+                        <Text style={{ color: 'red' }}>{errors.email.message}</Text>
+                        )}
+                    </>
                 )}
                 name="email"
                 rules={{ required: true }}
                 defaultValue=""
             />
 
+            <Spacer/>
+
             {/* PASSWORD */}
             <Controller
                 style={styles.controller}
                 control={control}
                 render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Password'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Password"
-                        error={errors.password ? errors.password.message : null}
-                        secureTextEntry
-                    />
-                    {errors.password && (
-                    <Text style={{ color: 'red' }}>{errors.password.message}</Text>
-                    )}
-                </>
+                    <>
+                        <TextInput
+                            label='Password'
+                            mode='flat'
+                            onChangeText={field.onChange}
+                            onBlur={field.onBlur}
+                            value={field.value}
+                            placeholder="Password"
+                            error={errors.password ? errors.password.message : null}
+                            secureTextEntry
+                        />
+                        {errors.password && (
+                        <Text style={{ color: 'red' }}>{errors.password.message}</Text>
+                        )}
+                    </>
                 )}
                 name="password"
                 rules={{ required: true }}
                 defaultValue=""
             />
 
+            <Spacer/>
+
             {/* REPEAT PASSWORD */}
             <Controller
                 style={styles.controller}
                 control={control}
                 render={({ field }) => (
-                <>
-                    <TextInput
-                        label='Repeat Password'
-                        mode='flat'
-                        onChangeText={field.onChange}
-                        onBlur={field.onBlur}
-                        value={field.value}
-                        placeholder="Confirm Password"
-                        error={errors.confirmPassword ? errors.confirmPassword.message : null}
-                        secureTextEntry
-                    />
-                    {errors.confirmPassword && (
-                    <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
-                    )}
-                </>
+                    <>
+                        <TextInput
+                            label='Confirm Password'
+                            mode='flat'
+                            onChangeText={field.onChange}
+                            onBlur={field.onBlur}
+                            value={field.value}
+                            placeholder="Confirm Password"
+                            error={errors.confirmPassword ? errors.confirmPassword.message : null}
+                            secureTextEntry
+                        />
+                        {errors.confirmPassword && (
+                        <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
+                        )}
+                    </>
                 )}
-                name="passwordRepeat"
+                name="confirmPassword"
                 rules={{ required: true }}
                 defaultValue=""
             />

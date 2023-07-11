@@ -5,7 +5,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import SignInScreen from './SignInScreen'
 import SignUpScreen from './SignUpScreen'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
+import { auth } from '../firebase';
 
 const HomeScreen = () => {
   
@@ -29,6 +30,8 @@ const HomeScreen = () => {
 
       <Button mode='contained' title='open' onPress={openDrawer}/>
       <Button mode='contained' title='close' onPress={closeDrawer}/>
+
+      <Text>{auth.currentUser.displayName}</Text> 
 
     </ImageBackground>
   );

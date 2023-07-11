@@ -5,12 +5,13 @@ const validationSchema = yup.object().shape({
   email: yup.string().email('Enter a valid email').required('Email is required'),
   password: yup
     .string()
-    .min(6, 'Password must be at least 6 characters')
+    .min(8, 'Password must be at least 8 characters')
+    .max(32, "Password cannot exceed more than 32 characters")
     .required('Password is required'),
   confirmPassword: yup
     .string()
-    // .oneOf([yup.ref('password'), null], 'Passwords must match')
-    // .required('Password confirmation is required'),
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Password confirmation is required'),
 });
 
 export default validationSchema;
