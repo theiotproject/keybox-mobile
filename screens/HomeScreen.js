@@ -2,17 +2,21 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { backgroundMain } from '../assets';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import SignInScreen from './SignInScreen'
-import SignUpScreen from './SignUpScreen'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button, Text } from 'react-native-paper';
 import { auth } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
 import { signOut } from '../utils/userHandler';
+import LogoutModal from '../components/LogOutModal';
+import { FlatList } from 'react-native-gesture-handler';
+
 
 const HomeScreen = () => {
   
   const navigation = useNavigation();
+
+  // MODALS
+  const [ logout, setLogout ] = useState(false)
   
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
@@ -49,11 +53,26 @@ const HomeScreen = () => {
       <Button mode='contained' title='close' onPress={closeDrawer}>
         CLOSE DRAWER
       </Button>
+      <Button mode='contained' title='close' onPress={() => {
+        setLogout(true)
+      }}>
+        MODAL
+      </Button>
       <Button mode='contained' title='LogOut' text="LogOut" onPress={() => signOut()}>
         LOG OUT
       </Button>
 
-      <Text>{username}</Text> 
+      { user ? <Text>{username}</Text> : null }
+
+      <LogoutModal 
+        visible={logout} 
+        handleSignOut={() => {
+          signOut()
+          setLogout(false) 
+        }} 
+        handleDismiss={() => setLogout(false)} 
+      />
+      
 
     </ImageBackground>
   );

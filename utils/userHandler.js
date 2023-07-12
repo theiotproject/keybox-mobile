@@ -1,7 +1,6 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut as signOutFirebase } from "firebase/auth";
 import { auth } from "../firebase";
-import { Dialog, Portal } from "react-native-paper";
-import SignOutDialog from "../components/SignOutDialog";
+import LogoutModal from "../components/LogOutModal";
 
 // -------------------------------------------------
 // SIGNING UP
@@ -40,5 +39,5 @@ export const signIn = ( email, password ) => {
 // -------------------------------------------------
 // SIGNING OUT
 export const signOut = () => {
-    signOutFirebase(auth);
+    signOutFirebase(auth);    
 }
