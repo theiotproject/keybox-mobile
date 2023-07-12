@@ -7,7 +7,7 @@ A repository for KeyBox Mobile App
 
 ### npm packages
 
- `^ -> or higher`
+ > ^ -> or higher
 * react - `18.2.0^`
 * react-hook-form - `7.45.1^`
 * @hookform/resolvers - `3.1.1^`
