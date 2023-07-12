@@ -78,7 +78,60 @@ A repository for KeyBox Mobile App
 ### Running on Your Device
 
 * Download [Expo App](https://expo.dev/client)
-* Scan QR Code From Your Terminal OR Use Generated Code Instead (ex. `exp://3333.1.333.333:4444`)
+* Scan QR Code From Your Terminal OR Use Generated Code Instead (ex. `exp://333.1.333.333:4444`)
 
+
+
+
+## /Components
+
+> ### `ClickableText.js`
+>
+> #### *Description*
+>
+> Text that you can click/press and execute provided function
+>
+> #### *Parameters*: 
+>
+> > `text` - Text that will be displayed in component  
+> > `handlePress` - Function which will be executed on click 
+>   
+>   <br/>
+
+
+## /Screens
+
+
+## /Utils
+
+> ### `themes.js`
+> 
+> #### *Description* 
+> > Provides themes to App Screens 
+>   
+>   <br/>
+
+> ### `userHandler.js`
+> 
+> #### *Description* 
+> > Provides operations on user such as `signIn`, `signUp`, `signOut` for managing user status
+>   
+>   <br/>
+
+> ### `yupSchema.js`
+> 
+> #### *Description* 
+> > Provides `yup` shema to use in form in `SignUpScreen`
+>   
+>   <br/>
+
+## /Context
+
+> ### `AuthContext.js`
+> 
+> #### *Description* 
+> > Provides user status throughout Application
+>   
+>   <br/>
         
   
