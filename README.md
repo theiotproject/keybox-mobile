@@ -39,7 +39,7 @@ A repository for KeyBox Mobile App
 * Create Expo App `npx create-expo-app <YOUR APP NAME>`
   * [Example](https://docs.expo.dev/tutorial/create-your-first-app/)
 * Install required `npm packages` with `npm install <PACKAGE NAME>` or `npm i <PACKAGE NAME>`
-> Note: If you are using [VS Code](https://code.visualstudio.com/download) you could download [NPM extension by Kasper Mikiewicz](https://marketplace.visualstudio.com/items?itemName=idered.npm) which allows You to manage node packages via [VS Code](https://code.visualstudio.com/download) sidebar
+> Note: If you are using [VS Code](https://code.visualstudio.com/download) you could download [NPM extension by Kasper Mikiewicz](https://marketplace.visualstudio.com/items?itemName=idered.npm) which allows You to manage node packages via [VS Code](https://code.visualstudio.com/download) sidebar, makes updating and changing packages versions easier  
 * Create `.env` file for your firebase credentials based on `.env.example` (or just rename `.env.example` to `.env`) and fill the credentials
 
 ### Third party
@@ -146,6 +146,24 @@ A repository for KeyBox Mobile App
 
 ## /Screens
 
+> ### `HomeScreen.js`
+> #### *Description*
+> > Main Screen for managing user and devices
+>
+> <br>
+
+> ### `SignInScreen.js`
+> #### *Description*
+> > Screen for Signing In/ Logging In to Application with [Firebase](https://firebase.google.com/)
+>
+> <br>
+
+> ### `SignUpScreen.js`
+> #### *Description*
+> > Screen for Signing Up to Application with [Firebase](https://firebase.google.com/)
+>
+> <br>
+
 
 ## /Utils
 
@@ -156,7 +174,6 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
-<!-- ------------------------------------- -->
 
 > ### `userHandler.js`
 > 
@@ -165,7 +182,6 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
-<!-- ------------------------------------- -->
 
 > ### `yupSchema.js`
 > 
@@ -174,7 +190,6 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
-<!-- ------------------------------------- -->
 
 ## /Context
 
