@@ -39,7 +39,8 @@ A repository for KeyBox Mobile App
 * Create Expo App `npx create-expo-app <YOUR APP NAME>`
   * [Example](https://docs.expo.dev/tutorial/create-your-first-app/)
 * Install required `npm packages` with `npm install <PACKAGE NAME>` or `npm i <PACKAGE NAME>`
-* Create `.env` file for your firebase credentials
+> Note: If you are using [VS Code](https://code.visualstudio.com/download) you could download [NPM extension by Kasper Mikiewicz](https://marketplace.visualstudio.com/items?itemName=idered.npm) which allows You to manage node packages via [VS Code](https://code.visualstudio.com/download) sidebar
+* Create `.env` file for your firebase credentials based on `.env.example` (or just rename `.env.example` to `.env`) and fill the credentials
 
 ### Third party
 
@@ -64,7 +65,8 @@ A repository for KeyBox Mobile App
   * Install Android SDK (in Android Studio)
   * Create new Project
   * Go to `Tools -> Device Manager`
-      * Create New Device ( Select Model of Your Liking) > I have tested it on `Pixel 4 API 30`
+      * Create New Device ( Select Model of Your Liking)  
+        * `*Works on Pixel 4 API 30`
       * Install Android System
  
 ## Running App
@@ -98,6 +100,8 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- ------------------------------------- -->
+
 > ### `LogOutModal.js`
 >
 > #### *Description*
@@ -112,6 +116,8 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- ------------------------------------- -->
+
 > ### `Spacer.js`
 >
 > #### *Description*
@@ -119,6 +125,8 @@ A repository for KeyBox Mobile App
 > Component with vertical margin to be placed between components that are not capable of using margin for some reason...
 >   
 >   <br/>
+
+<!-- ------------------------------------- -->
 
 > ### `WrappedTextInput.js`
 >
@@ -134,6 +142,7 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- ------------------------------------- -->
 
 ## /Screens
 
@@ -147,6 +156,8 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- ------------------------------------- -->
+
 > ### `userHandler.js`
 > 
 > #### *Description* 
@@ -154,12 +165,16 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- ------------------------------------- -->
+
 > ### `yupSchema.js`
 > 
 > #### *Description* 
 > > Provides `yup` shema to use in form in `SignUpScreen`
 >   
 >   <br/>
+
+<!-- ------------------------------------- -->
 
 ## /Context
 
