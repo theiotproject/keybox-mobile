@@ -53,7 +53,7 @@ A repository for KeyBox Mobile App
   * Create Web App
     * Copy Firebase SDK Credentials Into `.env`
   * TO BE CONTINUED
-  * [In-Depth Tutorial](https://blog.logrocket.com/integrating-firebase-authentication-expo-mobile-app/) 
+  > [In-Depth Tutorial](https://blog.logrocket.com/integrating-firebase-authentication-expo-mobile-app/) 
 
 #### Android Studio
   
@@ -83,7 +83,7 @@ A repository for KeyBox Mobile App
 * Scan QR Code From Your Terminal OR Use Generated Code Instead (ex. `exp://333.1.333.333:4444`)
 
 
-
+<!-- -------------------------------------------- -->
 
 ## /Components
 
@@ -91,7 +91,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> Text that you can click/press and execute provided function
+> > Text that you can click/press and execute provided function
 >
 > #### *Parameters*: 
 >
@@ -106,7 +106,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> Modal used when logging out of Application
+> > Modal used when logging out of Application
 >
 > #### *Parameters*: 
 >
@@ -122,7 +122,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> Component with vertical margin to be placed between components that are not capable of using margin for some reason...
+> > Component with vertical margin to be placed between components that are not capable of using margin for some reason...
 >   
 >   <br/>
 
@@ -132,7 +132,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/) but wrapped in [View](https://reactnative.dev/docs/view) so it can use margin. 
+> > [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/) but wrapped in [View](https://reactnative.dev/docs/view) so it can use margin. 
 >
 > #### *Parameters*
 > > `label` - label for [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/)  
@@ -164,6 +164,7 @@ A repository for KeyBox Mobile App
 >
 > <br>
 
+<!-- -------------------------------------------- -->
 
 ## /Utils
 
@@ -190,6 +191,7 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+<!-- -------------------------------------------- -->
 
 ## /Context
 
