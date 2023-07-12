@@ -98,6 +98,42 @@ A repository for KeyBox Mobile App
 >   
 >   <br/>
 
+> ### `LogOutModal.js`
+>
+> #### *Description*
+>
+> Modal used when logging out of Application
+>
+> #### *Parameters*: 
+>
+> > `visible` - Boolean used for showing/hiding Modal 
+> > `handleSignOut` - Function to be executed on Sign Out (ex. Sign out of Application)
+> > `handleDismiss` - Function to be executed on Dismiss (ex. hide Modal)
+>   
+>   <br/>
+
+> ### `Spacer.js`
+>
+> #### *Description*
+>
+> Component with vertical margin to be placed between components that are not capable of using margin for some reason...
+>   
+>   <br/>
+
+> ### `WrappedTextInput.js`
+>
+> #### *Description*
+>
+> [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/) but wrapped in [View](https://reactnative.dev/docs/view) so it can use margin. 
+>
+> #### *Parameters*
+> > `label` - label for [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/)  
+> > `value ` - value for [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/) 
+> > `onChangeText` -  function to be executed on text change in [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/)  
+> > `canHide` -  boolean for making [TextInput](https://callstack.github.io/react-native-paper/docs/components/TextInput/) secure or not (`secureTextInput` value) and making it possible for user to show or hide text (WORK IN PROGRESS)
+>   
+>   <br/>
+
 
 ## /Screens
 
