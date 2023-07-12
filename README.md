@@ -198,7 +198,7 @@ A repository for KeyBox Mobile App
 > ### `AuthContext.js`
 > 
 > #### *Description* 
-> > Provides user status throughout Application
+> > Provides user status throughout Application ( if user exists -> if user is logged in) to prevent accessing screens that should be availible only to logged in users.
 >   
 >   <br/>
         
