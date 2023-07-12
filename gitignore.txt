@@ -18,6 +18,3 @@ web-build/
 
 # Hide .env
 .env
-
-# Google services
-/google-services.json

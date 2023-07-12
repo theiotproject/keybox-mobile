@@ -6,18 +6,37 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
+import { Button, IconButton, PaperProvider, useTheme } from 'react-native-paper';
+import themes from './utils/themes';
+import { logo } from './assets';
+import { AuthProvider } from './context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+  // getting current theme
+
+  const currentTheme = theme;
+
+
+  // Elements are in navigation containee so you can change between screens (like in android studio)
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
-        <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
-        <Stack.Screen name="Home" options={{ headerBackVisible: false }} component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // PaperProvider is used for setting app theme
+    <PaperProvider theme={currentTheme}>
+      {/* NavigationContainer is used for navigating app*/}
+      <NavigationContainer>
+        {/* Provider for authentication */}
+        <AuthProvider >
+          {/* Navigation */}
+          <Stack.Navigator>
+            <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
+            <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
+            <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />
+          </Stack.Navigator>
+        </AuthProvider>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 
