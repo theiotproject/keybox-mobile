@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut as signOutFirebase } from "firebase/auth";
 import { auth } from "../firebase";
 import LogoutModal from "../components/LogOutModal";
+import {AsyncStorage} from 'react-native';
 
 
 // -------------------------------------------------
@@ -24,11 +25,17 @@ export const signUp = ( auth, email, password, username ) => {
 
 // -------------------------------------------------
 // SIGNING IN
-export const signIn = ( email, password ) => {
+export const signIn = ( email, password, rememberUser ) => {
     // Sign in to app
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
         const user = auth.currentUser;
+        
+        // Save user in AsyncStorage
+        if(rememberUser)
+        {
+            // TODO Remember User
+        }
         console.log('Logged in with: ', user.email);
     })
     .catch(error => alert(error.message));

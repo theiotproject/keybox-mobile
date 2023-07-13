@@ -8,6 +8,7 @@ import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
 import { signIn, signInGoogle } from '../utils/userHandler';
+import {AsyncStorage} from 'react-native';
 
 
 
@@ -44,7 +45,7 @@ const SignInScreen = () => {
 
     // SIGNING IN WITH EMAIL AND PASSWORD
     const handleSignIn = () => {
-        signIn(email, password);
+        signIn(email, password, rememberUser);
     }
     
     const handleSignInGoogle = () => {
