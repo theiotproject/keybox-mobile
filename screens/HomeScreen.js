@@ -9,6 +9,7 @@ import { AuthContext } from '../context/AuthContext';
 import { signOut } from '../utils/userHandler';
 import LogoutModal from '../components/LogOutModal';
 import { FlatList } from 'react-native-gesture-handler';
+import KeyboxList from '../components/KeyBoxList';
 
 
 const HomeScreen = () => {
@@ -47,18 +48,16 @@ const HomeScreen = () => {
   return (
     <ImageBackground style={styles.container} source={backgroundMain}>  
 
+      <KeyboxList />
+
       <Button mode='contained' title='open' onPress={openDrawer}>
         OPEN DRAWER
       </Button>
       <Button mode='contained' title='close' onPress={closeDrawer}>
         CLOSE DRAWER
       </Button>
-      <Button mode='contained' title='close' onPress={() => {
-        setLogout(true)
-      }}>
-        MODAL
-      </Button>
-      <Button mode='contained' title='LogOut' text="LogOut" onPress={() => signOut()}>
+   
+      <Button mode='contained' title='LogOut' text="LogOut" onPress={() => setLogout(true)}>
         LOG OUT
       </Button>
 
