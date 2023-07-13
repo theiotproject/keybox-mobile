@@ -11,6 +11,11 @@ import themes from './utils/themes';
 import { logo } from './assets';
 import { AuthProvider } from './context/AuthContext';
 
+import { AppRegistry, Platform } from 'react-native';
+import 'expo-dev-client'
+
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

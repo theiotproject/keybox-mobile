@@ -17,6 +17,7 @@ const firebaseConfig = {
   appId: Constants.expoConfig?.extra?.firebaseAppId,
 };
 
+
 // Initialize Firebase
 let app;
 if (getApps().length === 0)

@@ -7,7 +7,7 @@ import {  Button, Checkbox, TouchableRipple } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
-import { signIn } from '../utils/userHandler';
+import { signIn, signInGoogle } from '../utils/userHandler';
 
 
 
@@ -40,23 +40,16 @@ const SignInScreen = () => {
     // Used for signing-up (used on button register)
     const handleSignUp = () => {
         navigation.navigate('SignUp') 
-
-        //Create user (NO EMAIL VALIDATION YET)
-        // createUserWithEmailAndPassword(auth, email, password)
-        //     .then(() => {
-        //         const user = auth.currentUser;
-        //         console.log('Registered with: ', user.email);
-        //     })
-        //     .catch(error => alert(error.message));
-
     }
 
     // SIGNING IN WITH EMAIL AND PASSWORD
     const handleSignIn = () => {
-        
         signIn(email, password);
     }
-
+    
+    const handleSignInGoogle = () => {
+        // signIn(email, password);
+    }
 
     return (
         
@@ -116,6 +109,21 @@ const SignInScreen = () => {
                     >
                         SIGN IN
                 </Button>
+               
+                {/* SIGN IN GOOGLE - BUTTON */}
+                <Button
+                    onPress={handleSignInGoogle}
+                    mode='outlined'
+                    uppercase={true}
+                    style = {styles.buttonOutlined}
+                    icon='google'
+                    
+                    >
+                        SIGN IN WITH GOOGLE 
+                </Button>
+
+
+                
 
             </View>
 
@@ -179,13 +187,14 @@ const styles = StyleSheet.create({
     
     button: {
         width: '100%',
+        marginBottom: 10
     },
 
-    buttonOutline: {
+    
+    buttonOutlined: {
+        color: 'white',
         backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#06F',
-        borderWidth:  2,
+        width: '100%',
     },
 
     buttonText: {
@@ -194,11 +203,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 
-    buttonOutlineText: {
-        color: '#06f',
-        fontWeight: 700,
-        fontSize: 16,
-    },
 
     // CHECKBOX
     checkboxContainer: {

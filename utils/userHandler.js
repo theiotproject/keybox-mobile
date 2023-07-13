@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfi
 import { auth } from "../firebase";
 import LogoutModal from "../components/LogOutModal";
 
+
 // -------------------------------------------------
 // SIGNING UP
 export const signUp = ( auth, email, password, username ) => {
@@ -35,10 +36,7 @@ export const signIn = ( email, password ) => {
 }
 
 
-// GOOGLE
-
-
-
+// > GOOGLE
 
 
 

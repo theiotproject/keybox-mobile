@@ -32,6 +32,10 @@ const SignUpScreen = () => {
     const navigation = useNavigation();
 
     
+    // GOOGLE USER VARIABLES
+    const [loggedIn, setloggedIn] = useState(false);
+    const [userInfo, setuserInfo] = useState([]);
+    
     
 
     // FORM VARIABLES
