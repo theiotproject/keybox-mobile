@@ -71,7 +71,7 @@ A repository for KeyBox Mobile App
         * Install Android System
           * From `x86 Images` (Why? Check [here](https://stackoverflow.com/questions/45517553/cant-change-the-ram-size-in-avd-manager-android-studio))  
             
-      > Note: if you have problem with black artifacts while emulating Android increase RAM amount - [Here's why](https://stackoverflow.com/questions/73349171/android-studio-avd-emulator-shows-a-black-flickering)
+      > Note: If you have problem with black artifacts while emulating Android increase RAM amount - [Here's why](https://stackoverflow.com/questions/73349171/android-studio-avd-emulator-shows-a-black-flickering)
  
 ## Running App
 
@@ -111,7 +111,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> > Modal used when logging out of Application
+> > Modal used when logging out of Application with Icon, Title, Text and Two buttons, one for Logging Out, other for dismissing Modal
 >
 > #### *Parameters*: 
 >
