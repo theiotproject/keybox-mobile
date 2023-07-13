@@ -21,7 +21,6 @@ export const signUp = ( auth, email, password, username ) => {
     )
 }
 
-
 // -------------------------------------------------
 // SIGNING IN
 export const signIn = ( email, password ) => {
@@ -34,6 +33,15 @@ export const signIn = ( email, password ) => {
     .catch(error => alert(error.message));
     
 }
+
+
+// GOOGLE
+
+
+
+
+
+
 
 
 // -------------------------------------------------

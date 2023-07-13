@@ -65,20 +65,25 @@ A repository for KeyBox Mobile App
   * Install Android SDK (in Android Studio)
   * Create new Project
   * Go to `Tools -> Device Manager`
-      * Create New Device ( Select Model of Your Liking)  
-        * `*Works on Pixel 4 API 30`
-      * Install Android System
+      * Create New `Android Virtual Device`  
+        * Select Model of Your Liking  
+          * `*Works on Pixel 4 API 30`
+        * Install Android System
+          * From `x86 Images` (Why? Check [here](https://stackoverflow.com/questions/45517553/cant-change-the-ram-size-in-avd-manager-android-studio))  
+            
+      > Note: If you have problem with black artifacts while emulating Android increase RAM amount - [Here's why](https://stackoverflow.com/questions/73349171/android-studio-avd-emulator-shows-a-black-flickering)
  
 ## Running App
 
 ### Android Emulation
 
-* Open Android Emulator in Android Studio
+* Open Android Emulator in Android Studio -`Android Virtual Device` (ex. `Pixel 4 API 30`)
 * Open Terminal in Project Terminal and Execute `npx expo start`
 * Press 'a' on Your Keyboard
 
 ### Running on Your Device
 
+* Open Terminal in Project Terminal and Execute `npx expo start`
 * Download [Expo App](https://expo.dev/client)
 * Scan QR Code From Your Terminal OR Use Generated Code Instead (ex. `exp://333.1.333.333:4444`)
 
@@ -106,7 +111,7 @@ A repository for KeyBox Mobile App
 >
 > #### *Description*
 >
-> > Modal used when logging out of Application
+> > Modal used when logging out of Application with Icon, Title, Text and Two buttons, one for Logging Out, other for dismissing Modal
 >
 > #### *Parameters*: 
 >
