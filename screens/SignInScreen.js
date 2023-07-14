@@ -1,19 +1,29 @@
-import { Dimensions, Image, ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, ImageBackground, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import {  Button, Checkbox, TouchableRipple } from 'react-native-paper';
+import {  Button, Checkbox, Text, TouchableRipple } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
 import { signIn, signInGoogle } from '../utils/userHandler';
 import {AsyncStorage} from 'react-native';
-
-
+import themes from '../utils/themes';
 
 
 const SignInScreen = () => {
+
+    // Easter Egg
+    const [clickCount, setClickCount] = useState(0);
+    const CountClicks = () => {
+        if(clickCount === 10){
+            alert('You really do like clicking things...')
+            setClickCount(0)
+        }else {
+            setClickCount(clickCount + 1)
+        }
+    }
 
     // Variables used for setting an email
     const [email, setEmail] = useState('');
@@ -23,8 +33,6 @@ const SignInScreen = () => {
 
 
     const navigation = useNavigation();
-
-
 
     
     // Go to home screen on login
@@ -50,86 +58,97 @@ const SignInScreen = () => {
     
     const handleSignInGoogle = () => {
         // signIn(email, password);
+        alert('You shall not Log In Ashen One. Inasmuch as this function does not work')
     }
 
     return (
         
-        <ImageBackground
+        <View
             style={styles.container}
-            source={backgroundMain} 
         >
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
             <View style={styles.logoContainer}>
-                <Image 
-                    style={styles.logoImage} 
-                    source={logo} />
+                {/* Unnecessary logic here */}
+                <Pressable style={styles.logoImage} 
+                    onPress={() => CountClicks()}
+                >
+                    <Image 
+                        style={styles.logoImage} 
+                        source={logo} />
+                </Pressable>
             </View>
-
-            {/* CONTAINER FOR INPUTS */}
-            <View style={styles.inputContainer}>
-
-                <WrappedTextInput
-                    label="Email Address"
-                    value={ email }
-                    onChangeText={text => setEmail(text)}
-                    canHide={false}
-                />
-
-                <WrappedTextInput
-                    label="Password"
-                    value={ password }
-                    onChangeText={ text => setPassword(text)}
-                    canHide={true}
-                />
-
-
-                <View style={styles.checkboxContainer}>
-                    <Checkbox.Item
-                        label='Remember Me'
-                        position='leading'
-                        style={styles.checkbox}
-                        status={rememberUser? 'checked' : 'unchecked'}
-                        onPress={() => {
-                            setRememberUser(!rememberUser);
-                        }}
-                    />
-                </View>
             
-            </View>
+            {/* HELLO TEXT */}
+            <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
 
 
-            {/* CONTAINER FOR BUTTONS */}
-            <View style={styles.buttonContainer}>
+            <View style={styles.formContainer}>
 
-                {/* SIGN IN - BUTTON */}
-                <Button
-                    onPress={handleSignIn}
-                    mode='contained'
-                    uppercase={true}
-                    style = {styles.button}
-                    >
-                        SIGN IN
-                </Button>
-               
-                {/* SIGN IN GOOGLE - BUTTON */}
-                <Button
-                    onPress={handleSignInGoogle}
-                    mode='outlined'
-                    uppercase={true}
-                    style = {styles.buttonOutlined}
-                    icon='google'
-                    
-                    >
-                        SIGN IN WITH GOOGLE 
-                </Button>
+                {/* CONTAINER FOR INPUTS */}
+                <View style={styles.inputContainer}>
+
+                    <WrappedTextInput
+                        label="Email Address"
+                        value={ email }
+                        onChangeText={text => setEmail(text)}
+                        canHide={false}
+                    />
+
+                    <WrappedTextInput
+                        label="Password"
+                        value={ password }
+                        onChangeText={ text => setPassword(text)}
+                        canHide={true}
+                    />
 
 
-                
+                    <View style={styles.checkboxContainer}>
+                        <Checkbox.Item
+                            label='Remember Me'
+                            position='leading'
+                            style={styles.checkbox}
+                            status={rememberUser? 'checked' : 'unchecked'}
+                            onPress={() => {
+                                setRememberUser(!rememberUser);
+                            }}
+                        />
+                    </View>
 
-            </View>
+                </View>
 
-             {/* CHANGE PASSWORD, REGISTER */}
-             <View style={styles.clickableTextContainer}>
+
+                {/* CONTAINER FOR BUTTONS */}
+                <View style={styles.buttonContainer}>
+
+                    {/* SIGN IN - BUTTON */}
+                    <Button
+                        onPress={handleSignIn}
+                        mode='contained'
+                        uppercase={true}
+                        style = {styles.button}
+                        >
+                            SIGN IN
+                    </Button>
+
+                    {/* OR */}
+                    <Text variant='labelLarge' style={styles.text}>or</Text>
+
+                    {/* SIGN IN GOOGLE - BUTTON */}
+                    <Button
+                        onPress={handleSignInGoogle}
+                        mode='contained'
+                        uppercase={true}
+                        style = {styles.buttonVariant}
+                        icon='google'
+                        
+                        >
+                            SIGN IN WITH GOOGLE 
+                    </Button>
+
+                </View>
+
+                {/* CHANGE PASSWORD, REGISTER */}
+                <View style={styles.clickableTextContainer}>
                 {/* Forgot Password */}
                 <ClickableText
                     text="Forgot Password?"
@@ -140,8 +159,11 @@ const SignInScreen = () => {
                     text="Don't have an account? Sign Up"
                     handlePress={handleSignUp}
                 />
+                </View>
+
             </View>
-        </ImageBackground>
+            
+        </View>
     )
 }
 
@@ -154,7 +176,12 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center'
-        
+    },
+
+    formContainer: {
+        width:'100%',
+        paddingTop: 25 ,
+        paddingHorizontal: '3%',
     },
 
     // INPUT STYLES
@@ -167,9 +194,6 @@ const styles = StyleSheet.create({
 
     input: {
         paddingHorizontal: 20,
-        // borderRadius: 5,
-        // borderWidth: 1,
-        // borderColor: '#CCC',
     },
 
     inputWrapper: {
@@ -188,22 +212,18 @@ const styles = StyleSheet.create({
     
     button: {
         width: '100%',
-        marginBottom: 10
+        borderRadius: 5,
+        marginVertical: 5,
     },
-
     
-    buttonOutlined: {
+    
+    buttonVariant: {
         color: 'white',
-        backgroundColor: 'white',
+        backgroundColor: themes.colors.buttonVariant,
         width: '100%',
+        borderRadius: 5,
+        marginVertical: 5,
     },
-
-    buttonText: {
-        color: 'white',
-        fontWeight: 400,
-        fontSize: 16,
-    },
-
 
     // CHECKBOX
     checkboxContainer: {
@@ -217,9 +237,9 @@ const styles = StyleSheet.create({
     // IMAGE STYLES
 
     logoContainer: {
-        marginVertical: 50,
-        width: 150,
-        height: 150,
+        marginVertical: 25,
+        width: 75,
+        height: 75,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -243,6 +263,17 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
     },
+
+    // Text
+
+    text: {
+        color: 'black',
+    },
+    
+    textHeadline: {
+        color: 'black',
+        fontWeight: 'bold'
+    }
 
 
 })

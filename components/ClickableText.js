@@ -18,8 +18,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    textDecorationLine: 'underline',
-    color: themes.colors.onSurface
+    color: themes.colors.clickableText
   }
 });
 

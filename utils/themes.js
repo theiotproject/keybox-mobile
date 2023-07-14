@@ -6,14 +6,16 @@ export default theme = {
     ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#3AA090',
+    primary: '#00618A',
     secondary: 'yellow',
     // onSecondary: 'red',
-    tertiary: 'white',
-    surfaceVariant: 'white',
+    tertiary: '#000',
+    surfaceVariant: 'white', //TextInput
     // onSurfaceVariant: 'white',//On TextInput etc
     // outline: 'red', //Something
     // surface: 'red',
-    onSurface:'#EEE'//Checkbox
+    onSurface:'#000',//Checkbox
+    clickableText: '#00618A',
+    buttonVariant: '#0086BE'
   },
 }

@@ -13,6 +13,8 @@ import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import Spacer from '../components/Spacer';
 import { signUp } from '../utils/userHandler';
+import { Pressable } from 'react-native';
+import themes from '../utils/themes';
 
 
 
@@ -61,6 +63,11 @@ const SignUpScreen = () => {
 
     };
 
+    const handleSignUpGoogle = () =>
+    {
+        null
+    }
+
 
 
     
@@ -69,7 +76,6 @@ const SignUpScreen = () => {
 
 
     
-
     const handleSignIn = () => {
         navigation.navigate('SignIn')
     }
@@ -79,175 +85,200 @@ const SignUpScreen = () => {
 
 
   return (
-    <ImageBackground
+    <View
         style={styles.container}
-        source={backgroundMain} 
     >
         {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
         <View style={styles.logoContainer}>
-           
-            <Image 
-                style={styles.logoImage} 
-                source={logo} />
-
-        </View>
-
-        {/* CONTAINER FOR INPUTS */}
-        <View style={styles.inputContainer}>
-
-            {/* USERNAME */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                    <>
-                        <TextInput
-                            label='Username'
-                            mode='flat'
-                            onChangeText={field.onChange}
-                            onBlur={field.onBlur}
-                            value={field.value}
-                            placeholder="Username"
-                            error={errors.username ? errors.username.message : null}
-                        />
-                        {errors.username && (
-                        <Text style={{ color: 'red' }}>{errors.username.message}</Text>
-                        )}
-                    </>
-                )}
-                name="username"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-
-            <Spacer/>
-
-            {/* EMAIL */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                    <>
-                        <TextInput
-                            label='Email'
-                            mode='flat'
-                            onChangeText={field.onChange}
-                            onBlur={field.onBlur}
-                            value={field.value}
-                            placeholder="Email Address"
-                            error={errors.email ? errors.email.message : null}
-                        />
-                        {errors.email && (
-                        <Text style={{ color: 'red' }}>{errors.email.message}</Text>
-                        )}
-                    </>
-                )}
-                name="email"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-
-            <Spacer/>
-
-            {/* PASSWORD */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                    <>
-                        <TextInput
-                            label='Password'
-                            mode='flat'
-                            onChangeText={field.onChange}
-                            onBlur={field.onBlur}
-                            value={field.value}
-                            placeholder="Password"
-                            error={errors.password ? errors.password.message : null}
-                            secureTextEntry
-                        />
-                        {errors.password && (
-                        <Text style={{ color: 'red' }}>{errors.password.message}</Text>
-                        )}
-                    </>
-                )}
-                name="password"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-
-            <Spacer/>
-
-            {/* REPEAT PASSWORD */}
-            <Controller
-                style={styles.controller}
-                control={control}
-                render={({ field }) => (
-                    <>
-                        <TextInput
-                            label='Confirm Password'
-                            mode='flat'
-                            onChangeText={field.onChange}
-                            onBlur={field.onBlur}
-                            value={field.value}
-                            placeholder="Confirm Password"
-                            error={errors.confirmPassword ? errors.confirmPassword.message : null}
-                            secureTextEntry
-                        />
-                        {errors.confirmPassword && (
-                        <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
-                        )}
-                    </>
-                )}
-                name="confirmPassword"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-        
-        </View>
-
-        {/* CHECKBOX */}
-        <View style={styles.checkboxContainer}>
-            <Checkbox.Item
-                label='I want to recive inspiration, marketing promotions and updates via email.'
-                labelStyle={styles.checkboxLabel}
-                position='leading'
-                style={styles.checkbox}
-                status={sendExtraEmails? 'checked' : 'unchecked'}
-                onPress={() => {
-                    setSendExtraEmails(!sendExtraEmails);
-                }}
-            />
-        </View>
-
-
-        {/* CONTAINER FOR BUTTONS */}
-        <View style={styles.buttonContainer}>
-
-            {/* SIGN IN - BUTTON */}
-            <Button
-                onPress={handleSubmit(onSubmit)}
-                mode='contained'
-                uppercase={true}
-                style = {styles.button}
+            {/* Unnecessary logic here */}
+            <Pressable style={styles.logoImage} 
+                onPress={() => null}
             >
-                    SIGN UP
-            </Button>
+                <Image 
+                    style={styles.logoImage} 
+                    source={logo} />
+            </Pressable>
+        </View>
+        
+        {/* HELLO TEXT */}
+        <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
+
+        {/* FORM CONTAINER */}
+        <View style={styles.formContainer}>
+
+            {/* CONTAINER FOR INPUTS */}
+            <View style={styles.inputContainer}>
+                {/* USERNAME */}
+                <Controller
+                    style={styles.controller}
+                    control={control}
+                    render={({ field }) => (
+                        <>
+                            <TextInput
+                                label='Username'
+                                mode='flat'
+                                onChangeText={field.onChange}
+                                onBlur={field.onBlur}
+                                value={field.value}
+                                placeholder="Username"
+                                style={styles.inputText}
+                                error={errors.username ? errors.username.message : null}
+                            />
+                            {errors.username && (
+                            <Text style={{ color: 'red' }}>{errors.username.message}</Text>
+                            )}
+                        </>
+                    )}
+                    name="username"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                <Spacer/>
+
+                {/* EMAIL */}
+                <Controller
+                    style={styles.controller}
+                    control={control}
+                    render={({ field }) => (
+                        <>
+                            <TextInput
+                                label='Email'
+                                mode='flat'
+                                onChangeText={field.onChange}
+                                onBlur={field.onBlur}
+                                value={field.value}
+                                placeholder="Email Address"
+                                style={styles.inputText}
+                                error={errors.email ? errors.email.message : null}
+                            />
+                            {errors.email && (
+                            <Text style={{ color: 'red' }}>{errors.email.message}</Text>
+                            )}
+                        </>
+                    )}
+                    name="email"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                <Spacer/>
+
+                {/* PASSWORD */}
+                <Controller
+                    style={styles.controller}
+                    control={control}
+                    render={({ field }) => (
+                        <>
+                            <TextInput
+                                label='Password'
+                                mode='flat'
+                                onChangeText={field.onChange}
+                                onBlur={field.onBlur}
+                                value={field.value}
+                                placeholder="Password"
+                                style={styles.inputText}
+                                error={errors.password ? errors.password.message : null}
+                                secureTextEntry
+                            />
+                            {errors.password && (
+                            <Text style={{ color: 'red' }}>{errors.password.message}</Text>
+                            )}
+                        </>
+                    )}
+                    name="password"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                <Spacer/>
+
+                {/* REPEAT PASSWORD */}
+                <Controller
+                    style={styles.controller}
+                    control={control}
+                    render={({ field }) => (
+                        <>
+                            <TextInput
+                                label='Confirm Password'
+                                mode='flat'
+                                onChangeText={field.onChange}
+                                onBlur={field.onBlur}
+                                value={field.value}
+                                placeholder="Confirm Password"
+                                style={styles.inputText}
+                                error={errors.confirmPassword ? errors.confirmPassword.message : null}
+                                secureTextEntry
+                            />
+                            {errors.confirmPassword && (
+                            <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
+                            )}
+                        </>
+                    )}
+                    name="confirmPassword"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                {/* CHECKBOX */}
+                <View style={styles.checkboxContainer}>
+                    <Checkbox.Item
+                        label='By creating account you agree to our terms of conditions'
+                        labelStyle={styles.checkboxLabel}
+                        position='leading'
+                        style={styles.checkbox}
+                        status={sendExtraEmails? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setSendExtraEmails(!sendExtraEmails);
+                        }}
+                    />
+                </View>
+
+            </View>
+
+ 
+
+
+            {/* CONTAINER FOR BUTTONS */}
+            <View style={styles.buttonContainer}>
+
+
+                {/* SIGN IN - BUTTON */}
+                <Button
+                    onPress={handleSubmit(onSubmit)}
+                    mode='contained'
+                    uppercase={true}
+                    style = {styles.button}
+                >
+                        SIGN UP
+                </Button>
+
+                {/* OR */}
+                <Text variant='labelLarge' style={styles.text}>or</Text>
+
+                {/* SIGN IN GOOGLE - BUTTON */}
+                <Button
+                    onPress={handleSignUpGoogle}
+                    mode='contained'
+                    uppercase={true}
+                    style = {styles.buttonVariant}
+                    icon='google'
+                >
+                        SIGN UP WITH GOOGLE 
+                </Button>
+            </View>
+
+            {/* TO SIGN IN */}
+            <View style={styles.clickableTextContainer}>
+                <ClickableText
+                    text="Have an account? Sign In"
+                    handlePress={handleSignIn}
+                />
+            </View>
+
         </View>
 
-        {/* CHANGE PASSWORD, REGISTER */}
-        <View style={styles.clickableTextContainer}>
-            {/* Forgot Password */}
-            <ClickableText
-                text="Forgot Password?"
-                handlePress={null}
-            />
-
-            <ClickableText
-                text="Have an account? Sign In"
-                handlePress={handleSignIn}
-            />
-        </View>
-    </ImageBackground>
+    </View>
   )
 }
 
@@ -262,7 +293,13 @@ const styles = StyleSheet.create({
         
     },
 
-    // INPUT STYLES
+    formContainer: {
+        width:'100%',
+        paddingTop: 25 ,
+        paddingHorizontal: '3%',
+    },
+
+// INPUT STYLES
 
     inputContainer: {
         width: '100%',
@@ -270,22 +307,22 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
 
-    input: {
-        paddingHorizontal: 20,
+    inputText: {
+        // height: 50
     },
 
     inputWrapper: {
         marginTop: 25,
     },  
 
-    // CONTROLLERS - input
+// CONTROLLERS - input
    
     controller: {
         paddingVertical: 20,
     },
 
     
-    // BUTTON STYLES
+// BUTTON STYLES
 
     buttonContainer: {
         width: '100%',
@@ -293,49 +330,41 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    
+
     button: {
         width: '100%',
+        borderRadius: 5,
+        marginVertical: 5,
     },
 
-    buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#06F',
-        borderWidth:  2,
-    },
-
-    buttonText: {
+    buttonVariant: {
         color: 'white',
-        fontWeight: 400,
-        fontSize: 16,
+        backgroundColor: themes.colors.buttonVariant,
+        width: '100%',
+        borderRadius: 5,
+        marginVertical: 5,
     },
 
-    buttonOutlineText: {
-        color: '#06f',
-        fontWeight: 700,
-        fontSize: 16,
-    },
-
-    // CHECKBOX
+// CHECKBOX
     checkboxContainer: {
         width: '100%',
     },
 
     checkboxLabel: {
-        fontSize: 15,
+        fontSize: 10,
     },
 
     checkbox: {
         fontSize: 5,
+        textAlign: 'left',
     },
 
-    // IMAGE STYLES
+// IMAGE STYLES
 
     logoContainer: {
-        marginVertical: 50,
-        width: 150,
-        height: 150,
+        marginVertical: 25,
+        width: 75,
+        height: 75,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -346,7 +375,7 @@ const styles = StyleSheet.create({
     },
 
 
-    // CLICKABLE TEXT
+// CLICKABLE TEXT
 
     clickableTextContainer: {
         padding: 10,
