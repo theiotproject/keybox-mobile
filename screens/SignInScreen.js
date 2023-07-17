@@ -10,7 +10,7 @@ import WrappedTextInput from '../components/WrappedTextInput';
 import { signIn, signInGoogle } from '../utils/userHandler';
 import {AsyncStorage} from 'react-native';
 import themes from '../utils/themes';
-
+const { height } = Dimensions.get('window');
 
 const SignInScreen = () => {
 
@@ -64,23 +64,28 @@ const SignInScreen = () => {
     return (
         
         <View
-            style={styles.container}
+            style={{height}}
         >
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
-            <View style={styles.logoContainer}>
-                {/* Unnecessary logic here */}
-                <Pressable style={styles.logoImage} 
-                    onPress={() => CountClicks()}
-                >
-                    <Image 
-                        style={styles.logoImage} 
-                        source={logo} />
-                </Pressable>
+            <View style={styles.logoTextContainer}>
+
+                <View style={styles.logoContainer}>
+                    {/* Unnecessary logic here */}
+                    <Pressable style={styles.logoImage} 
+                        onPress={() => CountClicks()}
+                    >
+                        <Image 
+                            style={styles.logoImage} 
+                            source={logo} />
+                    </Pressable>
+
+                </View>
+                
+                {/* HELLO TEXT */}
+                <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
+
             </View>
             
-            {/* HELLO TEXT */}
-            <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
-
 
             <View style={styles.formContainer}>
 
@@ -90,6 +95,7 @@ const SignInScreen = () => {
                     <WrappedTextInput
                         label="Email Address"
                         value={ email }
+                        style={styles.input}
                         onChangeText={text => setEmail(text)}
                         canHide={false}
                     />
@@ -97,6 +103,7 @@ const SignInScreen = () => {
                     <WrappedTextInput
                         label="Password"
                         value={ password }
+                        style={styles.input}
                         onChangeText={ text => setPassword(text)}
                         canHide={true}
                     />
@@ -105,6 +112,7 @@ const SignInScreen = () => {
                     <View style={styles.checkboxContainer}>
                         <Checkbox.Item
                             label='Remember Me'
+                            labelStyle={styles.checkboxLabel}
                             position='leading'
                             style={styles.checkbox}
                             status={rememberUser? 'checked' : 'unchecked'}
@@ -149,16 +157,18 @@ const SignInScreen = () => {
 
                 {/* CHANGE PASSWORD, REGISTER */}
                 <View style={styles.clickableTextContainer}>
-                {/* Forgot Password */}
-                <ClickableText
-                    text="Forgot Password?"
-                    handlePress={() => alert("Here will be passwor recovery")}
-                />
+                    {/* Forgot Password */}
+                    <ClickableText
+                        style={styles.clickableText}
+                        text="Forgot Password?"
+                        handlePress={() => alert("Here will be passwor recovery")}
+                    />
 
-                <ClickableText
-                    text="Don't have an account? Sign Up"
-                    handlePress={handleSignUp}
-                />
+                    <ClickableText
+                        style={styles.clickableText}
+                        text="Don't have an account? Sign Up"
+                        handlePress={handleSignUp}
+                    />
                 </View>
 
             </View>
@@ -178,42 +188,59 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    logoTextContainer: {
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
     formContainer: {
+        flex: 5,
         width:'100%',
-        paddingTop: 25 ,
         paddingHorizontal: '3%',
+        alignContent: 'center',
+        justifyContent: 'space-evenly',
+
+        // backgroundColor: 'green'
+
     },
 
     // INPUT STYLES
 
     inputContainer: {
+        flex: 4,
         width: '100%',
         paddingHorizontal: 20,
-        marginBottom: 20,
+        justifyContent: 'space-around',
+        // backgroundColor: 'red'
     },
 
-    input: {
-        paddingHorizontal: 20,
-    },
+    // input: {
+    //     // flex: 10
+    //     // paddingHorizontal: 20,
+    // },
 
-    inputWrapper: {
-        marginTop: 25,
-    },  
+    // inputWrapper: {
+    //     marginTop: 25,
+    // },  
 
     
     // BUTTON STYLES
 
     buttonContainer: {
+        flex: 2,
         width: '100%',
         paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor: 'violet'
+
     },
     
     button: {
         width: '100%',
         borderRadius: 5,
-        marginVertical: 5,
+        // marginVertical: 5,
     },
     
     
@@ -222,22 +249,29 @@ const styles = StyleSheet.create({
         backgroundColor: themes.colors.buttonVariant,
         width: '100%',
         borderRadius: 5,
-        marginVertical: 5,
+        // marginVertical: 5,
     },
 
     // CHECKBOX
+    
     checkboxContainer: {
-        width: '60%',
+        width: '100%',
+        // backgroundColor: 'yellow'
+    },
+
+    checkboxLabel: {
+        fontSize: 15,
+        textAlign: 'left',
     },
 
     checkbox: {
-
+        // Style Checkbox here
     },
 
     // IMAGE STYLES
 
     logoContainer: {
-        marginVertical: 25,
+        marginVertical: 25, //Idk how it makes it look better, but it looks better
         width: 75,
         height: 75,
         alignItems: 'center',
@@ -252,15 +286,16 @@ const styles = StyleSheet.create({
 
     // CLICKABLE TEXT CONTAINER
     clickableTextContainer: {
-        padding: 10,
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
-        
+        justifyContent: 'center',
+        // backgroundColor: 'pink',
+        padding: 5,
     },
 
     clickableText: {
-        flex:1,
+        flex: 1,
         alignItems:'center',
     },
 

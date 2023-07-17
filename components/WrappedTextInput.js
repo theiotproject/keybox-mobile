@@ -30,9 +30,9 @@ const WrappedTextInput = ({ label, value, onChangeText, canHide }) => {
 
 const styles = StyleSheet.create({
   
-  inputWrapper: {
-    marginVertical: 12,
-  },
+  // inputWrapper: {
+  //   // marginVertical: 12,
+  // },
 
   input: {
     paddingHorizontal: 20,

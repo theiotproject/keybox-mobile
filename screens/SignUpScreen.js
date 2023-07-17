@@ -1,7 +1,6 @@
-import { Image, ImageBackground, StyleSheet, View } from 'react-native'
+import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import {  Button, Checkbox, Text, TextInput } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
@@ -15,6 +14,8 @@ import Spacer from '../components/Spacer';
 import { signUp } from '../utils/userHandler';
 import { Pressable } from 'react-native';
 import themes from '../utils/themes';
+import {Dimensions} from 'react-native'; 
+const { height } = Dimensions.get('window');
 
 
 
@@ -80,34 +81,44 @@ const SignUpScreen = () => {
         navigation.navigate('SignIn')
     }
 
-    
 
 
 
   return (
+
     <View
-        style={styles.container}
+        // style ={styles.container}
+        style = {{height}}
+
     >
-        {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
-        <View style={styles.logoContainer}>
-            {/* Unnecessary logic here */}
-            <Pressable style={styles.logoImage} 
-                onPress={() => null}
-            >
-                <Image 
-                    style={styles.logoImage} 
-                    source={logo} />
-            </Pressable>
+
+        <View style={styles.logoTextContainer}>
+
+            {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
+            <View style={styles.logoContainer}>
+                {/* Unnecessary logic here */}
+                <Pressable style={styles.logoImage} 
+                    onPress={() => null}
+                >
+                    <Image 
+                        style={styles.logoImage} 
+                        source={logo} />
+                </Pressable>
+            </View>
+            
+            {/* HELLO TEXT */}
+            <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
+
         </View>
         
-        {/* HELLO TEXT */}
-        <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
-
         {/* FORM CONTAINER */}
         <View style={styles.formContainer}>
 
             {/* CONTAINER FOR INPUTS */}
-            <View style={styles.inputContainer}>
+            <KeyboardAvoidingView 
+                style={styles.inputContainer}
+                behavior="position"
+            >
                 {/* USERNAME */}
                 <Controller
                     style={styles.controller}
@@ -134,7 +145,7 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                <Spacer/>
+                {/* <Spacer/> */}
 
                 {/* EMAIL */}
                 <Controller
@@ -162,7 +173,7 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                <Spacer/>
+                {/* <Spacer/> */}
 
                 {/* PASSWORD */}
                 <Controller
@@ -191,7 +202,7 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                <Spacer/>
+                {/* <Spacer/> */}
 
                 {/* REPEAT PASSWORD */}
                 <Controller
@@ -229,7 +240,7 @@ const SignUpScreen = () => {
                         render={({ field: { onChange, value } }) => (
                             <>
                                 <Checkbox.Item
-                                    label="By creating an account, you agree to our terms and conditions"
+                                    label="Agree to Terms od Use"
                                     labelStyle={styles.checkboxLabel}
                                     position="leading"
                                     style={styles.checkbox}
@@ -241,20 +252,15 @@ const SignUpScreen = () => {
                                     <Text style={styles.error}>{errors.agreeTerms.message}</Text>
                                 )}
                             </>
-                            
                         )}
                     />
                 
                 </View>
-
-            </View>
+            </KeyboardAvoidingView>
 
  
-
-
             {/* CONTAINER FOR BUTTONS */}
             <View style={styles.buttonContainer}>
-
 
                 {/* SIGN IN - BUTTON */}
                 <Button
@@ -279,6 +285,7 @@ const SignUpScreen = () => {
                 >
                         SIGN UP WITH GOOGLE 
                 </Button>
+            
             </View>
 
             {/* TO SIGN IN */}
@@ -300,28 +307,39 @@ export default SignUpScreen
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%',
+        // height: { screenHeight },
         justifyContent: 'center',
-        alignItems: 'center'
-        
+        alignItems: 'center',
+        // {screenHeight}
+    },
+
+    logoTextContainer: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     formContainer: {
+        flex: 5,
         width:'100%',
-        paddingTop: 25 ,
         paddingHorizontal: '3%',
+        justifyContent: 'space-evenly',
+        // backgroundColor: 'green',
     },
 
 // INPUT STYLES
 
     inputContainer: {
+        flex: 6,
+        // flexShrink: 3,
         width: '100%',
         paddingHorizontal: 20,
-        marginBottom: 20,
+        // backgroundColor: 'red',
+        justifyContent: 'space-evenly'
     },
 
     inputText: {
-        height: 40
+        // height: 40
     },
 
     inputWrapper: {
@@ -343,39 +361,46 @@ const styles = StyleSheet.create({
 // BUTTON STYLES
 
     buttonContainer: {
+        flex: 2,
         width: '100%',
         paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor: 'violet'
+
     },
 
     button: {
         width: '100%',
         borderRadius: 5,
-        marginVertical: 5,
+        // marginVertical: 5,
     },
+
 
     buttonVariant: {
         color: 'white',
         backgroundColor: themes.colors.buttonVariant,
         width: '100%',
         borderRadius: 5,
-        marginVertical: 5,
+        // marginVertical: 5,
     },
 
 // CHECKBOX
     checkboxContainer: {
         width: '100%',
+        // backgroundColor: 'yellow'
     },
 
     checkboxLabel: {
         fontSize: 10,
+        textAlign: 'left'
     },
 
-    checkbox: {
-        fontSize: 5,
-        textAlign: 'left',
-    },
+    // checkbox: {
+    //     fontSize: 5,
+    //     textAlign: 'left',
+    //     alignContent: 'flex-start'
+    // },
 
 // IMAGE STYLES
 
@@ -396,11 +421,11 @@ const styles = StyleSheet.create({
 // CLICKABLE TEXT
 
     clickableTextContainer: {
-        padding: 10,
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
-        
+        justifyContent: 'center',
+        // backgroundColor: 'pink',
     },
 
     clickableText: {
