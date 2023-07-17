@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         width:'100%',
         paddingHorizontal: '3%',
         alignContent: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
 
         // backgroundColor: 'green'
 
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         flex: 2,
         width: '100%',
         paddingHorizontal: 20,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor: 'violet'
 
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     
     buttonVariant: {
         color: 'white',
-        backgroundColor: themes.colors.buttonVariant,
+        backgroundColor: themes.colors.secondary,
         width: '100%',
         borderRadius: 5,
         // marginVertical: 5,

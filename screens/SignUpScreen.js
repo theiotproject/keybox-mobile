@@ -82,16 +82,12 @@ const SignUpScreen = () => {
     }
 
 
-
-
   return (
 
     <View
         // style ={styles.container}
         style = {{height}}
-
     >
-
         <View style={styles.logoTextContainer}>
 
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
@@ -107,15 +103,16 @@ const SignUpScreen = () => {
             </View>
             
             {/* HELLO TEXT */}
-            <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
+            <Text variant='headlineSmall' style={styles.textHeadline}> Hello! Sign Up to get started! </Text>
 
         </View>
+        
         
         {/* FORM CONTAINER */}
         <View style={styles.formContainer}>
 
             {/* CONTAINER FOR INPUTS */}
-            <KeyboardAvoidingView 
+            <View 
                 style={styles.inputContainer}
                 behavior="position"
             >
@@ -164,7 +161,7 @@ const SignUpScreen = () => {
                                 error={errors.email ? errors.email.message : null}
                             />
                             {errors.email && (
-                            <Text style={styles.error}>{errors.email.message}</Text>
+                                <Text style={styles.error}>{errors.email.message}</Text>
                             )}
                         </>
                     )}
@@ -256,7 +253,7 @@ const SignUpScreen = () => {
                     />
                 
                 </View>
-            </KeyboardAvoidingView>
+            </View>
 
  
             {/* CONTAINER FOR BUTTONS */}
@@ -272,8 +269,6 @@ const SignUpScreen = () => {
                         SIGN UP
                 </Button>
 
-                {/* OR */}
-                <Text variant='labelLarge' style={styles.text}>or</Text>
 
                 {/* SIGN IN GOOGLE - BUTTON */}
                 <Button
@@ -283,7 +278,7 @@ const SignUpScreen = () => {
                     style = {styles.buttonVariant}
                     icon='google'
                 >
-                        SIGN UP WITH GOOGLE 
+                        GOOGLE 
                 </Button>
             
             </View>
@@ -310,19 +305,17 @@ const styles = StyleSheet.create({
         // height: { screenHeight },
         justifyContent: 'center',
         alignItems: 'center',
-        // {screenHeight}
     },
 
     logoTextContainer: {
         flex: 2,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
 
     formContainer: {
         flex: 5,
         width:'100%',
-        paddingHorizontal: '3%',
         justifyContent: 'space-evenly',
         // backgroundColor: 'green',
     },
@@ -331,20 +324,15 @@ const styles = StyleSheet.create({
 
     inputContainer: {
         flex: 6,
-        // flexShrink: 3,
         width: '100%',
         paddingHorizontal: 20,
+        justifyContent: 'space-around',
         // backgroundColor: 'red',
-        justifyContent: 'space-evenly'
+        
     },
 
     inputText: {
-        // height: 40
     },
-
-    inputWrapper: {
-        marginTop: 25,
-    },  
 
     error: {
         color: 'red',
@@ -354,6 +342,7 @@ const styles = StyleSheet.create({
 // CONTROLLERS - input
    
     controller: {
+        flex: 1,
         paddingVertical: 20,
     },
 
@@ -361,7 +350,9 @@ const styles = StyleSheet.create({
 // BUTTON STYLES
 
     buttonContainer: {
-        flex: 2,
+        flex: 1,
+        flexDirection: 'row',
+        columnGap: 10,
         width: '100%',
         paddingHorizontal: 20,
         justifyContent: 'center',
@@ -371,18 +362,18 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: '100%',
+        flex: 1,
+        width: '40%',
         borderRadius: 5,
-        // marginVertical: 5,
     },
 
 
     buttonVariant: {
+        flex: 1,
         color: 'white',
-        backgroundColor: themes.colors.buttonVariant,
-        width: '100%',
+        backgroundColor: themes.colors.secondary,
+        width: '40%',
         borderRadius: 5,
-        // marginVertical: 5,
     },
 
 // CHECKBOX
@@ -392,7 +383,7 @@ const styles = StyleSheet.create({
     },
 
     checkboxLabel: {
-        fontSize: 10,
+        fontSize: 15,
         textAlign: 'left'
     },
 

@@ -7,7 +7,7 @@ export default theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#00618A',
-    secondary: 'yellow',
+    secondary: '#0086BE',
     // onSecondary: 'red',
     tertiary: '#000',
     surfaceVariant: 'white', //TextInput
@@ -15,7 +15,11 @@ export default theme = {
     // outline: 'red', //Something
     // surface: 'red',
     onSurface:'#000',//Checkbox
+    // Custom underneath
+    secondaryDark: '#004EDA',
+
     clickableText: '#00618A',
-    buttonVariant: '#0086BE'
+    buttonVariant: '#0086BE',
+    buttonVariantDark: '#004EDA',
   },
 }
