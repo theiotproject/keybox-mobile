@@ -12,6 +12,9 @@ const validationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Password confirmation is required'),
+  agreeTerms: yup
+    .boolean()
+    .required("You have to accept our terms of use to Sign Up")
 });
 
 export default validationSchema;

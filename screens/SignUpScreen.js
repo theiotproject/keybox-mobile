@@ -116,7 +116,7 @@ const SignUpScreen = () => {
                         <>
                             <TextInput
                                 label='Username'
-                                mode='flat'
+                                mode='outlined'
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
@@ -125,7 +125,7 @@ const SignUpScreen = () => {
                                 error={errors.username ? errors.username.message : null}
                             />
                             {errors.username && (
-                            <Text style={{ color: 'red' }}>{errors.username.message}</Text>
+                            <Text style={styles.error}>{errors.username.message}</Text>
                             )}
                         </>
                     )}
@@ -144,7 +144,7 @@ const SignUpScreen = () => {
                         <>
                             <TextInput
                                 label='Email'
-                                mode='flat'
+                                mode='outlined'
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
@@ -153,7 +153,7 @@ const SignUpScreen = () => {
                                 error={errors.email ? errors.email.message : null}
                             />
                             {errors.email && (
-                            <Text style={{ color: 'red' }}>{errors.email.message}</Text>
+                            <Text style={styles.error}>{errors.email.message}</Text>
                             )}
                         </>
                     )}
@@ -172,7 +172,7 @@ const SignUpScreen = () => {
                         <>
                             <TextInput
                                 label='Password'
-                                mode='flat'
+                                mode='outlined'
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
@@ -182,7 +182,7 @@ const SignUpScreen = () => {
                                 secureTextEntry
                             />
                             {errors.password && (
-                            <Text style={{ color: 'red' }}>{errors.password.message}</Text>
+                            <Text style={styles.error}>{errors.password.message}</Text>
                             )}
                         </>
                     )}
@@ -201,7 +201,7 @@ const SignUpScreen = () => {
                         <>
                             <TextInput
                                 label='Confirm Password'
-                                mode='flat'
+                                mode='outlined'
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
@@ -211,7 +211,7 @@ const SignUpScreen = () => {
                                 secureTextEntry
                             />
                             {errors.confirmPassword && (
-                            <Text style={{ color: 'red' }}>{errors.confirmPassword.message}</Text>
+                                <Text style={styles.error}>{errors.confirmPassword.message}</Text>
                             )}
                         </>
                     )}
@@ -222,16 +222,29 @@ const SignUpScreen = () => {
 
                 {/* CHECKBOX */}
                 <View style={styles.checkboxContainer}>
-                    <Checkbox.Item
-                        label='By creating account you agree to our terms of conditions'
-                        labelStyle={styles.checkboxLabel}
-                        position='leading'
-                        style={styles.checkbox}
-                        status={sendExtraEmails? 'checked' : 'unchecked'}
-                        onPress={() => {
-                            setSendExtraEmails(!sendExtraEmails);
-                        }}
+                    
+                    <Controller
+                        control={control}
+                        name="agreeTerms"
+                        render={({ field: { onChange, value } }) => (
+                            <>
+                                <Checkbox.Item
+                                    label="By creating an account, you agree to our terms and conditions"
+                                    labelStyle={styles.checkboxLabel}
+                                    position="leading"
+                                    style={styles.checkbox}
+                                    status={value ? 'checked' : 'unchecked'}
+                                    onPress={() => onChange(!value)}
+                                />
+
+                                {errors.agreeTerms && (
+                                    <Text style={styles.error}>{errors.agreeTerms.message}</Text>
+                                )}
+                            </>
+                            
+                        )}
                     />
+                
                 </View>
 
             </View>
@@ -308,12 +321,17 @@ const styles = StyleSheet.create({
     },
 
     inputText: {
-        // height: 50
+        height: 40
     },
 
     inputWrapper: {
         marginTop: 25,
     },  
+
+    error: {
+        color: 'red',
+        fontSize: 10,
+    },
 
 // CONTROLLERS - input
    
@@ -390,8 +408,15 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
 
+// Text
+
+    text: {
+        color: 'black',
+    },
     
-
-
+    textHeadline: {
+        color: 'black',
+        fontWeight: 'bold'
+    }
 
 })

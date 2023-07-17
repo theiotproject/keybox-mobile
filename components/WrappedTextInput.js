@@ -8,7 +8,7 @@ const WrappedTextInput = ({ label, value, onChangeText, canHide }) => {
   return (
     <View style={styles.inputWrapper}>
       <TextInput
-        mode='flat'
+        mode='outlined'
         label={label}
         value={value}
         style={[styles.input]}
