@@ -3,11 +3,12 @@ import React from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import { Ionicons } from '@expo/vector-icons';
 
-const CustomSelectDropdown = ({list, selectText }) => {
+const CustomSelectDropdown = ({list, selectText, handleSelect }) => {
     
     return (
         <SelectDropdown
             data={list}
+
 
             // Button
             defaultButtonText={selectText}
@@ -28,7 +29,7 @@ const CustomSelectDropdown = ({list, selectText }) => {
             // Select
             onSelect={(selectedItem, index) => {
                 console.log(selectedItem, index);
-                handleKeyboxSelect(selectedItem);
+                handleSelect(selectedItem);
             }}
 
             renderDropdownIcon={isOpened => {
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
 
 
     // DROPDOWN SELECT
+
 
     dropdownButton: {
         width: '90%',

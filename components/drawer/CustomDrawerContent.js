@@ -17,6 +17,7 @@ const CustomDrawerContent = (props) => {
 
   const handleKeyboxSelect = (selectedKeybox) => {
     setKeybox(selectedKeybox);
+    alert(selectedKeybox)
   };
 
   return (
@@ -41,7 +42,7 @@ const CustomDrawerContent = (props) => {
 
             {/* Select Input */}
             <View style={styles.selectContainer}>
-                <CustomSelectDropdown list={keyBoxList} selectText={"Select Keybox"}/>
+                <CustomSelectDropdown list={keyBoxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}/>
             </View>
 
             {/* Custom Drawer Items */}
