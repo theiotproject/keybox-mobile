@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { backgroundMain } from '../assets';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -7,10 +7,12 @@ import { Button, Text } from 'react-native-paper';
 import { auth } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
 import { signOut } from '../utils/userHandler';
-import LogoutModal from '../components/LogOutModal';
+import LogoutModal from '../components/modals/LogOutModal';
 import { FlatList } from 'react-native-gesture-handler';
 import KeyboxList from '../components/KeyBoxList';
-import AddKeyboxModal from '../components/AddKeyBoxModal';
+import AddKeyboxModal from '../components/modals/AddKeyBoxModal';
+import { Drawer } from 'react-native-drawer-layout';
+import 'react-native-gesture-handler';
 
 
 const HomeScreen = () => {
@@ -21,10 +23,12 @@ const HomeScreen = () => {
   const [ logout, setLogout ] = useState(false)
   const [ addDevice, setAddDevice ] = useState(false)
   
+  // -------------------------
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
   const [username, setUsername] = useState('');
 
+  // HANDLE USER STATE
   //If not logged in go to sign in screen 
   useEffect(() => {
     if (!user && navigation) {
@@ -32,6 +36,7 @@ const HomeScreen = () => {
       alert('You are not logged in. Please log in.');
     }
   }, [ user, navigation ]);
+  // --------------------------
 
   // KEYBOX LIST ITEMS
   const [keyboxList, setKeyboxList] = useState([
@@ -49,42 +54,54 @@ const HomeScreen = () => {
     setAddDevice(false);
   }
 
+  const handleDeleteDevice = () => {
+
+  }
+
+  // DRAWER
 
 
   return (
-    <ImageBackground style={styles.container} source={backgroundMain}>  
-
-      <KeyboxList keyBoxList={keyboxList} />
-   
-      <Button mode='contained' title='AddDevice' text="Add Device" onPress={() => setAddDevice(true)}>
-        Add Device
-      </Button>
-
-      <Button mode='contained' title='LogOut' text="LogOut" onPress={() => setLogout(true)}>
-        LOG OUT
-      </Button>
-     
-
-      { user ? <Text>{username}</Text> : null }
-
-      <LogoutModal 
-        visible={logout} 
-        handleSignOut={() => {
-          signOut()
-          setLogout(false) 
-        }} 
-        handleDismiss={() => setLogout(false)} 
-      />
+    <>
     
-      <AddKeyboxModal 
-        visible={addDevice} 
-        handleAdd={handleAddDevice} 
-        handleDismiss={() => setAddDevice(false)} 
-      />
+      {/* <CustomDrawer /> */}
 
+      <View style={styles.container} >  
+
+
+        <KeyboxList keyBoxList={keyboxList} />
     
+        <Button mode='contained' title='AddDevice' text="Add Device" onPress={() => setAddDevice(true)}>
+          Add Device
+        </Button>
 
-    </ImageBackground>
+        <Button mode='contained' title='LogOut' text="LogOut" onPress={() => setLogout(true)}>
+          LOG OUT
+        </Button>
+      
+
+        { user ? <Text>{username}</Text> : null }
+
+        <LogoutModal 
+          visible={logout} 
+          handleSignOut={() => {
+            signOut()
+            setLogout(false) 
+          }} 
+          handleDismiss={() => setLogout(false)} 
+        />
+      
+        <AddKeyboxModal 
+          visible={addDevice} 
+          handleAdd={handleAddDevice} 
+          handleDismiss={() => setAddDevice(false)} 
+        />
+      
+
+      </View>
+
+    </>
+
   );
 };
 

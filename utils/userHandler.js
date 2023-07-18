@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut as signOutFirebase } from "firebase/auth";
 import { auth } from "../firebase";
-import LogoutModal from "../components/LogOutModal";
+import LogoutModal from "../components/modals/LogOutModal";
 import {AsyncStorage} from 'react-native';
 
 

@@ -1,37 +1,42 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import KeyBoxItem from './KeyBoxItem';
+import KeyboxItem from './KeyBoxItem';
 
 
 const KeyboxList = ({ keyBoxList }) => {
- 
-  
+  const [keyboxList, setKeyboxList] = useState(keyBoxList);
+
+
+
 
   const handleEditItem = (deviceId) => {
     // Handle edit logic here
     console.log('Editing device:', deviceId);
   };
 
-  // TODO: when sent device name and device id add item
-
-  
+  const handleDeleteItem = (deviceId) => {
+    setKeyboxList((prevList) => prevList.filter((item) => item.id !== deviceId));
+  };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={keyBoxList}
+        data={keyboxList}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <KeyBoxItem
+          <KeyboxItem
             deviceName={item.name}
             deviceId={item.id}
             onPressEdit={() => handleEditItem(item.id)}
+            onPressDelete={() => handleDeleteItem(item.id)}
           />
         )}
       />
+
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

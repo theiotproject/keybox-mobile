@@ -2,7 +2,7 @@ import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from '
 import React, { useEffect, useState, useRef } from 'react'
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
-import {  Button, Checkbox, Text, TextInput } from 'react-native-paper';
+import {  Button, Checkbox, Modal, Text, TextInput, Tooltip } from 'react-native-paper';
 import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
@@ -15,6 +15,7 @@ import { signUp } from '../utils/userHandler';
 import { Pressable } from 'react-native';
 import themes from '../utils/themes';
 import {Dimensions} from 'react-native'; 
+import AnimatedLogo from '../components/AnimatedLogo';
 const { height } = Dimensions.get('window');
 
 
@@ -90,16 +91,13 @@ const SignUpScreen = () => {
     >
         <View style={styles.logoTextContainer}>
 
+            <Spacer/>
+
+
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
             <View style={styles.logoContainer}>
                 {/* Unnecessary logic here */}
-                <Pressable style={styles.logoImage} 
-                    onPress={() => null}
-                >
-                    <Image 
-                        style={styles.logoImage} 
-                        source={logo} />
-                </Pressable>
+                <AnimatedLogo />
             </View>
             
             {/* HELLO TEXT */}
@@ -142,7 +140,6 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                {/* <Spacer/> */}
 
                 {/* EMAIL */}
                 <Controller
@@ -170,7 +167,6 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                {/* <Spacer/> */}
 
                 {/* PASSWORD */}
                 <Controller
@@ -199,7 +195,6 @@ const SignUpScreen = () => {
                     defaultValue=""
                 />
 
-                {/* <Spacer/> */}
 
                 {/* REPEAT PASSWORD */}
                 <Controller
@@ -278,7 +273,7 @@ const SignUpScreen = () => {
                     style = {styles.buttonVariant}
                     icon='google'
                 >
-                        GOOGLE 
+                        SIGN UP
                 </Button>
             
             </View>
@@ -310,7 +305,7 @@ const styles = StyleSheet.create({
     logoTextContainer: {
         flex: 2,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
     },
 
     formContainer: {

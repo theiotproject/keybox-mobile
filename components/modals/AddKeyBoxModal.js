@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Modal, Text, Button, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import themes from '../utils/themes';
-import Spacer from './Spacer';
+import themes from '../../utils/themes';
+import Spacer from '../Spacer';
 
 const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
   const [modalVisible, setModalVisible] = useState(visible);

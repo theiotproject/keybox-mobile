@@ -13,6 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 
 import { AppRegistry, Platform } from 'react-native';
 import 'expo-dev-client'
+import Dashboard from './screens/Dashboard';
 
 
 
@@ -35,6 +36,8 @@ export default function App() {
         <AuthProvider >
           {/* Navigation */}
           <Stack.Navigator>
+
+            {/* <Stack.Screen name="Dashboard" options={{ headerShown: false }} component={Dashboard} /> */}
             <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
             <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />

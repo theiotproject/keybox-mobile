@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Modal, Text, Button, IconButton } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import themes from '../utils/themes';
+import themes from '../../utils/themes';
 
 const LogoutModal = ({ visible, handleSignOut, handleDismiss }) => {
 

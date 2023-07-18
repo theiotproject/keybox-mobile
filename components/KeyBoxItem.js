@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { Card, IconButton } from 'react-native-paper';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Card, Button } from 'react-native-paper';
 
-const KeyboxItem = ({ deviceName, deviceId, onPressEdit }) => {
+const KeyboxItem = ({ deviceName, deviceId, onPressEdit, onPressDelete }) => {
   return (
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
@@ -10,9 +10,15 @@ const KeyboxItem = ({ deviceName, deviceId, onPressEdit }) => {
         <Text style={styles.deviceId}>Device Id: <Text style={styles.deviceIdValue}>{deviceId}</Text></Text>
       </Card.Content>
       <Card.Actions style={styles.cardActions}>
-        <IconButton icon="pencil" onPress={onPressEdit} />
+        <Button style={styles.buttonManage} mode='outlined' onPress={onPressEdit}>
+          Manage
+        </Button>
+        <Button style={styles.buttonDelete} mode='outlined' onPress={onPressDelete}>
+          Delete
+        </Button>
       </Card.Actions>
     </Card>
+
   );
 };
 
@@ -20,12 +26,17 @@ const styles = StyleSheet.create({
   card: {
     margin: 8,
     elevation: 4,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardContent: {
     alignItems: 'center',
   },
   cardActions: {
-    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    flexDirection: 'row', // Added to align buttons horizontally
+    justifyContent: 'space-between', // Added to create space between buttons
   },
   deviceName: {
     fontSize: 20,
@@ -40,6 +51,12 @@ const styles = StyleSheet.create({
   deviceIdValue: {
     fontWeight: 'normal',
     color: '#666',
+  },
+  buttonManage: {
+    borderRadius: 5,
+  },
+  buttonDelete: {
+    borderRadius: 5,
   },
 });
 

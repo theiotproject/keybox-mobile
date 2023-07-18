@@ -1,5 +1,5 @@
 import { Dimensions, Image, ImageBackground, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
@@ -8,23 +8,20 @@ import { backgroundMain, logo } from '../assets';
 import ClickableText from '../components/ClickableText';
 import WrappedTextInput from '../components/WrappedTextInput';
 import { signIn, signInGoogle } from '../utils/userHandler';
-import {AsyncStorage} from 'react-native';
 import themes from '../utils/themes';
+import Spacer from '../components/Spacer';
+import AnimatedLogo from '../components/AnimatedLogo';
+import { AuthContext } from '../context/AuthContext';
+
+
+
+
 const { height } = Dimensions.get('window');
+
 
 const SignInScreen = () => {
 
-    // Easter Egg
-    const [clickCount, setClickCount] = useState(0);
-    const CountClicks = () => {
-        if(clickCount === 10){
-            alert('You really do like clicking things...')
-            setClickCount(0)
-        }else {
-            setClickCount(clickCount + 1)
-        }
-    }
-
+ 
     // Variables used for setting an email
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,6 +30,21 @@ const SignInScreen = () => {
 
 
     const navigation = useNavigation();
+
+
+    // -------------------------
+    // USER MANAGEMENT
+    const { user } = useContext(AuthContext);
+    const [username, setUsername] = useState('');
+
+    // HANDLE USER STATE
+    //If logged in, go to home screen
+    useEffect(() => {
+        if (user && navigation) {
+        navigation.navigate('Home');
+        }
+    }, [ user, navigation ]);
+    // --------------------------
 
     
     // Go to home screen on login
@@ -69,21 +81,28 @@ const SignInScreen = () => {
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
             <View style={styles.logoTextContainer}>
 
+                {/* It may be stupid, but it works*/}
+                <Spacer />
+                <Spacer />
+
                 <View style={styles.logoContainer}>
+                    
                     {/* Unnecessary logic here */}
-                    <Pressable style={styles.logoImage} 
-                        onPress={() => CountClicks()}
+                    {/* <Pressable style={styles.logoImage} 
+                        onPress={() => null}
                     >
                         <Image 
                             style={styles.logoImage} 
                             source={logo} />
-                    </Pressable>
+                    </Pressable> */}
+
+                    <AnimatedLogo />
 
                 </View>
                 
                 {/* HELLO TEXT */}
                 <Text variant='headlineSmall' style={styles.textHeadline}> Hello Again! Sign In </Text>
-
+                
             </View>
             
 
@@ -107,7 +126,6 @@ const SignInScreen = () => {
                         onChangeText={ text => setPassword(text)}
                         canHide={true}
                     />
-
 
                     <View style={styles.checkboxContainer}>
                         <Checkbox.Item
@@ -147,9 +165,8 @@ const SignInScreen = () => {
                         mode='contained'
                         uppercase={true}
                         style = {styles.buttonVariant}
-                        icon='google'
-                        
-                        >
+                        icon='google'    
+                    >
                             SIGN IN WITH GOOGLE 
                     </Button>
 
@@ -191,7 +208,7 @@ const styles = StyleSheet.create({
     logoTextContainer: {
         flex: 3,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-evenly'
     },
 
     formContainer: {
@@ -211,18 +228,9 @@ const styles = StyleSheet.create({
         flex: 4,
         width: '100%',
         paddingHorizontal: 20,
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         // backgroundColor: 'red'
     },
-
-    // input: {
-    //     // flex: 10
-    //     // paddingHorizontal: 20,
-    // },
-
-    // inputWrapper: {
-    //     marginTop: 25,
-    // },  
 
     
     // BUTTON STYLES
@@ -231,7 +239,7 @@ const styles = StyleSheet.create({
         flex: 2,
         width: '100%',
         paddingHorizontal: 20,
-        // justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
         // backgroundColor: 'violet'
 
@@ -240,7 +248,6 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         borderRadius: 5,
-        // marginVertical: 5,
     },
     
     
@@ -249,7 +256,6 @@ const styles = StyleSheet.create({
         backgroundColor: themes.colors.secondary,
         width: '100%',
         borderRadius: 5,
-        // marginVertical: 5,
     },
 
     // CHECKBOX
