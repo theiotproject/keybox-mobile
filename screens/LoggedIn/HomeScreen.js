@@ -1,16 +1,16 @@
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import { backgroundMain } from '../assets';
+import { backgroundMain } from '../../assets';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button, Text } from 'react-native-paper';
-import { auth } from '../firebase';
-import { AuthContext } from '../context/AuthContext';
-import { signOut } from '../utils/userHandler';
-import LogoutModal from '../components/modals/LogOutModal';
+import { auth } from '../../firebase';
+import { AuthContext } from '../../context/AuthContext';
+import { signOut } from '../../utils/userHandler';
+import LogoutModal from '../../components/modals/LogOutModal';
 import { FlatList } from 'react-native-gesture-handler';
-import KeyboxList from '../components/KeyBoxList';
-import AddKeyboxModal from '../components/modals/AddKeyBoxModal';
+import KeyboxList from '../../components/KeyBoxList';
+import AddKeyboxModal from '../../components/modals/AddKeyBoxModal';
 import { Drawer } from 'react-native-drawer-layout';
 import 'react-native-gesture-handler';
 

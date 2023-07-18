@@ -1,17 +1,17 @@
 import { Dimensions, Image, ImageBackground, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import {  Button, Checkbox, Text, TouchableRipple } from 'react-native-paper';
-import { backgroundMain, logo } from '../assets';
-import ClickableText from '../components/ClickableText';
-import WrappedTextInput from '../components/WrappedTextInput';
-import { signIn, signInGoogle } from '../utils/userHandler';
-import themes from '../utils/themes';
-import Spacer from '../components/Spacer';
-import AnimatedLogo from '../components/AnimatedLogo';
-import { AuthContext } from '../context/AuthContext';
+// import { backgroundMain, logo } from '../../assets';
+import ClickableText from '../../components/ClickableText';
+import WrappedTextInput from '../../components/WrappedTextInput';
+import { signIn, signInGoogle } from '../../utils/userHandler';
+import themes from '../../utils/themes';
+import Spacer from '../../components/Spacer';
+import AnimatedLogo from '../../components/AnimatedLogo';
+import { AuthContext } from '../../context/AuthContext';
 
 
 

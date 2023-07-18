@@ -21,5 +21,6 @@ export default theme = {
     clickableText: '#00618A',
     buttonVariant: '#0086BE',
     buttonVariantDark: '#004EDA',
+
   },
 }

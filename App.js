@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignInScreen from './screens/SignInScreen';
-import SignUpScreen from './screens/SignUpScreen';
-import HomeScreen from './screens/HomeScreen';
+import SignInScreen from './screens/LoggedOut/SignInScreen';
+import HomeScreen from './screens/LoggedIn/HomeScreen';
+import DashboardScreen from './screens/LoggedIn/DashboardScreen';
 import { Button, IconButton, PaperProvider, useTheme } from 'react-native-paper';
 import themes from './utils/themes';
 import { logo } from './assets';
@@ -13,7 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 
 import { AppRegistry, Platform } from 'react-native';
 import 'expo-dev-client'
-import Dashboard from './screens/Dashboard';
+import SignUpScreen from './screens/LoggedOut/SignUpScreen';
 
 
 
@@ -37,7 +37,7 @@ export default function App() {
           {/* Navigation */}
           <Stack.Navigator>
 
-            {/* <Stack.Screen name="Dashboard" options={{ headerShown: false }} component={Dashboard} /> */}
+            <Stack.Screen name="Dashboard" options={{ headerShown: false }} component={DashboardScreen} />
             <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
             <Stack.Screen name="Home" options={{ headerBackVisible: false, headerLeft: () => <IconButton icon={logo}/> }} component={HomeScreen} />

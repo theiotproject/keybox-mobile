@@ -1,21 +1,20 @@
 import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
 import {  Button, Checkbox, Modal, Text, TextInput, Tooltip } from 'react-native-paper';
-import { backgroundMain, logo } from '../assets';
-import ClickableText from '../components/ClickableText';
-import WrappedTextInput from '../components/WrappedTextInput';
+import ClickableText from '../../components/ClickableText';
+import WrappedTextInput from '../../components/WrappedTextInput';
 import { useForm, Controller } from "react-hook-form"
-import validationSchema from '../utils/yupShema';
+import validationSchema from '../../utils/yupShema';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
-import Spacer from '../components/Spacer';
-import { signUp } from '../utils/userHandler';
+import Spacer from '../../components/Spacer';
+import { signUp } from '../../utils/userHandler';
 import { Pressable } from 'react-native';
-import themes from '../utils/themes';
+import themes from '../../utils/themes';
 import {Dimensions} from 'react-native'; 
-import AnimatedLogo from '../components/AnimatedLogo';
+import AnimatedLogo from '../../components/AnimatedLogo';
 const { height } = Dimensions.get('window');
 
 

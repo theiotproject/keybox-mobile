@@ -21,3 +21,6 @@ web-build/
 
 # Google services
 /google-services.json
+
+# ...
+/utils/fsociety.bat
