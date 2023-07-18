@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { ScreenStack } from 'react-native-screens';
 import CardsScreen from './DrawerStack/CardsScreen';
@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import Tester from './DrawerStack/Tester';
 import { Dimensions } from 'react-native';
+import { AuthContext } from '../../context/AuthContext';
 
 const Drawer = createDrawerNavigator();
 const width = Dimensions.get('window').width;
@@ -22,6 +23,23 @@ const DashboardScreen = () => {
   const navigation = useNavigation();
 
   const [currentDevice, setCurrentDevice] = useState({deviceId: 1, deviceName: "Hello Mobile World", deviceStatus: false, ownerId: 2137})
+
+
+  // USER MANAGEMENT
+  const { user } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
+
+  // HANDLE USER STATE
+  //If not logged in go to sign in screen 
+  useEffect(() => {
+      if (!user && navigation) {
+        // navigation.navigate('SignIn'); // TODO uncomment after dashboard is done
+        alert('You are not logged in. Please log in.');
+      }
+  }, [ user, navigation ]);
+  // --------------------------
+
+
 
   return (
     <>
