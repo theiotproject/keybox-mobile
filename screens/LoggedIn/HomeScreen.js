@@ -9,7 +9,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { signOut } from '../../utils/userHandler';
 import LogoutModal from '../../components/modals/LogOutModal';
 import { FlatList } from 'react-native-gesture-handler';
-import KeyboxList from '../../components/KeyBoxList';
+import KeyboxList from '../../components/keybox/KeyBoxList';
 import AddKeyboxModal from '../../components/modals/AddKeyBoxModal';
 import { Drawer } from 'react-native-drawer-layout';
 import 'react-native-gesture-handler';

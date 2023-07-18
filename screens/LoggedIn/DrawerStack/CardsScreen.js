@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import KeyCard from '../../../components/KeyCard'
-import KeyCardPending from '../../../components/KeyCardPending'
+import KeyCard from '../../../components/keycards/KeyCard'
+import KeyCardPending from '../../../components/keycards/KeyCardPending'
 
 const CardsScreen = () => {
   return (

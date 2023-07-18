@@ -1,30 +1,42 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Card, Button } from 'react-native-paper';
-import themes from '../utils/themes';
+import themes from '../../utils/themes';
 
 
-const KeyCard = ({ deviceName, handleEdit }) => {
+const KeyCardPending = ({ deviceId, handleAdd, handleDelete }) => {
 
 
 
   return (
     <Card style={styles.cardContainer}>
       <View style={styles.container}>
-        <Text style={styles.deviceName}>
-          {deviceName.length < 19 ? deviceName : deviceName.substring(0, 19) + '...'}
+        <Text style={styles.deviceId}>
+          {deviceId.length < 10 ? "Id: " + deviceId : "Id: " + deviceId.substring(0, 10) + '...'}
         </Text>
 
         <Button 
-          style={styles.buttonManage} 
+          style={styles.buttonAdd} 
           mode='outlined' 
           compact={true}
           onPress={() => 
-            // handleEdit
-            alert("EDITING BOX")
+            // handle on Add
+            alert("Add")
           } 
         >
-          Edit Card
+          Add
+        </Button>
+
+        <Button 
+          style={styles.buttonDelete} 
+          mode='outlined' 
+          compact={true}
+          onPress={() => 
+            // handle on Delete
+            alert("Delete")
+          } 
+        >
+          Delete
         </Button>
       </View>
     </Card>
@@ -32,7 +44,7 @@ const KeyCard = ({ deviceName, handleEdit }) => {
   )
 }
 
-export default KeyCard
+export default KeyCardPending
 
 const styles = StyleSheet.create({
 
@@ -40,29 +52,35 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     borderRadius: 5,
-    marginVertical: 15,
   },
 
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
     columnGap: 5,
   },
 
-  deviceName: {
+  deviceId: {
     flex: 3,
     fontWeight: 'bold',
     fontSize: 23  
   },
 
-  buttonManage: {
+  buttonAdd: {
     flex: 1,
     borderRadius: 5,
     color: themes.colors.primary,
     borderColor: themes.colors.primary,
-    // height: '75%'
+  },
+  
+  buttonDelete: {
+    flex: 1,
+    borderRadius: 5,
+    color: 'red',
+    borderColor: 'red',
   }
 
 })

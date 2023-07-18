@@ -7,8 +7,6 @@ const KeyboxList = ({ keyBoxList }) => {
   const [keyboxList, setKeyboxList] = useState(keyBoxList);
 
 
-
-
   const handleEditItem = (deviceId) => {
     // Handle edit logic here
     console.log('Editing device:', deviceId);

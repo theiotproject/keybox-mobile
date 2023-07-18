@@ -10,8 +10,12 @@ import SettingsScreen from './DrawerStack/SettingsScreen';
 import CustomDrawerContent from '../../components/drawer/CustomDrawerContent';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import Tester from './DrawerStack/Tester';
+import { Dimensions } from 'react-native';
 
 const Drawer = createDrawerNavigator();
+const width = Dimensions.get('window').width;
+const drawerWidth = width / 2;
 
 const DashboardScreen = () => {
 
@@ -22,12 +26,18 @@ const DashboardScreen = () => {
   return (
     <>
       <Drawer.Navigator 
+        screenOptions={{
+          drawerStyle: {
+            width: 250,
+          },
+        }}
         drawerContent={(props) => <CustomDrawerContent {...props} progress={navigation.progress}/>}
       >
         <Drawer.Screen name="Cards" component={CardsScreen}/>
         <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />
         <Drawer.Screen name="Events" component={EventsScreen} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
+        <Drawer.Screen name="Tester" component={Tester} />
       </Drawer.Navigator>
     </>
   )
