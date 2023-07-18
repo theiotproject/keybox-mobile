@@ -8,6 +8,8 @@ import { Image } from 'react-native';
 import { useState } from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import CustomSelectDropdown from '../CustomSelectDropdown';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const CustomDrawerContent = (props) => {
   const [keybox, setKeybox] = React.useState('Keybox 1');
@@ -107,6 +109,7 @@ const CustomDrawerContent = (props) => {
 
                     onPress={() => {
                         // Handle sign-out
+                        signOut(auth)
                     }}
                     icon={({ color, size }) => (
                         <Ionicons name="log-out" size={size} color={color} />
