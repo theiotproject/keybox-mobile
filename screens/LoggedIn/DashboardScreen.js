@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { ScreenStack } from 'react-native-screens';
 import CardsScreen from './DrawerStack/CardsScreen';
 import KeySlotsScreen from './DrawerStack/KeySlotsScreen';
 import EventsScreen from './DrawerStack/EventsScreen';
-import { Button } from 'react-native-paper';
 import SettingsScreen from './DrawerStack/SettingsScreen';
 import CustomDrawerContent from '../../components/drawer/CustomDrawerContent';
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +11,7 @@ import { useState } from 'react';
 import Tester from './DrawerStack/Tester';
 import { Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import { auth } from '../../firebase';
 
 const Drawer = createDrawerNavigator();
 const width = Dimensions.get('window').width;
@@ -22,13 +21,14 @@ const DashboardScreen = () => {
 
   const navigation = useNavigation();
 
+  const [keyBoxList, setKeyboxList] = useState();
+
   const [currentDevice, setCurrentDevice] = useState({deviceId: 1, deviceName: "Hello Mobile World", deviceStatus: false, ownerId: 2137})
 
 
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-
+  
   // HANDLE USER STATE
   //If not logged in go to sign in screen 
   useEffect(() => {

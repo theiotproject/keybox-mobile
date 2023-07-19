@@ -12,18 +12,15 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 const CustomDrawerContent = (props) => {
-    const [keybox, setKeybox] = React.useState('Keybox 1');
-    const [menuVisible, setMenuVisible] = React.useState(false);
+    const [keybox, setKeybox] = useState('Keybox 1');
+    const [menuVisible, setMenuVisible] = useState(false);
 
-    const [keyBoxList, setKeyboxList] = useState(["Tytus", "Romek", "Atomek", "Reksio", "Kretes", "Reksio", "Kretes", "Reksio", "Kretes"]);
+    const [keyBoxList, setKeyboxList] = useState(["Tytus", "Romek", "Atomek"]);
 
     const handleKeyboxSelect = (selectedKeybox) => {
         setKeybox(selectedKeybox);
         alert(selectedKeybox)
     };
-
-  
-
 
     return (
         <DrawerContentScrollView {...props} style={styles.drawerContentContainer}>
@@ -47,7 +44,7 @@ const CustomDrawerContent = (props) => {
 
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
-                    <CustomSelectDropdown list={keyBoxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}/>
+                    <CustomSelectDropdown list={keyBoxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={false}/>
                 </View>
 
                 {/* Custom Drawer Items */}
