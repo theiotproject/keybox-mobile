@@ -12,12 +12,16 @@ import Tester from './DrawerStack/Tester';
 import { Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 import { auth } from '../../firebase';
+import { useWindowDimensions } from 'react-native';
+import themes from '../../utils/themes';
 
 const Drawer = createDrawerNavigator();
-const width = Dimensions.get('window').width;
-const drawerWidth = width / 2;
+
 
 const DashboardScreen = () => {
+
+  // Get dimensions of screen
+  const dimensions = useWindowDimensions()
 
   const navigation = useNavigation();
 
@@ -48,8 +52,29 @@ const DashboardScreen = () => {
           drawerStyle: {
             width: 250,
           },
+          // If it is a tablet, then drawer will be always on screen
+          drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+          //SWIPE
+          swipeEnabled: true, //TODO Allow user to change this setting in settings
+          swipeEdgeWidth: 125, // TODO change distance to more reasonable
+          headerStyle: {
+            height: 82,
+            // fontSize: 50
+          },
+          headerTitleStyle: {
+            fontSize: 30,
+          },
+          headerLeftContainerStyle: {
+            fontSize: 30,
+            // TODO change icon size
+          },
+        
         }}
-        drawerContent={(props) => <CustomDrawerContent {...props} progress={navigation.progress}/>}
+
+      
+        
+        drawerContent={(props) => <CustomDrawerContent {...props} drawerInactiveTintColor='#000' drawerActiveTintColor={themes.colors.secondary}/>}
+        backBehavior='none'
       >
         <Drawer.Screen name="Cards" component={CardsScreen}/>
         <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />

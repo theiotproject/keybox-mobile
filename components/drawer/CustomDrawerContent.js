@@ -10,23 +10,35 @@ import SelectDropdown from 'react-native-select-dropdown';
 import CustomSelectDropdown from '../CustomSelectDropdown';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
+import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigation } from '@react-navigation/native';
+import themes from '../../utils/themes';
+
 
 const CustomDrawerContent = (props) => {
+
+
+    
+
+
     const [keybox, setKeybox] = useState('Keybox 1');
-    const [menuVisible, setMenuVisible] = useState(false);
-
     const [keyBoxList, setKeyboxList] = useState(["Tytus", "Romek", "Atomek"]);
-
     const handleKeyboxSelect = (selectedKeybox) => {
         setKeybox(selectedKeybox);
         alert(selectedKeybox)
     };
 
+
+
     return (
         <DrawerContentScrollView {...props} style={styles.drawerContentContainer}>
             <View style={styles.contentContainer}>
 
-                <Ionicons name='reorder-three-outline' style={styles.hamburgerIcon} />
+                <Ionicons 
+                    name='reorder-three-outline' 
+                    style={styles.hamburgerIcon} 
+                    onPress={() => props.navigation.closeDrawer()}
+                
+                />
 
                 {/* Profile Container */}
                 <View style={styles.profileContainer}>
@@ -53,6 +65,7 @@ const CustomDrawerContent = (props) => {
                         style={styles.drawerItem}
                         label="Cards"
                         labelStyle={styles.drawerItemLabel}
+                
                         onPress={() => props.navigation.navigate('Cards')}
                         icon={({ color, size }) => (
                             <Ionicons name="card" size={size} color={color} />
@@ -126,9 +139,11 @@ const styles = StyleSheet.create({
   
 
     hamburgerIcon: {
-        fontSize: 35,
-        marginTop: 5,
-        marginHorizontal: 10,
+        fontSize: 45,
+        width: '100%',
+        paddingHorizontal: 10,
+        paddingVertical: 3,
+        borderBottomWidth: 1,
     },
 
     contentContainer: {
@@ -145,8 +160,8 @@ const styles = StyleSheet.create({
     },
 
     profileImageContainer: {
-        width: 75,
-        height: 75,
+        width: 50,
+        height: 50,
         borderRadius: 100,
         overflow: 'hidden',
         borderWidth: 2,  
