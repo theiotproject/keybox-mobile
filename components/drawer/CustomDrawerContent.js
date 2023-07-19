@@ -15,11 +15,12 @@ import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
 import { firebase } from '@react-native-firebase/auth';
 import { Firestore } from '@firebase/firestore';
+import LogoutModal from '../modals/LogOutModal';
 
 
-const CustomDrawerContent = (props, keyBoxList, currentUser, handleSelect, handleAdd, handleDelete ) => {
+const CustomDrawerContent = (props) => {
 
-
+ 
 
 
     const [keybox, setKeybox] = useState('Keybox 1');
@@ -152,17 +153,18 @@ const CustomDrawerContent = (props, keyBoxList, currentUser, handleSelect, handl
                         label="Sign Out"
                         labelStyle={styles.drawerItemLabel}
 
-                        onPress={() => {
-                            // Handle sign-out
-                            signOut(auth)
-                        }}
+                        onPress={() => props.handleLogout()}
+                    
                         icon={({ color, size }) => (
                             <Ionicons name="log-out" size={size} color={color} />
                         )}
                     />
+
+                    
                 </View>
             </View>
 
+            
         </DrawerContentScrollView>
     );
 };

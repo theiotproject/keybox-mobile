@@ -16,6 +16,8 @@ import { useWindowDimensions } from 'react-native';
 import themes from '../../utils/themes';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+import LogoutModal from '../../components/modals/LogOutModal';
+import { signOut } from '../../utils/userHandler';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,19 +27,23 @@ const DashboardScreen = () => {
   // Get dimensions of screen
   const dimensions = useWindowDimensions()
 
+  // Navigation
   const navigation = useNavigation();
 
+  // KEYBOX MANAGEMENT
   const [keyBoxList, setKeyboxList] = useState();
 
   const [currentDevice, setCurrentDevice] = useState({deviceId: 1, deviceName: "Hello Mobile World", deviceStatus: false, ownerId: 2137})
 
+  // MODALS
+   const [ logout, setLogout ] = useState(false)
 
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
 
   // HANDLE USER STATE
-  //If not logged in go to sign in screen 
   useEffect(() => {
+    //If not logged in go to sign in screen 
     if (!user && navigation) {
       navigation.navigate('SignIn'); // TODO uncomment after dashboard is done
       alert('You are not logged in. Please log in.');
@@ -106,7 +112,7 @@ const DashboardScreen = () => {
        
       
         drawerContent={(props) => 
-          <CustomDrawerContent {...props} />
+          <CustomDrawerContent {...props} handleLogout={() => setLogout(true)}/>
         } 
           
       >
@@ -116,6 +122,17 @@ const DashboardScreen = () => {
         <Drawer.Screen name="Settings" component={SettingsScreen} />
         <Drawer.Screen name="Tester" component={Tester} />
       </Drawer.Navigator>
+
+
+      {/* Modals  */}
+      <LogoutModal 
+          visible={logout} 
+          handleSignOut={() => {
+              signOut()
+              setLogout(false) 
+          }} 
+          handleDismiss={() => setLogout(false)} 
+      />
     </>
   )
 }
