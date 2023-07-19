@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,20 +12,50 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigation } from '@react-navigation/native';
 import themes from '../../utils/themes';
+import { AuthContext } from '../../context/AuthContext';
+import { firebase } from '@react-native-firebase/auth';
+import { Firestore } from '@firebase/firestore';
 
 
-const CustomDrawerContent = (props) => {
+const CustomDrawerContent = (props, keyBoxList, currentUser, handleSelect, handleAdd, handleDelete ) => {
 
 
-    
 
 
     const [keybox, setKeybox] = useState('Keybox 1');
-    const [keyBoxList, setKeyboxList] = useState(["Tytus", "Romek", "Atomek"]);
+    const [list, setList] = useState(["Tytus", "Romek", "Atomek"]);
     const handleKeyboxSelect = (selectedKeybox) => {
         setKeybox(selectedKeybox);
         alert(selectedKeybox)
     };
+
+    const { user } = useContext(AuthContext);
+
+
+// TODO TRYING TO HANDLE FIREBASE
+
+    const [snapshot, setSnapshot ] = useState();
+
+    const getUserKeyBoxes = () => {
+        
+        // firebase.firestore()
+        //         .collection("keyboxes")
+        //         // .doc("DOC_NAME")
+        //         .get()
+        //         .then((snapshot) => {
+        //             // ...
+        //             setSnapshot(snapshot)
+        //             alert(snapshot)
+        //         })
+
+        
+    }
+
+    
+
+    getUserKeyBoxes()
+
+    // setList([]);
 
 
 
@@ -51,12 +81,14 @@ const CustomDrawerContent = (props) => {
                     </View>
 
                     {/* User name */}
-                    <Text style={styles.userName}>John Doe</Text>
+                    <Text style={styles.userName}>{user ? user.displayName : "No Name"}</Text>
+                    {/* User email */}
+                    <Text>{user ? user.email : "No email"}</Text>
                 </View>
 
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
-                    <CustomSelectDropdown list={keyBoxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={false}/>
+                    <CustomSelectDropdown list={list} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={false}/>
                 </View>
 
                 {/* Custom Drawer Items */}

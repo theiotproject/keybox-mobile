@@ -38,25 +38,25 @@ const SignInScreen = () => {
     const [username, setUsername] = useState('');
 
     // HANDLE USER STATE
-    //If logged in, go to home screen
+    //If logged in, go to Dashboard screen
     useEffect(() => {
         if (user && navigation) {
-        navigation.navigate('Home');
+            navigation.navigate('Dashboard');
         }
     }, [ user, navigation ]);
     // --------------------------
 
     
     // Go to home screen on login
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged( ( user ) => {
-            if (user) {
-                navigation.navigate("Home") 
-            }
-        });
+    // useEffect(() => {
+    //     const unsubscribe = auth.onAuthStateChanged( ( user ) => {
+    //         if (user) {
+    //             navigation.navigate("Home") 
+    //         }
+    //     });
 
-        return unsubscribe
-    }, [])
+    //     return unsubscribe
+    // }, [])
 
     // Used for signing-up (used on button register)
     const handleSignUp = () => {

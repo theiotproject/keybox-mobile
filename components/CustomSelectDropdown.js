@@ -4,7 +4,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { Ionicons } from '@expo/vector-icons';
 import themes from '../utils/themes';
 
-const CustomSelectDropdown = ({list, selectText, handleSelect, allowSearch }) => {
+const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
     
 
@@ -14,7 +14,6 @@ const CustomSelectDropdown = ({list, selectText, handleSelect, allowSearch }) =>
         return (
             <SelectDropdown
                 data={list}
-
 
                 // Button
                 defaultButtonText={selectText}

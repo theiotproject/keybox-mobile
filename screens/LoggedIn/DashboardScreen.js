@@ -6,7 +6,7 @@ import KeySlotsScreen from './DrawerStack/KeySlotsScreen';
 import EventsScreen from './DrawerStack/EventsScreen';
 import SettingsScreen from './DrawerStack/SettingsScreen';
 import CustomDrawerContent from '../../components/drawer/CustomDrawerContent';
-import { useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import Tester from './DrawerStack/Tester';
 import { Dimensions } from 'react-native';
@@ -14,6 +14,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { auth } from '../../firebase';
 import { useWindowDimensions } from 'react-native';
 import themes from '../../utils/themes';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,17 +34,16 @@ const DashboardScreen = () => {
 
   // USER MANAGEMENT
   const { user } = useContext(AuthContext);
-  
+
   // HANDLE USER STATE
   //If not logged in go to sign in screen 
   useEffect(() => {
-      if (!user && navigation) {
-        // navigation.navigate('SignIn'); // TODO uncomment after dashboard is done
-        alert('You are not logged in. Please log in.');
-      }
+    if (!user && navigation) {
+      navigation.navigate('SignIn'); // TODO uncomment after dashboard is done
+      alert('You are not logged in. Please log in.');
+    }
   }, [ user, navigation ]);
   // --------------------------
-
 
 
   return (
@@ -54,9 +55,12 @@ const DashboardScreen = () => {
           },
           // If it is a tablet, then drawer will be always on screen
           drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
-          //SWIPE
+          
+        //SWIPE
           swipeEnabled: true, //TODO Allow user to change this setting in settings
           swipeEdgeWidth: 125, // TODO change distance to more reasonable
+          
+        // HEADER
           headerStyle: {
             height: 82,
             // fontSize: 50
@@ -64,17 +68,47 @@ const DashboardScreen = () => {
           headerTitleStyle: {
             fontSize: 30,
           },
-          headerLeftContainerStyle: {
-            fontSize: 30,
-            // TODO change icon size
-          },
-        
-        }}
 
-      
-        
-        drawerContent={(props) => <CustomDrawerContent {...props} drawerInactiveTintColor='#000' drawerActiveTintColor={themes.colors.secondary}/>}
+          // Left Header Icon
+          headerLeftContainerStyle: {
+            paddingTop: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            // backgroundColor: 'red',
+            paddingLeft: 10
+            
+          },
+          headerLeft: () => (
+            <TouchableOpacity style={{alignSelf: 'center'}} onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+              <Ionicons name="reorder-three-outline" size={40} color="black" />
+            </TouchableOpacity>
+          ),
+
+          // Right Header Icon
+          headerRightContainerStyle: { // TODO make it smaller, not as wide as it is now
+            paddingTop: 5,
+            justifyContent: 'center',
+            paddingRight: 10,
+            width: 40,
+          },
+          
+          headerRight: () => (
+            <TouchableOpacity  
+              onPress={() => {
+                alert("Here will be notifications")
+              }}>
+              <Ionicons name="notifications" size={30} color="black" />
+            </TouchableOpacity>
+          ),
+        }}
         backBehavior='none'
+
+       
+      
+        drawerContent={(props) => 
+          <CustomDrawerContent {...props} />
+        } 
+          
       >
         <Drawer.Screen name="Cards" component={CardsScreen}/>
         <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />
