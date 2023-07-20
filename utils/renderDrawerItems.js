@@ -26,6 +26,7 @@ export default renderDrawerItems = (props) => {
       <DrawerItem
         key={routeName}
         label={label}
+        style={focused ? {borderBottomWidth: 1, borderBottomColor: themes.colors.secondary} : {borderBottomWidth: 0}}  
         labelStyle={styles.drawerItemLabel}
         onPress={() => navigation.navigate(routeName)}
         icon={({ color, size }) => {

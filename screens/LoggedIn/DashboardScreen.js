@@ -140,9 +140,9 @@ const DashboardScreen = () => {
         } 
           
       >
-        <Drawer.Screen name="Cards" component={CardsScreen}/>
-        <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />
         <Drawer.Screen name="Events" component={EventsScreen} />
+        <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />
+        <Drawer.Screen name="Cards" component={CardsScreen}/>
         <Drawer.Screen name="Settings" component={SettingsScreen} />
         <Drawer.Screen name="Tester" component={Tester} />
       </Drawer.Navigator>
