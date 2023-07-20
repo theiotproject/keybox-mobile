@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { DrawerContent, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerContent, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { Menu, Divider, Provider } from 'react-native-paper';
 import { logo } from '../../assets';
@@ -16,11 +16,20 @@ import { AuthContext } from '../../context/AuthContext';
 import { firebase } from '@react-native-firebase/auth';
 import { Firestore } from '@firebase/firestore';
 import LogoutModal from '../modals/LogOutModal';
+import renderDrawerItems from '../../utils/renderDrawerItems';
 
 
 const CustomDrawerContent = (props) => {
 
- 
+    // --------CHATGPT---------
+    const { state, navigation } = props;
+
+    // Function to determine if a drawer item is active
+    const isDrawerItemActive = (routeName) => {
+      return getFocusedRouteNameFromRoute(state) === routeName;
+    };
+    // --------------------
+
 
 
     const [keybox, setKeybox] = useState('Keybox 1');
@@ -39,17 +48,7 @@ const CustomDrawerContent = (props) => {
 
     const getUserKeyBoxes = () => {
         
-        // firebase.firestore()
-        //         .collection("keyboxes")
-        //         // .doc("DOC_NAME")
-        //         .get()
-        //         .then((snapshot) => {
-        //             // ...
-        //             setSnapshot(snapshot)
-        //             alert(snapshot)
-        //         })
-
-        
+        // TODO get keyboxes from firebase
     }
 
     
@@ -57,6 +56,7 @@ const CustomDrawerContent = (props) => {
     getUserKeyBoxes()
 
     // setList([]);
+   
 
 
 
@@ -64,7 +64,13 @@ const CustomDrawerContent = (props) => {
 
     
 
-        <DrawerContentScrollView {...props} style={styles.drawerContentContainer}>
+        <DrawerContentScrollView {...props} 
+            style={styles.drawerContentContainer}
+            drawerContentOptions={{
+                activeTintColor: themes.colors.secondary, // Use the correct reference to the active tint color from your themes object.
+                inactiveTintColor: 'red', // This sets the inactive tint color.
+            }}
+        >
             <View style={styles.contentContainer}>
 
                 <Ionicons 
@@ -74,6 +80,7 @@ const CustomDrawerContent = (props) => {
                 
                 />
 
+                
                 {/* Profile Container */}
                 <View style={styles.profileContainer}>
                     {/* Small profile picture */}
@@ -97,57 +104,9 @@ const CustomDrawerContent = (props) => {
 
                 {/* Custom Drawer Items */}
                 <View style={styles.drawerItemsContainer}>
+                   
+                    {renderDrawerItems(props)}
                     
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Events"
-                        labelStyle={styles.drawerItemLabel}
-                        onPress={() => props.navigation.navigate('Events')}
-                        icon={({ color, size }) => (
-                            <Ionicons name="timer-outline" size={size} color={color} />
-                        )}
-                    />
-
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Key Slots"
-                        labelStyle={styles.drawerItemLabel}
-                        onPress={() => props.navigation.navigate('Key Slots')}
-                        icon={({ color, size }) => (
-                            <Ionicons name="albums-outline" size={size} color={color} />
-                        )}
-                    />
-
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Cards"
-                        labelStyle={styles.drawerItemLabel}
-                
-                        onPress={() => props.navigation.navigate('Cards')}
-                        icon={({ color, size }) => (
-                            <Ionicons name="card-outline" size={size} color={color} />
-                        )}
-                    />
-
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Settings"
-                        labelStyle={styles.drawerItemLabel}
-                        onPress={() => props.navigation.navigate('Settings')}
-                        icon={({ color, size }) => (
-                            <Ionicons name="settings-outline" size={size} color={color} />
-                        )}
-                    />
-
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Tester"
-                        labelStyle={styles.drawerItemLabel}
-                        onPress={() => props.navigation.navigate('Tester')}
-                        icon={({ color, size }) => (
-                            <Ionicons name="warning-outline" size={size} color={color} />
-                        )}
-                    />
                 </View>
 
             </View>    
