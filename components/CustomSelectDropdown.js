@@ -6,8 +6,6 @@ import themes from '../utils/themes';
 
 const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
-    
-
     const searchEnabled = allowSearch === undefined ? true : allowSearch;
 
     if(searchEnabled) {
@@ -97,15 +95,13 @@ const styles = StyleSheet.create({
 
 
     // DROPDOWN SELECT
-
-
     dropdownButton: {
-        width: '90%',
+        width: '100%',
         height: 40,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#000',
-        // alignSelf: 'center',
+        backgroundColor: 'transparent',
     },
 
     dropdownButtonText: {

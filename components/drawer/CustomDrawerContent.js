@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { DrawerContent, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
-import { Menu, Divider, Provider } from 'react-native-paper';
 import { logo } from '../../assets';
 import { Image } from 'react-native';
 import { useState } from 'react';
@@ -14,7 +13,6 @@ import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigatio
 import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
 import { firebase } from '@react-native-firebase/auth';
-import { Firestore } from '@firebase/firestore';
 import LogoutModal from '../modals/LogOutModal';
 import renderDrawerItems from '../../utils/renderDrawerItems';
 
@@ -49,11 +47,13 @@ const CustomDrawerContent = (props) => {
     const getUserKeyBoxes = () => {
         
         // TODO get keyboxes from firebase
+        // firebase
+        
     }
 
     
 
-    getUserKeyBoxes()
+    // getUserKeyBoxes()
 
     // setList([]);
    

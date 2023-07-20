@@ -129,16 +129,12 @@ const DashboardScreen = () => {
 
         }}
 
-        
-
-
         backBehavior='none'
 
         
         drawerContent={(props) => 
           <CustomDrawerContent {...props} handleLogout={() => setLogout(true)} drawerContentOptions={customDrawerContentOptions}/>
         } 
-          
       >
         <Drawer.Screen name="Events" component={EventsScreen} />
         <Drawer.Screen name="Key Slots" component={KeySlotsScreen} />
