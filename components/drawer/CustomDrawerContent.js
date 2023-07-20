@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerContent, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { Menu, Divider, Provider } from 'react-native-paper';
 import { logo } from '../../assets';
@@ -61,6 +61,9 @@ const CustomDrawerContent = (props) => {
 
 
     return (
+
+    
+
         <DrawerContentScrollView {...props} style={styles.drawerContentContainer}>
             <View style={styles.contentContainer}>
 
@@ -94,14 +97,14 @@ const CustomDrawerContent = (props) => {
 
                 {/* Custom Drawer Items */}
                 <View style={styles.drawerItemsContainer}>
+                    
                     <DrawerItem
                         style={styles.drawerItem}
-                        label="Cards"
+                        label="Events"
                         labelStyle={styles.drawerItemLabel}
-                
-                        onPress={() => props.navigation.navigate('Cards')}
+                        onPress={() => props.navigation.navigate('Events')}
                         icon={({ color, size }) => (
-                            <Ionicons name="card" size={size} color={color} />
+                            <Ionicons name="timer-outline" size={size} color={color} />
                         )}
                     />
 
@@ -111,17 +114,18 @@ const CustomDrawerContent = (props) => {
                         labelStyle={styles.drawerItemLabel}
                         onPress={() => props.navigation.navigate('Key Slots')}
                         icon={({ color, size }) => (
-                            <Ionicons name="folder" size={size} color={color} />
+                            <Ionicons name="albums-outline" size={size} color={color} />
                         )}
                     />
 
                     <DrawerItem
                         style={styles.drawerItem}
-                        label="Events"
+                        label="Cards"
                         labelStyle={styles.drawerItemLabel}
-                        onPress={() => props.navigation.navigate('Events')}
+                
+                        onPress={() => props.navigation.navigate('Cards')}
                         icon={({ color, size }) => (
-                            <Ionicons name="time" size={size} color={color} />
+                            <Ionicons name="card-outline" size={size} color={color} />
                         )}
                     />
 
@@ -131,7 +135,7 @@ const CustomDrawerContent = (props) => {
                         labelStyle={styles.drawerItemLabel}
                         onPress={() => props.navigation.navigate('Settings')}
                         icon={({ color, size }) => (
-                            <Ionicons name="settings" size={size} color={color} />
+                            <Ionicons name="settings-outline" size={size} color={color} />
                         )}
                     />
 
@@ -141,37 +145,46 @@ const CustomDrawerContent = (props) => {
                         labelStyle={styles.drawerItemLabel}
                         onPress={() => props.navigation.navigate('Tester')}
                         icon={({ color, size }) => (
-                            <Ionicons name="warning" size={size} color={color} />
+                            <Ionicons name="warning-outline" size={size} color={color} />
                         )}
                     />
                 </View>
 
-                {/* Sign-Out Button */}
-                <View style={styles.signOutContainer}>
-                    <DrawerItem
-                        style={styles.drawerItem}
-                        label="Sign Out"
-                        labelStyle={styles.drawerItemLabel}
-
-                        onPress={() => props.handleLogout()}
-                    
-                        icon={({ color, size }) => (
-                            <Ionicons name="log-out" size={size} color={color} />
-                        )}
-                    />
-
-                    
-                </View>
-            </View>
-
+            </View>    
             
+                  
+            {/* Sign-Out Button */}
+            <View style={styles.signOutContainer}>
+                <DrawerItem
+                    style={styles.drawerItem}
+                    label="Sign Out"
+                    labelStyle={styles.drawerItemLabel}
+
+                    onPress={() => props.handleLogout()}
+                
+                    icon={({ color, size }) => (
+                        <Ionicons name="log-out-outline" size={size} color={color} />
+                    )}
+                />
+            </View>
         </DrawerContentScrollView>
+
     );
 };
 
 const styles = StyleSheet.create({
-  
+    
+    drawerContentContainer: {
 
+    },
+
+    
+    contentContainer: {
+        flex: 1,
+        height: '100%',
+    },
+
+    // Navigationeiro
     hamburgerIcon: {
         fontSize: 45,
         width: '100%',
@@ -179,15 +192,9 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         borderBottomWidth: 1,
     },
-
-    contentContainer: {
-        // styles here
-    },
-
     // PROFILE
 
     profileContainer: {
-        flex: 1,
         padding: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -203,7 +210,6 @@ const styles = StyleSheet.create({
     },
 
     profileImage: {
-        flex: 1,
         width: 75,
         height: 75,
         resizeMode: 'contain',     
@@ -219,7 +225,6 @@ const styles = StyleSheet.create({
     // SELECTION
 
     selectContainer: {
-        flex: 1,
         padding: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -233,11 +238,11 @@ const styles = StyleSheet.create({
     // DRAWER ITEMS
 
     drawerItemsContainer: {
-        flex: 1,
+
     },
 
     drawerItem: {
-        flex: 1,
+
     },
     
     drawerItemLabel: {
@@ -249,7 +254,8 @@ const styles = StyleSheet.create({
 
     signOutContainer: {
         flex: 1,
-
+        borderTopWidth: 1,
+        width: '100%',
     },
 
 

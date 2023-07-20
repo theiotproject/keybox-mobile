@@ -19,6 +19,8 @@ import { Ionicons } from '@expo/vector-icons';
 import LogoutModal from '../../components/modals/LogOutModal';
 import { signOut } from '../../utils/userHandler';
 
+
+
 const Drawer = createDrawerNavigator();
 
 
@@ -50,6 +52,8 @@ const DashboardScreen = () => {
     }
   }, [ user, navigation ]);
   // --------------------------
+
+
 
 
   return (
@@ -103,14 +107,19 @@ const DashboardScreen = () => {
               onPress={() => {
                 alert("Here will be notifications")
               }}>
-              <Ionicons name="notifications" size={30} color="black" />
+              <Ionicons name="notifications" size={25} color="black" />
             </TouchableOpacity>
           ),
+         
+
         }}
+
+        
+
+
         backBehavior='none'
 
-       
-      
+        
         drawerContent={(props) => 
           <CustomDrawerContent {...props} handleLogout={() => setLogout(true)}/>
         } 
