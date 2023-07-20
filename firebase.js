@@ -2,6 +2,7 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth} from "firebase/auth";
 import Constants from 'expo-constants';
+// import { getFirestore } from "@firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,6 +28,12 @@ if (getApps().length === 0)
     app = getApp()
 }
 
-const auth = getAuth();
 
+const auth = getAuth();
 export { auth }
+
+
+// TODO FIRESTORE
+// const db = getFirestore();
+
+// export { db }

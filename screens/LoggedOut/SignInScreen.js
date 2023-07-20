@@ -47,16 +47,6 @@ const SignInScreen = () => {
     // --------------------------
 
     
-    // Go to home screen on login
-    // useEffect(() => {
-    //     const unsubscribe = auth.onAuthStateChanged( ( user ) => {
-    //         if (user) {
-    //             navigation.navigate("Home") 
-    //         }
-    //     });
-
-    //     return unsubscribe
-    // }, [])
 
     // Used for signing-up (used on button register)
     const handleSignUp = () => {

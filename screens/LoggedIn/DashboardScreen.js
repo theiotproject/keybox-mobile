@@ -18,6 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import LogoutModal from '../../components/modals/LogOutModal';
 import { signOut } from '../../utils/userHandler';
+// import getKeyboxesData from '../../utils/dataService';
 
 
 
@@ -52,19 +53,6 @@ const DashboardScreen = () => {
     }
   }, [ user, navigation ]);
   // --------------------------
-
-  // CHAT GPT
-   // Custom function to set active tint color
-   const customDrawerContentOptions = {
-    activeTintColor: themes.colors.secondary, // Use the correct reference to the active tint color from your themes object.
-    inactiveTintColor: 'red', // This sets the inactive tint color.
-    // Function to determine if a drawer item is active
-    itemStyle: { marginVertical: 0 }, // Remove default item vertical spacing
-    labelStyle: {
-      // Set label style to make the text bold for active items
-      fontWeight: 'bold',
-    },
-  };
 
 
 
@@ -133,7 +121,7 @@ const DashboardScreen = () => {
 
         
         drawerContent={(props) => 
-          <CustomDrawerContent {...props} handleLogout={() => setLogout(true)} drawerContentOptions={customDrawerContentOptions}/>
+          <CustomDrawerContent {...props} handleLogout={() => setLogout(true)} />
         } 
       >
         <Drawer.Screen name="Events" component={EventsScreen} />

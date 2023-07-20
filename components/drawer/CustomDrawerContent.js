@@ -8,26 +8,18 @@ import { useState } from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import CustomSelectDropdown from '../CustomSelectDropdown';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigation } from '@react-navigation/native';
 import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
-import { firebase } from '@react-native-firebase/auth';
+// import { firebase } from '@react-native-firebase/auth';
 import LogoutModal from '../modals/LogOutModal';
 import renderDrawerItems from '../../utils/renderDrawerItems';
+// import getDevice from '../../utils/dataService';
+// import getKeyboxesData from '../../utils/dataService';
 
 
 const CustomDrawerContent = (props) => {
-
-    // --------CHATGPT---------
-    const { state, navigation } = props;
-
-    // Function to determine if a drawer item is active
-    const isDrawerItemActive = (routeName) => {
-      return getFocusedRouteNameFromRoute(state) === routeName;
-    };
-    // --------------------
-
 
 
     const [keybox, setKeybox] = useState('Keybox 1');
@@ -44,7 +36,7 @@ const CustomDrawerContent = (props) => {
 
     const [snapshot, setSnapshot ] = useState();
 
-    const getUserKeyBoxes = () => {
+    const getUserKeyBoxes = async () => {
         
         // TODO get keyboxes from firebase
         // firebase
@@ -52,17 +44,7 @@ const CustomDrawerContent = (props) => {
     }
 
     
-
-    // getUserKeyBoxes()
-
-    // setList([]);
-   
-
-
-
     return (
-
-    
 
         <DrawerContentScrollView {...props} 
             style={styles.drawerContentContainer}
@@ -77,10 +59,8 @@ const CustomDrawerContent = (props) => {
                     name='reorder-three-outline' 
                     style={styles.hamburgerIcon} 
                     onPress={() => props.navigation.closeDrawer()}
-                
                 />
 
-                
                 {/* Profile Container */}
                 <View style={styles.profileContainer}>
                     {/* Small profile picture */}
@@ -95,6 +75,7 @@ const CustomDrawerContent = (props) => {
                     <Text style={styles.userName}>{user ? user.displayName : "No Name"}</Text>
                     {/* User email */}
                     <Text>{user ? user.email : "No email"}</Text>
+
                 </View>
 
                 {/* Select Input */}
