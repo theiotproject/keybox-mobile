@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import DashboardScreen, { DashboardContext } from '../DashboardScreen'
+import { useContext } from 'react'
 
 const EventsScreen = () => {
+  
+  
   return (
     <View>
-      <Text>EventsScreen</Text>
+      <Text>EventScreen</Text> 
+      
     </View>
   )
 }

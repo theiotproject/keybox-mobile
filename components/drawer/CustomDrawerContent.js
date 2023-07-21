@@ -12,21 +12,20 @@ import { auth, db } from '../../firebase';
 import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigation } from '@react-navigation/native';
 import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
-// import { firebase } from '@react-native-firebase/auth';
 import LogoutModal from '../modals/LogOutModal';
 import renderDrawerItems from '../../utils/renderDrawerItems';
-// import getDevice from '../../utils/dataService';
-// import getKeyboxesData from '../../utils/dataService';
 
 
 const CustomDrawerContent = (props) => {
 
 
     const [keybox, setKeybox] = useState('Keybox 1');
-    const [list, setList] = useState(["Tytus", "Romek", "Atomek"]);
+    const [list, setList] = useState(["Office", "Production", "Storage"]);
     const handleKeyboxSelect = (selectedKeybox) => {
-        setKeybox(selectedKeybox);
-        alert(selectedKeybox)
+        
+        props.handleSelectDevice(selectedKeybox);
+        // setKeybox(selectedKeybox);
+        // alert(selectedKeybox)
     };
 
     const { user } = useContext(AuthContext);
@@ -80,7 +79,7 @@ const CustomDrawerContent = (props) => {
 
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
-                    <CustomSelectDropdown list={list} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={false}/>
+                    <CustomSelectDropdown list={list} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
                 </View>
 
                 {/* Custom Drawer Items */}

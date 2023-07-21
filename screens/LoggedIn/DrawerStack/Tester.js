@@ -4,7 +4,7 @@ import React from 'react'
 const Tester = () => {
   return (
     <View>
-      <Text>OneForAll</Text>
+      <Text>Test here</Text>
     </View>
   ) 
 }

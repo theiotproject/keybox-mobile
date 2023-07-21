@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CardsScreen from './DrawerStack/CardsScreen';
@@ -9,17 +9,16 @@ import CustomDrawerContent from '../../components/drawer/CustomDrawerContent';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import Tester from './DrawerStack/Tester';
-import { Dimensions } from 'react-native';
+// import { Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
-import { auth } from '../../firebase';
-import { useWindowDimensions } from 'react-native';
+// import { auth } from '../../firebase';
 import themes from '../../utils/themes';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import LogoutModal from '../../components/modals/LogOutModal';
 import { signOut } from '../../utils/userHandler';
+// import { createContext } from 'react';
 // import getKeyboxesData from '../../utils/dataService';
-
 
 
 const Drawer = createDrawerNavigator();
@@ -53,7 +52,8 @@ const DashboardScreen = () => {
     }
   }, [ user, navigation ]);
   // --------------------------
-
+  // GIVE DATA TO ALL SCREENS
+  
 
 
 
@@ -121,7 +121,7 @@ const DashboardScreen = () => {
 
         
         drawerContent={(props) => 
-          <CustomDrawerContent {...props} handleLogout={() => setLogout(true)} />
+          <CustomDrawerContent {...props} handleLogout={() => setLogout(true)} handleSelectDevice={device => setCurrentDevice(device)} />
         } 
       >
         <Drawer.Screen name="Events" component={EventsScreen} />
@@ -146,5 +146,6 @@ const DashboardScreen = () => {
 }
 
 export default DashboardScreen
+
 
 const styles = StyleSheet.create({})

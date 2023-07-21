@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import { Ionicons } from '@expo/vector-icons';
 import themes from '../utils/themes';
@@ -7,6 +7,7 @@ import themes from '../utils/themes';
 const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
     const searchEnabled = allowSearch === undefined ? true : allowSearch;
+
 
     if(searchEnabled) {
         return (
