@@ -47,10 +47,6 @@ const CustomDrawerContent = (props) => {
 
         <DrawerContentScrollView {...props} 
             style={styles.drawerContentContainer}
-            drawerContentOptions={{
-                activeTintColor: themes.colors.secondary, // Use the correct reference to the active tint color from your themes object.
-                inactiveTintColor: 'red', // This sets the inactive tint color.
-            }}
         >
             <View style={styles.contentContainer}>
 
