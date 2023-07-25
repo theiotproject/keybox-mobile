@@ -1,20 +1,11 @@
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, useWindowDimensions } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import CardsScreen from './DrawerStack/CardsScreen';
-import KeySlotsScreen from './DrawerStack/KeySlotsScreen';
-import EventsScreen from './DrawerStack/EventsScreen';
-import SettingsScreen from './DrawerStack/SettingsScreen';
-import CustomDrawerContent from '../../components/drawer/CustomDrawerContent';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import Tester from './DrawerStack/Tester';
 // import { Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 // import { auth } from '../../firebase';
-import themes from '../../utils/themes';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
 import LogoutModal from '../../components/modals/LogOutModal';
 import { signOut } from '../../utils/userHandler';
 import { createContext } from 'react';

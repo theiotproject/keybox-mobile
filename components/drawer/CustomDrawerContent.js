@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { DrawerContent, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem, } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { logo } from '../../assets';
 import { Image } from 'react-native';
@@ -15,9 +15,9 @@ import { GetKeyBoxes } from '../../utils/dataService';
 const CustomDrawerContent = (props) => {
 
 
-    
     const [keyboxList, setKeyboxList] = useState([]);
     
+    // TODO get list of keyboxes and show in dropdown select
     useEffect(()=> {
         setKeyboxList(GetKeyBoxes())
         console.log(keyboxList)
@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         borderBottomWidth: 1,
     },
-    // PROFILE
 
+    // PROFILE
     profileContainer: {
         padding: 16,
         borderBottomWidth: 1,
@@ -160,12 +160,12 @@ const styles = StyleSheet.create({
 
 
     // SELECTION
-
     selectContainer: {
         padding: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
     },
+
 
     selectText: {
         fontSize: 16,
@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
     },
 
     // DRAWER ITEMS
-
     drawerItemsContainer: {
 
     },
@@ -188,7 +187,6 @@ const styles = StyleSheet.create({
     },
 
     // SIGN OUT
-
     signOutContainer: {
         flex: 1,
         borderTopWidth: 1,

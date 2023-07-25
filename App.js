@@ -1,18 +1,11 @@
-// import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from './screens/LoggedOut/SignInScreen';
-import { Button, IconButton, PaperProvider, useTheme } from 'react-native-paper';
-import themes from './utils/themes';
-import { logo } from './assets';
+import { PaperProvider } from 'react-native-paper';
 import { AuthProvider } from './context/AuthContext';
-
-import { AppRegistry, Platform } from 'react-native';
 import 'expo-dev-client'
 import SignUpScreen from './screens/LoggedOut/SignUpScreen';
-import { auth } from './firebase';
 import DrawerNavigationScreen from './screens/LoggedIn/DrawerNavigationScreen';
 
 
