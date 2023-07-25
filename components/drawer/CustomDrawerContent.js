@@ -14,6 +14,8 @@ import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
 import LogoutModal from '../modals/LogOutModal';
 import renderDrawerItems from '../../utils/renderDrawerItems';
+import { Pressable } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const CustomDrawerContent = (props) => {
@@ -56,8 +58,9 @@ const CustomDrawerContent = (props) => {
                     onPress={() => props.navigation.closeDrawer()}
                 />
 
+                {/* TODO maybe change TouchableOpacity back to View */}
                 {/* Profile Container */}
-                <View style={styles.profileContainer}>
+                <TouchableOpacity style={styles.profileContainer} onPress={() => alert("Changing Profile data")}>
                     {/* Small profile picture */}
                     <View style={styles.profileImageContainer}>
                         <Image
@@ -71,7 +74,7 @@ const CustomDrawerContent = (props) => {
                     {/* User email */}
                     <Text>{user ? user.email : "No email"}</Text>
 
-                </View>
+                </TouchableOpacity>
 
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
