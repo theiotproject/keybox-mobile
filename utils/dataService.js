@@ -26,7 +26,7 @@ export const GetKeyBoxes = async () => {
     const keyboxes = []
     const querySnapshot = (await getDocs(collection(db, "keyboxes")));
     querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id} => ${doc.data()}`);
+        console.log(`${doc.id} => ${doc.data()}`);
         keyboxes.push(doc.data())
     })
     return keyboxes

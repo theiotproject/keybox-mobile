@@ -5,29 +5,28 @@ import { Ionicons } from '@expo/vector-icons';
 import { logo } from '../../assets';
 import { Image } from 'react-native';
 import { useState } from 'react';
-import SelectDropdown from 'react-native-select-dropdown';
 import CustomSelectDropdown from '../CustomSelectDropdown';
-import { signOut } from 'firebase/auth';
-import { auth, db } from '../../firebase';
-import { DrawerActions, getFocusedRouteNameFromRoute, useIsFocused, useNavigation } from '@react-navigation/native';
-import themes from '../../utils/themes';
 import { AuthContext } from '../../context/AuthContext';
-import LogoutModal from '../modals/LogOutModal';
 import renderDrawerItems from '../../utils/renderDrawerItems';
-import { Pressable } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { GetKeyBoxes } from '../../utils/dataService';
 
 
 const CustomDrawerContent = (props) => {
 
 
-    const [keybox, setKeybox] = useState('Keybox 1');
+    
+    const [keyboxList, setKeyboxList] = useState([]);
+    
+    useEffect(()=> {
+        setKeyboxList(GetKeyBoxes())
+        console.log(keyboxList)
+    }, [])
+
     const [list, setList] = useState(["Office", "Production", "Storage"]);
     const handleKeyboxSelect = (selectedKeybox) => {
         
         props.handleSelectDevice(selectedKeybox);
-        // setKeybox(selectedKeybox);
-        // alert(selectedKeybox)
     };
 
     const { user } = useContext(AuthContext);

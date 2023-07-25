@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import DashboardScreen, { DashboardContext } from '../DashboardScreen'
+import DashboardScreen, { DashboardContext } from '../DrawerNavigationScreen'
 import { useContext } from 'react'
 
 const EventsScreen = () => {

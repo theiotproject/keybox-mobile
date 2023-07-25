@@ -41,7 +41,7 @@ const SignInScreen = () => {
     //If logged in, go to Dashboard screen
     useEffect(() => {
         if (user && navigation) {
-            navigation.navigate('Dashboard');
+            navigation.navigate('DrawerNavigation');
         }
     }, [ user, navigation ]);
     // --------------------------
