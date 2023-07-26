@@ -1,17 +1,16 @@
 // import { addDoc, collection, getDocs } from 'firebase/firestore';
 import uuid from 'react-native-uuid' // TEMPORARY
 import { db, auth } from '../firebase';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
-
-//TODO ADD VERIFICATION TO CHECK IF USER IS LOGGED IN
-// For some reason it does not work in separate file
+import { addDoc, collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { useState } from 'react';
 
 
-export const AddKeyBox = async () => {
+
+export const AddKeyBox = async (id, name ) => {
     try {
         const docRef = await addDoc(collection(db, "keyboxes"), {
             deviceId: uuid.v4(),
-            deviceName: "ggfghghg",
+            deviceName: name,
             deviceStatus: true,
             ownerId: auth.currentUser.uid
         });
@@ -23,42 +22,15 @@ export const AddKeyBox = async () => {
 
 // Get all keyboxes
 export const GetKeyBoxes = async () => {
-    const keyboxes = []
-    const querySnapshot = (await getDocs(collection(db, "keyboxes")));
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-        keyboxes.push(doc.data())
-    })
-    return keyboxes
-}
-
-// Get all keyboxes
-export const REPAIRTHIS__GetKeyBoxes = async () => {
-    const keyboxes = []
-    const querySnapshot = (await getDocs(collection(db, "keyboxes")));
-    querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id} => ${doc.data()}`);
-        const {deviceName, deviceId, deviceStatus, ownerId} = doc.data()
-        keyboxes.push({
-            id: doc.id,
-            deviceId,
-            deviceName,
-            deviceStatus,
-            ownerId,
-        })
-    })
-    return keyboxes
-}
-
-
-// Function to get data from returned keyboxes by field name
-export const getDataFromKeyBoxes = async (fieldName) => {
     try {
-        const keyboxes = await GetKeyBoxes();
-        const fieldData = keyboxes.map((keybox) => keybox[fieldName]);
-        return fieldData;
+      const keyboxes = [];
+      const querySnapshot = await getDocs(collection(db, "keyboxes"));
+      querySnapshot.docs.forEach((doc) => {
+        keyboxes.push({ docId: doc.id, ...doc.data() });
+      });
+      return keyboxes;
     } catch (e) {
-        console.error("Error getting field data: ", e);
-        return [];
+      console.error("Error getting keyboxes: ", e);
+      return [];
     }
-}
+};

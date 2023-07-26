@@ -11,6 +11,7 @@ const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handl
 
     if(searchEnabled) {
         return (
+            // WITH SEATCHING
             <SelectDropdown
                 data={list}
 
@@ -33,7 +34,7 @@ const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handl
                 // Select
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index);
-                    handleSelect(selectedItem);
+                    handleSelect(index);
                 }}
 
                 renderDropdownIcon={isOpened => {
@@ -54,6 +55,7 @@ const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handl
         )
     } else {
         return (
+            // WITHOUT SEATCHING
             <SelectDropdown
                 data={list}
 

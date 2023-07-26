@@ -1,3 +1,5 @@
+// Useless, not using it... Probably i should delete this
+
 import React, { useState } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 

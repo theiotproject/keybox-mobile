@@ -10,38 +10,28 @@ import { AuthContext } from '../../context/AuthContext';
 import renderDrawerItems from '../../utils/renderDrawerItems';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GetKeyBoxes } from '../../utils/dataService';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 const CustomDrawerContent = (props) => {
 
 
-    const [keyboxList, setKeyboxList] = useState([]);
-    
-    // TODO get list of keyboxes and show in dropdown select
-    useEffect(()=> {
-        setKeyboxList(GetKeyBoxes())
-        console.log(keyboxList)
-    }, [])
+    const [keyboxList, setKeyboxList] = useState([{deviceId: '1', deviceName: 'empty'}]);
 
-    const [list, setList] = useState(["Office", "Production", "Storage"]);
-    const handleKeyboxSelect = (selectedKeybox) => {
+    const handleKeyboxSelect = (index) => {
         
-        props.handleSelectDevice(selectedKeybox);
+        props.handleSelectDevice(props.keyboxList[index]);
     };
 
     const { user } = useContext(AuthContext);
 
+    useEffect(() => {
+        // Ensure props.keyboxList is available and an array before setting the state
+        if (Array.isArray(props.keyboxList)) {
+            setKeyboxList(props.keyboxList);
+        }
+    }, [props.keyboxList]);
 
-// TODO TRYING TO HANDLE FIREBASE
-
-    const [snapshot, setSnapshot ] = useState();
-
-    const getUserKeyBoxes = async () => {
-        
-        // TODO get keyboxes from firebase
-        // firebase
-        
-    }
 
     
     return (
@@ -77,7 +67,11 @@ const CustomDrawerContent = (props) => {
 
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
-                    <CustomSelectDropdown list={list} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
+                    {props.loading ? (
+                        <ActivityIndicator size="large" color={themes.colors.primary} />
+                    ) : (
+                        <CustomSelectDropdown list={keyboxList?.map((keybox) => keybox.deviceName)} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
+                    )}
                 </View>
 
                 {/* Custom Drawer Items */}
@@ -86,7 +80,6 @@ const CustomDrawerContent = (props) => {
                     {renderDrawerItems(props)}
                     
                 </View>
-
             </View>    
             
                   
@@ -115,7 +108,6 @@ const styles = StyleSheet.create({
 
     },
 
-    
     contentContainer: {
         flex: 1,
         height: '100%',
