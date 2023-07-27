@@ -39,6 +39,7 @@ const LogoutModal = ({ visible, handleSignOut, handleDismiss }) => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',

@@ -6,8 +6,6 @@ import {  Button, Checkbox, Modal, Text, TextInput, Tooltip } from 'react-native
 import ClickableText from '../../components/ClickableText';
 import WrappedTextInput from '../../components/WrappedTextInput';
 import { useForm, Controller } from "react-hook-form"
-import validationSchema from '../../utils/yupShema';
-import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import Spacer from '../../components/Spacer';
 import { signUp } from '../../utils/userHandler';
@@ -15,6 +13,7 @@ import { Pressable } from 'react-native';
 import themes from '../../utils/themes';
 import {Dimensions} from 'react-native'; 
 import AnimatedLogo from '../../components/AnimatedLogo';
+import { signUpValidationSchema } from '../../utils/yupShema';
 const { height } = Dimensions.get('window');
 
 
@@ -43,7 +42,7 @@ const SignUpScreen = () => {
 
     // FORM VARIABLES
     const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(validationSchema),
+        resolver: yupResolver(signUpValidationSchema),
         defaultValues: {
           username: '',
           email: '',

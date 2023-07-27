@@ -1,18 +1,16 @@
 // import { addDoc, collection, getDocs } from 'firebase/firestore';
-import uuid from 'react-native-uuid' // TEMPORARY
 import { db, auth } from '../firebase';
-import { addDoc, collection, getDocs, onSnapshot } from 'firebase/firestore';
-import { useState } from 'react';
+import { addDoc, collection, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 
-
-
-export const AddKeyBox = async (id, name ) => {
+// Add new keybox with current user id as ownerId
+export const AddKeyBox = async ( deviceId, deviceName ) => {
     try {
         const docRef = await addDoc(collection(db, "keyboxes"), {
-            deviceId: uuid.v4(),
-            deviceName: name,
+            deviceId: deviceId,
+            deviceName: deviceName,
             deviceStatus: true,
-            ownerId: auth.currentUser.uid
+            ownerId: auth.currentUser.uid,
+            // slots: []
         });
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -23,14 +21,53 @@ export const AddKeyBox = async (id, name ) => {
 // Get all keyboxes
 export const GetKeyBoxes = async () => {
     try {
-      const keyboxes = [];
-      const querySnapshot = await getDocs(collection(db, "keyboxes"));
-      querySnapshot.docs.forEach((doc) => {
-        keyboxes.push({ docId: doc.id, ...doc.data() });
-      });
-      return keyboxes;
+        const keyboxes = [];
+        const querySnapshot = (await getDocs(collection(db, "keyboxes")));
+        querySnapshot.docs.forEach((doc) => {
+            keyboxes.push({ docId: doc.id, ...doc.data() });
+        });
+        return keyboxes;
     } catch (e) {
-      console.error("Error getting keyboxes: ", e);
-      return [];
+        console.error("Error getting keyboxes: ", e);
+        return [];
     }
 };
+
+// TODO MAKE IT WORK or not
+export const GetKeyBoxesNew = async () => {
+    // try {
+    //     const keyboxes = [];
+    //     firestore.collection(db, "keyboxes").where("ownerId", '==', auth.currentUser.uid), (snapshot) => {
+    //         snapshot.docs.forEach((doc) => {
+    //             keyboxes.push({ docId: doc.id, ...doc.data() });
+    //         });
+    //         return keyboxes;
+    //     };
+    // } catch (e) {
+    // console.error("Error getting keyboxes: ", e);
+    // return [];
+    // }
+};
+
+// Edit Keyboxes
+
+export const EditKeybox = async (docId, deviceName, deviceStatus) => {
+    try {
+        console.log("Received data in EditKeybox:", docId, deviceName, deviceStatus);
+        const deviceRef = doc(db, "keyboxes", docId);
+        const updateData = {
+            deviceName: deviceName,
+            // deviceStatus: true,
+        };
+
+        await updateDoc(deviceRef, updateData);
+        console.log("Document updated successfully.");
+    } catch (error) {
+        console.error("Error updating document:", error);
+        // Handle any errors that might occur during the update process
+    }
+
+};
+
+
+

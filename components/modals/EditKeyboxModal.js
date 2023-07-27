@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Modal, Text, Button, TextInput } from 'react-native-paper';
+import { Modal, Text, Button, TextInput, Switch } from 'react-native-paper';
 import themes from '../../utils/themes';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { addDeviceValidationSchema } from '../../utils/yupShema';
 import { Controller, useForm } from 'react-hook-form';
+import { editDeviceValidationSchema } from '../../utils/yupShema';
 
-const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
+const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, keybox }) => {
   // Variable for handling modal visibility
   const [modalVisible, setModalVisible] = useState(visible);
 
+  // Variable for handling status
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+
   // Validation of inputs vie Yup Resolver  
   const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(addDeviceValidationSchema),
+    resolver: yupResolver(editDeviceValidationSchema),
       defaultValues: {
-        deviceId: '',
         deviceName: '',
     },
   });
 
   // When submit button clicked
   const onSubmit = (data) => {  
-    
-    // Add keybox using deviceId, deviceName
-    handleAdd(data.deviceId, data.deviceName);
+    // Update keybox
+    handleEdit("", data.deviceName, isOnline);
   };
 
   // Update the local state when the `visible` prop changes
@@ -35,34 +38,11 @@ const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
   return (
     <Modal visible={modalVisible} onDismiss={() => handleDismiss()} contentContainerStyle={styles.container}>
 
-        <Text style={styles.title}>Add a New Device</Text>
+        <Text style={styles.title}>Edit Device</Text>
 
         <Text style={styles.inputLabel}>Insert ID number: </Text>
         {/* DEVICE ID */}
-        <Controller
-          style={styles.controller}
-          control={control}
-          render={({ field }) => (
-            <>
-              <TextInput
-                  label='Device Id'
-                  mode='outlined'
-                  onChangeText={field.onChange}
-                  onBlur={field.onBlur}
-                  value={field.value}
-                  placeholder="Device Id"
-                  style={styles.inputText}
-                  error={errors.deviceId ? errors.deviceId.message : null}
-              />
-              {errors.deviceId && (
-                  <Text style={styles.error}>{errors.deviceId.message}</Text>
-              )}
-            </>
-          )}
-          name="deviceId"
-          rules={{ required: true }}
-          defaultValue=""
-        />
+        <Text variant='labelMedium'>{keybox?.docId ? keybox.docId : "Here should be id..."}</Text>
 
 
         <Text style={styles.inputLabel}>Insert Device Name: </Text>
@@ -91,6 +71,16 @@ const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
           rules={{ required: true }}
           defaultValue=""
         />
+
+       
+        <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+         
 
       
         <View style={styles.buttonContainer}>
@@ -164,4 +154,4 @@ const styles = StyleSheet.create({
 },
 });
 
-export default AddKeyboxModal;
+export default EditKeyboxModal;

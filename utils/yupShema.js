@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
-const validationSchema = yup.object().shape({
+// Validation schema for Signing Up
+export const signUpValidationSchema = yup.object().shape({
   username: yup.string().required('Username is required'),
   email: yup.string().email('Enter a valid email').required('Email is required'),
   password: yup
@@ -13,8 +14,28 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Password confirmation is required'),
   agreeTerms: yup
-    .boolean()
-    .required("You have to accept our terms of use to Sign Up")
+    .bool()
+    .oneOf([true], "You have to accept our Terms of Use to Sign Up")
+    .required("You have to accept our Terms of Use to Sign Up")
 });
 
-export default validationSchema;
+// Validation schema for adding a new device
+export const addDeviceValidationSchema = yup.object().shape({
+  deviceId: yup
+    .string()
+    .min(3, "Id must have at least 3 symbols")
+    .required('Id is required'),
+  deviceName: yup
+    .string()
+    .min(3, "Name must have at least 3 symbols")
+    .required('Name is required')
+})
+
+// Validation schema for editing a device
+export const editDeviceValidationSchema = yup.object().shape({
+  deviceName: yup
+    .string()
+    .min(3, "Name must have at least 3 symbols")
+    .required('Name is required'),
+})
+
