@@ -1,6 +1,6 @@
 // import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-import { addDoc, collection, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 
 // Add new keybox with current user id as ownerId
 export const AddKeyBox = async ( deviceId, deviceName ) => {
@@ -19,7 +19,7 @@ export const AddKeyBox = async ( deviceId, deviceName ) => {
 }
 
 // Get all keyboxes
-export const GetKeyBoxes = async () => {
+export const GetKeyBoxesOLD = async () => {
     try {
         const keyboxes = [];
         const querySnapshot = (await getDocs(collection(db, "keyboxes")));
@@ -33,20 +33,24 @@ export const GetKeyBoxes = async () => {
     }
 };
 
-// TODO MAKE IT WORK or not
-export const GetKeyBoxesNew = async () => {
-    // try {
-    //     const keyboxes = [];
-    //     firestore.collection(db, "keyboxes").where("ownerId", '==', auth.currentUser.uid), (snapshot) => {
-    //         snapshot.docs.forEach((doc) => {
-    //             keyboxes.push({ docId: doc.id, ...doc.data() });
-    //         });
-    //         return keyboxes;
-    //     };
-    // } catch (e) {
-    // console.error("Error getting keyboxes: ", e);
-    // return [];
-    // }
+// TODO MAKE IT WORK or not 🤦‍♂️
+export const GetKeyBoxes = async () => {
+    try {
+        const keyboxes = [];
+        const userId = auth.currentUser.uid; // Assuming you have access to the authenticated user object
+        console.log(userId)
+        const q = query(collection(db, "keyboxes"), where("ownerId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+            keyboxes.push({ docId: doc.id, ...doc.data() });
+        });
+
+        return keyboxes;
+    } catch (e) {
+        console.error("Error getting keyboxes: ", e);
+        return [];
+    }
 };
 
 // Edit Keyboxes
@@ -57,7 +61,8 @@ export const EditKeybox = async (docId, deviceName, deviceStatus) => {
         const deviceRef = doc(db, "keyboxes", docId);
         const updateData = {
             deviceName: deviceName,
-            // deviceStatus: true,
+            deviceStatus: true,
+            // 🤓🤦‍♂️device status parameter does not work...
         };
 
         await updateDoc(deviceRef, updateData);

@@ -1,18 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Card, Button } from 'react-native-paper';
+import { Card, Button, Text } from 'react-native-paper';
 import themes from '../../utils/themes';
 
 
 const KeyCardPending = ({ deviceId, handleAdd, handleDelete }) => {
 
-
-
   return (
     <Card style={styles.cardContainer}>
       <View style={styles.container}>
-        <Text style={styles.deviceId}>
-          {deviceId.length < 10 ? "Id: " + deviceId : "Id: " + deviceId.substring(0, 10) + '...'}
+        <Text variant='titleMedium' style={styles.deviceId}>
+          {deviceId.length < 15 ? "Id: " + deviceId : "Id: " + deviceId.substring(0, 15) + '...'}
         </Text>
 
         <Button 
@@ -52,6 +50,7 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     borderRadius: 5,
+    marginVertical: 5,
   },
 
   container: {
@@ -66,7 +65,6 @@ const styles = StyleSheet.create({
   deviceId: {
     flex: 3,
     fontWeight: 'bold',
-    fontSize: 23  
   },
 
   buttonAdd: {

@@ -26,7 +26,8 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
   // When submit button clicked
   const onSubmit = (data) => {  
     // Update keybox
-    handleEdit("", data.deviceName, isOnline);
+    // DO NOT PUSH THIS
+    handleEdit("", data.deviceName, isEnabled);//DO NOT PUSH THIS
   };
 
   // Update the local state when the `visible` prop changes
@@ -100,7 +101,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: '50%',
+    top: '50%', //It works only on big devices... 🤢
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',

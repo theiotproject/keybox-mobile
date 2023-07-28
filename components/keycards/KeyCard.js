@@ -1,18 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Card, Button } from 'react-native-paper';
+import { Card, Button, Text } from 'react-native-paper';
 import themes from '../../utils/themes';
 
 
 const KeyCard = ({ deviceName, handleEdit }) => {
 
-
-
   return (
     <Card style={styles.cardContainer}>
       <View style={styles.container}>
-        <Text style={styles.deviceName}>
-          {deviceName.length < 19 ? deviceName : deviceName.substring(0, 19) + '...'}
+        <Text variant='titleMedium' style={styles.deviceName}>
+          {deviceName.length < 25 ? deviceName : deviceName.substring(0, 25) + '...'}
         </Text>
 
         <Button 
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     borderRadius: 5,
-    marginVertical: 15,
+    marginVertical: 5,
   },
 
   container: {
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
   deviceName: {
     flex: 3,
     fontWeight: 'bold',
-    fontSize: 23  
+    // fontSize: 23  
   },
 
   buttonManage: {
