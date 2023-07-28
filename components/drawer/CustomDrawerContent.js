@@ -11,6 +11,7 @@ import renderDrawerItems from '../../utils/renderDrawerItems';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GetKeyBoxes } from '../../utils/dataService';
 import { ActivityIndicator } from 'react-native-paper';
+import themes from '../../utils/themes';
 
 
 const CustomDrawerContent = (props) => {
@@ -68,9 +69,10 @@ const CustomDrawerContent = (props) => {
                 {/* Select Input */}
                 <View style={styles.selectContainer}>
                     {props.loading ? (
-                        <ActivityIndicator size="large" color={themes.colors.primary} />
+                        <ActivityIndicator size="medium" color={themes.colors.primary} />
                     ) : (
-                        <CustomSelectDropdown list={keyboxList?.map((keybox) => keybox.deviceName)} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
+                        // Passing separately names and whole keyboxList for it to be displayed properly
+                        <CustomSelectDropdown list={keyboxList?.map((keybox) => keybox.deviceName)} keyboxList={keyboxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
                     )}
                 </View>
 
@@ -82,13 +84,12 @@ const CustomDrawerContent = (props) => {
                 </View>
             </View>    
             
-                  
             {/* Sign-Out Button */}
             <View style={styles.signOutContainer}>
                 <DrawerItem
                     style={styles.drawerItem}
                     label="Sign Out"
-                    labelStyle={styles.drawerItemLabel}
+                    labelStyle={styles.signOutLabel}
 
                     onPress={() => props.handleLogout()}
                 
@@ -150,14 +151,12 @@ const styles = StyleSheet.create({
         marginTop: 8,
     },
 
-
     // SELECTION
     selectContainer: {
         padding: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
     },
-
 
     selectText: {
         fontSize: 16,
@@ -181,10 +180,16 @@ const styles = StyleSheet.create({
     // SIGN OUT
     signOutContainer: {
         flex: 1,
+        marginTop: 5,
         borderTopWidth: 1,
         width: '100%',
     },
 
+    signOutLabel: {
+        color: '#000',
+        fontSize: 25,
+        fontWeight: 'bold',
+    }
 
 });
 

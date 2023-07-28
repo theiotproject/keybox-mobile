@@ -74,7 +74,7 @@ const DrawerNavigationScreen = () => {
       {/* Sends currentDevice across all activities  */}
       <KeyboxContext.Provider value={currentDevice}>
         {/* Side Drawer (left) */}
-        <CustomDrawer handleLogout={() => setLogout(true)} handleSelectDevice={(device) => setCurrentDevice(device)} keyboxList={keyboxList} />
+        <CustomDrawer handleLogout={() => setLogout(true)} handleSelectDevice={(device) => setCurrentDevice(device)} keyboxList={keyboxList} loading={loading} />
 
         {/* Modals  */}
         <LogoutModal 

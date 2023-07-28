@@ -5,14 +5,14 @@ import themes from '../../utils/themes';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import { editDeviceValidationSchema } from '../../utils/yupShema';
+import SwitchSelector from 'react-native-switch-selector';
 
 const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, keybox }) => {
   // Variable for handling modal visibility
   const [modalVisible, setModalVisible] = useState(visible);
 
   // Variable for handling status
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [isOnline, setIsOnline] = useState(false);
 
 
   // Validation of inputs vie Yup Resolver  
@@ -23,11 +23,13 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
     },
   });
 
-  // When submit button clicked
+  // When submit button clicked, edit keybox (send update request to firestore)
   const onSubmit = (data) => {  
     // Update keybox
     // DO NOT PUSH THIS
-    handleEdit("", data.deviceName, isEnabled);//DO NOT PUSH THIS
+    console.log(isOnline)
+    
+    handleEdit("", data.deviceName, isOnline);//DO NOT PUSH THIS
   };
 
   // Update the local state when the `visible` prop changes
@@ -36,17 +38,27 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
   }, [visible]);
 
 
+  // SWITHC SELECTOR
+
+  const options = [
+    { label: "Offline", value: false, testID: "switch-offline", accessibilityLabel: "switch-offline" },
+    { label: "Online", value: true, testID: "switch-online", accessibilityLabel: "switch-online" },
+    
+  ];
+
   return (
     <Modal visible={modalVisible} onDismiss={() => handleDismiss()} contentContainerStyle={styles.container}>
 
-        <Text style={styles.title}>Edit Device</Text>
+        <Text variant='displaySmall' style={styles.title}>Edit Device</Text>
 
-        <Text style={styles.inputLabel}>Insert ID number: </Text>
+        {/* DEVICE ID SECTION */}
+        <Text variant='titleLarge' style={styles.inputLabel}>ID number: </Text>
         {/* DEVICE ID */}
-        <Text variant='labelMedium'>{keybox?.docId ? keybox.docId : "Here should be id..."}</Text>
+        <Text variant='labelMedium' style={{alignSelf: 'center'}}>{keybox?.docId ? keybox.docId : "Here should be id..."}</Text>
 
 
-        <Text style={styles.inputLabel}>Insert Device Name: </Text>
+        {/* DEVICE NAME SECTION */}
+        <Text  variant='titleLarge' style={styles.inputLabel}>Insert Device Name: </Text>
         {/* DEVICE NAME */}
         <Controller
           style={styles.controller}
@@ -62,28 +74,35 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
                   placeholder="Device Name"
                   style={styles.inputText}
                   error={errors.deviceName ? errors.deviceName.message : null}
-              />
+                  />
               {errors.deviceName && (
                 <Text style={styles.error}>{errors.deviceName.message}</Text>
-              )}
+                )}
             </>
           )}
           name="deviceName"
           rules={{ required: true }}
           defaultValue=""
+          />
+
+   
+        {/* DEVICE STATUS SECTION */}
+        <Text variant='titleLarge' style={styles.inputLabel}>Set Device status: </Text>
+        {/* Switch for choosing whether device should be online or offline */}
+        <SwitchSelector
+          style={styles.switchSelector}
+          options={options}
+          initial={0}
+          textStyle={styles.switchSelectorText}
+          selectedTextStyle={styles.switchSelectorSelectedText}
+          buttonColor={themes.colors.secondaryDark}
+          borderColor={themes.colors.secondaryDark}
+          hasPadding
+          onPress={value => setIsOnline(value)}
         />
 
-       
-        <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
-         
 
-      
+        {/* Container for submit and dismiss buttons */}
         <View style={styles.buttonContainer}>
             
             <Button mode="outlined" style={styles.buttonOutlined} onPress={handleDismiss}>
@@ -101,7 +120,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: '50%', //It works only on big devices... 🤢
+    top: '50%', //It works only on big devices... 
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',
@@ -115,7 +134,6 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
     borderBottomWidth: 1,
@@ -123,21 +141,29 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   
-  input: {
-    marginBottom: 10,
+  // INPUTS
+  controller: {
+
+  },
+  
+  inputText: {    
+    width: '95%',
+    alignSelf: 'center'
   },
 
   inputLabel: {
+    width: '95%',
+    alignSelf: 'center',
     marginTop: 10,
-    fontSize: 15,
     paddingHorizontal: 5,
     fontWeight: 'bold',
   },
 
+  // BUTTONS
   buttonContainer: {
-    marginVertical: 15,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
 
   buttonOutlined: {
@@ -149,10 +175,29 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 
+ 
+  // SWITCH SELECTOR
+  switchSelector: {
+    width: '95%',
+    alignSelf: 'center',
+    marginVertical: 10,
+    marginBottom: 15,
+  },
+
+  switchSelectorText: {
+    color: '#000'
+  },
+
+  switchSelectorSelectedText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+
+  // VARIOUS
   error: {
     color: 'red',
     fontSize: 10,
-},
+  },
 });
 
 export default EditKeyboxModal;

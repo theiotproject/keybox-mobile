@@ -55,13 +55,13 @@ export const GetKeyBoxes = async () => {
 
 // Edit Keyboxes
 
-export const EditKeybox = async (docId, deviceName, deviceStatus) => {
+export const EditKeybox = async ( docId, deviceName, deviceStatus ) => {
     try {
         console.log("Received data in EditKeybox:", docId, deviceName, deviceStatus);
         const deviceRef = doc(db, "keyboxes", docId);
         const updateData = {
             deviceName: deviceName,
-            deviceStatus: true,
+            deviceStatus: deviceStatus,
             // 🤓🤦‍♂️device status parameter does not work...
         };
 

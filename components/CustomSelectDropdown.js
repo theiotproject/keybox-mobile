@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, } from 'react-native'
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import { Ionicons } from '@expo/vector-icons';
-import themes from '../utils/themes';
 
-const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
+const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
     const searchEnabled = allowSearch === undefined ? true : allowSearch;
 
@@ -51,6 +50,7 @@ const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handl
                 renderSearchInputLeftIcon={() => {
                     return <Ionicons name={'search'} color={'#000'} size={18} />;
                 }}
+
             />
         )
     } else {
@@ -81,6 +81,7 @@ const CustomSelectDropdown = ({ list, selectText, handleSelect, handleAdd, handl
                     console.log(selectedItem, index);
                     handleSelect(selectedItem);
                 }}
+
 
                 renderDropdownIcon={isOpened => {
                     return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#000'} size={18} />;

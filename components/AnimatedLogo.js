@@ -8,7 +8,7 @@ import { logo } from '../assets';
 import { Pressable } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Image } from 'react-native';
-  
+
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -41,6 +41,8 @@ const AnimatedLogo = () => {
     );
   };
 
+
+
   return (
     <AnimatedPressable
       style={[styles.logoImage, animatedStyle]}
@@ -59,4 +61,3 @@ const styles = StyleSheet.create({
 })
 
 export default AnimatedLogo;
-

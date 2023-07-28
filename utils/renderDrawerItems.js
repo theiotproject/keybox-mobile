@@ -26,12 +26,11 @@ export default renderDrawerItems = (props) => {
       <DrawerItem
         key={routeName}
         label={label}
-        style={focused ? {borderBottomWidth: 1, borderBottomColor: themes.colors.secondary} : {borderBottomWidth: 0}}  
+        // style={focused ? {borderBottomWidth: 1, borderBottomColor: themes.colors.secondary} : {borderBottomWidth: 0}}  
         labelStyle={styles.drawerItemLabel}
         onPress={() => navigation.navigate(routeName)}
         icon={({ color, size }) => {
           // Define icon logic based on the routeName.
-          // If the item is focused, use the filled icon, otherwise use the outlined icon.
           switch (routeName) {
             case 'Events':
               return <Ionicons name={!focused ? "timer-outline" : "timer"} size={size} color={!focused ? color : themes.colors.secondary} />;
