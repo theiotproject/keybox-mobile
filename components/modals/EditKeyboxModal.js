@@ -7,6 +7,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { editDeviceValidationSchema } from '../../utils/yupShema';
 import SwitchSelector from 'react-native-switch-selector';
 
+// Modal that will be displayed when user wants to edit a device
+// Parameters are: 
+// visible -> variable for handling visibility of modal
+// handleEdit -> function for handling submit
+// handleDismiss -> function to handle onDismiss 
+// handleDelete -> function to handle deletion of a device
+// TODO add deletion option in form
 const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, keybox }) => {
   // Variable for handling modal visibility
   const [modalVisible, setModalVisible] = useState(visible);
@@ -29,6 +36,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
     // DO NOT PUSH THIS
     console.log(isOnline)
     
+    // DOES NOT WORK CAUSE THERE IS NO ID
     handleEdit("", data.deviceName, isOnline);//DO NOT PUSH THIS
   };
 

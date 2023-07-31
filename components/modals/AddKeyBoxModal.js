@@ -6,6 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { addDeviceValidationSchema } from '../../utils/yupShema';
 import { Controller, useForm } from 'react-hook-form';
 
+// Modal that will be displayed when user wants to add new device
+// Parameters are: 
+// visible -> variable for handling visibility of modal
+// handleAdd -> function for handling submit
+// handleDismiss -> function to handle onDismiss 
 const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
   // Variable for handling modal visibility
   const [modalVisible, setModalVisible] = useState(visible);
@@ -99,7 +104,7 @@ const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
               Cancel
             </Button>
             
-            <Button mode="contained" style={styles.button} onPress={handleSubmit(onSubmit)}>
+            <Button mode="contained" rippleColor={themes.colors.primaryRippleColor} style={styles.button} onPress={handleSubmit(onSubmit)}>
               Submit
             </Button>
         </View>
@@ -110,7 +115,6 @@ const AddKeyboxModal = ({ visible, handleAdd, handleDismiss }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: '50%',
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',

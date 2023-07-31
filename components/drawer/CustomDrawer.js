@@ -17,7 +17,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const Drawer = createDrawerNavigator();
 
 
-const CustomDrawer = ({ handleLogout, handleSelectDevice, keyboxList, loading }) => {
+const CustomDrawer = ({ handleLogout, handleAddDevice, handleSelectDevice, keyboxList, loading }) => {
 
     // Get dimensions of screen
     const dimensions = useWindowDimensions()
@@ -87,7 +87,12 @@ const CustomDrawer = ({ handleLogout, handleSelectDevice, keyboxList, loading })
             backBehavior='none'
 
             drawerContent={(props) => 
-                <CustomDrawerContent {...props} handleLogout={() => handleLogout()} handleSelectDevice={(device) => handleSelectDevice(device)} keyboxList={keyboxList} loading={loading} />
+                <CustomDrawerContent {...props} 
+                    handleLogout={() => handleLogout()} 
+                    handleAddDevice={() => handleAddDevice()}
+                    handleSelectDevice={(device) => handleSelectDevice(device)} 
+                    keyboxList={keyboxList} 
+                    loading={loading} />
             } 
         >
             <Drawer.Screen name="Events" component={EventsScreen} />

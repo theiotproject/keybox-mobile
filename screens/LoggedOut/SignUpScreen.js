@@ -16,11 +16,7 @@ import AnimatedLogo from '../../components/AnimatedLogo';
 import { signUpValidationSchema } from '../../utils/yupShema';
 const { height } = Dimensions.get('window');
 
-
-
-
-
-// ToDo Replace TextInput with WrappedTextInput
+// Activity for signing in
 const SignUpScreen = () => {
 
     // USER VARIABLES
@@ -29,40 +25,42 @@ const SignUpScreen = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    
-    const [sendExtraEmails, setSendExtraEmails] = useState(false);
+    // Used fo navigation between activities
     const navigation = useNavigation();
-
     
-    // GOOGLE USER VARIABLES
-    const [loggedIn, setloggedIn] = useState(false);
-    const [userInfo, setuserInfo] = useState([]);
-    
-    
-
-    // FORM VARIABLES
+    // -----------------------
+    // HANDLING FORM
+    // Variables for handling form validation (using yup schema and yupResolver)
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(signUpValidationSchema),
         defaultValues: {
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
         },
     });
-
+    
+    // When form is submitted (Works only if every field is filled correctly)
     const onSubmit = (data) => {
         console.log(data);
+        // Set variables to form data
         setUsername(data.username);
         setEmail(data.email);
         setPassword(data.password);
         console.log(errors);
-
-        // Sign Up
+        
+        // Sign Up with username,email and password
         signUp(auth, data.email, data.password, data.username);
-
     };
+    // -----------------------
 
+    // H
+    const handleSignIn = () => {
+        navigation.navigate('SignIn')
+    }
+
+    // TODO make it work
     const handleSignUpGoogle = () =>
     {
         null
@@ -70,15 +68,6 @@ const SignUpScreen = () => {
 
 
 
-    
-
-    // -------------
-
-
-    
-    const handleSignIn = () => {
-        navigation.navigate('SignIn')
-    }
 
 
   return (
@@ -256,6 +245,7 @@ const SignUpScreen = () => {
                 <Button
                     onPress={handleSubmit(onSubmit)}
                     mode='contained'
+                    rippleColor={themes.colors.primaryRippleColor}
                     uppercase={true}
                     style = {styles.button}
                 >
@@ -267,6 +257,7 @@ const SignUpScreen = () => {
                 <Button
                     onPress={handleSignUpGoogle}
                     mode='contained'
+                    rippleColor={themes.colors.primaryRippleColor}
                     uppercase={true}
                     style = {styles.buttonVariant}
                     icon='google'
@@ -301,7 +292,7 @@ const styles = StyleSheet.create({
     },
 
     logoTextContainer: {
-        flex: 2,
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
@@ -314,7 +305,6 @@ const styles = StyleSheet.create({
     },
 
 // INPUT STYLES
-
     inputContainer: {
         flex: 6,
         width: '100%',
@@ -333,7 +323,6 @@ const styles = StyleSheet.create({
     },
 
 // CONTROLLERS - input
-   
     controller: {
         flex: 1,
         paddingVertical: 20,
@@ -341,7 +330,6 @@ const styles = StyleSheet.create({
 
     
 // BUTTON STYLES
-
     buttonContainer: {
         flex: 1,
         flexDirection: 'row',
@@ -387,7 +375,6 @@ const styles = StyleSheet.create({
     // },
 
 // IMAGE STYLES
-
     logoContainer: {
         marginVertical: 25,
         width: 75,
@@ -403,7 +390,6 @@ const styles = StyleSheet.create({
 
 
 // CLICKABLE TEXT
-
     clickableTextContainer: {
         flex: 1,
         flexDirection: 'row',
@@ -417,8 +403,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
 
-// Text
-
+// TEXT
     text: {
         color: 'black',
     },

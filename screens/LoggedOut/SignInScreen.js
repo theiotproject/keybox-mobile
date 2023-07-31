@@ -14,21 +14,21 @@ import AnimatedLogo from '../../components/AnimatedLogo';
 import { AuthContext } from '../../context/AuthContext';
 
 
-
+// TODO maybe add yup resolver
 
 const { height } = Dimensions.get('window');
 
-
+// Activity for signing in
 const SignInScreen = () => {
 
  
-    // Variables used for setting an email
+    // Variables used for setting an email and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    // Variable used to define if user should stay logged in after closing app
     const [rememberUser, setRememberUser] = useState(false);
 
-
+    // Used fo navigation between activities
     const navigation = useNavigation();
 
 
@@ -37,30 +37,30 @@ const SignInScreen = () => {
     const { user } = useContext(AuthContext);
     const [username, setUsername] = useState('');
 
-    // HANDLE USER STATE
-    //If logged in, go to Dashboard screen
+    // handle User State
     useEffect(() => {
+        //If logged in, go to Dashboard screen
         if (user && navigation) {
             navigation.navigate('DrawerNavigation');
         }
     }, [ user, navigation ]);
     // --------------------------
 
-    
 
-    // Used for signing-up (used on button register)
+    // Used for signing-up, navigates to SignUp
     const handleSignUp = () => {
         navigation.navigate('SignUp') 
     }
 
-    // SIGNING IN WITH EMAIL AND PASSWORD
+    // Used for signing-in with email and password (passes rememberUser to handle remembering if user should be logged in after closing app)
     const handleSignIn = () => {
         signIn(email, password, rememberUser);
     }
     
+    // TODO repair this
     const handleSignInGoogle = () => {
         // signIn(email, password);
-        alert('You shall not Log In Ashen One. Inasmuch as this function does not work')
+        alert('You shall not Log In! Inasmuch as this function does not work!')
     }
 
     return (
@@ -76,15 +76,6 @@ const SignInScreen = () => {
                 <Spacer />
 
                 <View style={styles.logoContainer}>
-                    
-                    {/* Unnecessary logic here */}
-                    {/* <Pressable style={styles.logoImage} 
-                        onPress={() => null}
-                    >
-                        <Image 
-                            style={styles.logoImage} 
-                            source={logo} />
-                    </Pressable> */}
 
                     <AnimatedLogo />
 
@@ -140,6 +131,7 @@ const SignInScreen = () => {
                     <Button
                         onPress={handleSignIn}
                         mode='contained'
+                        rippleColor={themes.colors.primaryRippleColor}
                         uppercase={true}
                         style = {styles.button}
                         >
@@ -153,6 +145,7 @@ const SignInScreen = () => {
                     <Button
                         onPress={handleSignInGoogle}
                         mode='contained'
+                        rippleColor={themes.colors.primaryRippleColor}
                         uppercase={true}
                         style = {styles.buttonVariant}
                         icon='google'    

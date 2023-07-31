@@ -2,7 +2,8 @@
 import { db, auth } from '../firebase';
 import { addDoc, collection, doc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 
-// Add new keybox with current user id as ownerId
+// ADD KEYBOX
+// Add new keybox with current user id as ownerId and deviceName as... deviceName
 export const AddKeyBox = async ( deviceId, deviceName ) => {
     try {
         const docRef = await addDoc(collection(db, "keyboxes"), {
@@ -33,7 +34,8 @@ export const GetKeyBoxesOLD = async () => {
     }
 };
 
-// TODO MAKE IT WORK or not 🤦‍♂️
+// GET ALL KEYBOXES
+// Allows users to get all of their devices from firestore by firestore query
 export const GetKeyBoxes = async () => {
     try {
         const keyboxes = [];
@@ -53,8 +55,8 @@ export const GetKeyBoxes = async () => {
     }
 };
 
-// Edit Keyboxes
-
+// EDIT KEYBOXES
+// Allows users to edit their keyboxes Name and Status via firestore query
 export const EditKeybox = async ( docId, deviceName, deviceStatus ) => {
     try {
         console.log("Received data in EditKeybox:", docId, deviceName, deviceStatus);
@@ -62,7 +64,6 @@ export const EditKeybox = async ( docId, deviceName, deviceStatus ) => {
         const updateData = {
             deviceName: deviceName,
             deviceStatus: deviceStatus,
-            // 🤓🤦‍♂️device status parameter does not work...
         };
 
         await updateDoc(deviceRef, updateData);
@@ -71,8 +72,9 @@ export const EditKeybox = async ( docId, deviceName, deviceStatus ) => {
         console.error("Error updating document:", error);
         // Handle any errors that might occur during the update process
     }
-
 };
+
+// TODO deletion of keyboxes
 
 
 

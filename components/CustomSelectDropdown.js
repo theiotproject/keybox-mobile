@@ -1,7 +1,10 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, View, } from 'react-native'
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native-paper';
+import { RectButton, Swipeable } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 
 const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
@@ -51,14 +54,26 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
                     return <Ionicons name={'search'} color={'#000'} size={18} />;
                 }}
 
+                // Customizing rows
+                renderCustomizedRowChild={(item, index) => {
+                    
+
+                    return (
+                        <Swipeable style={styles.dropdownCustomRow}>
+                            <Text style={styles.dropdownCustomRowText}>{item}</Text>
+
+                        </Swipeable>
+                        
+                    );
+                }}
+
             />
         )
     } else {
         return (
-            // WITHOUT SEATCHING
+            // WITHOUT SEARCHING
             <SelectDropdown
                 data={list}
-
 
                 // Button
                 defaultButtonText={selectText}
@@ -88,6 +103,15 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
                 }}
                 dropdownIconPosition={'right'}
                 dropdownStyle={styles.dropdownDropdown}
+
+                // Customizing rows
+                renderCustomizedRowChild={(item, index) => {
+                    return (
+                        <View style={styles.dropdownCustomRow}>
+                            <Text style={styles.dropdownCustomRowText}>{item.title}</Text>
+                        </View>
+                    );
+                }}
             />
         )
     }
@@ -100,7 +124,7 @@ const styles = StyleSheet.create({
 
     // DROPDOWN SELECT
     dropdownButton: {
-        width: '100%',
+        // width: '100%',
         height: 40,
         borderRadius: 5,
         borderWidth: 1,
@@ -124,8 +148,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#eee', 
         borderBottomColor: '#000'
     },
+    
+    dropdownCustomRow: {
+        backgroundColor: 'red',
+        // backgroundColor: '#eee', 
+        borderBottomColor: '#000'
+    },
 
     dropdownRowText: {
+        color: '#000',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    
+    dropdownCustomRowText: {
         color: '#000',
         textAlign: 'center',
         fontWeight: 'bold',

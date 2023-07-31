@@ -1,4 +1,5 @@
 import { MD3LightTheme as DefaultTheme, MD3DarkTheme as DarkTheme } from 'react-native-paper'
+import { convertToRGBA } from 'react-native-reanimated'
 
 // File to be imported into App.js (Main file) for changing app theme
 
@@ -17,6 +18,8 @@ export default theme = {
     onSurface:'#000',//Checkbox
     // Custom underneath
     secondaryDark: '#004EDA',
+    primaryRippleColor: '#FFF6',
+    secondaryRippleColor: '#005FEB',
 
     clickableText: '#00618A',
     buttonVariant: '#0086BE',

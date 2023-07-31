@@ -8,26 +8,49 @@ A repository for KeyBox Mobile App
 ### npm packages
 
  > ^ -> or higher
+
+#### React Hooks etc
 * react - `18.2.0^`
 * react-hook-form - `7.45.1^`
 * @hookform/resolvers - `3.1.1^`
-* @react-native-community/masked-view - `0.1.11^`
+
+#### React Native Various
+
 * react-native - `0.72.1^`
-* react-native-gesture-handler - `2.12.0^`
 * react-native-paper - `5.9.1^`
 * react-native-reanimated - `3.3.0^`
+* react-native-gesture-handler - `2.12.0^`
+* react-native-drawer-layout - `3.2.1^`
 * react-native-safe-area-context - `4.6.3^`
 * react-native-screens - `3.22.0^`
 * react-native-vector-icons - `9.2.0^`
+* react-native-uuid - `2.0.1^`
+* react-native-select-dropdown - `3.3.4^`
+* react-native-switch-selector - `2.3.0^`
+* @react-native-community/google-signin - `5.0.0^`
+* @react-native-community/masked-view - `0.1.11^`
 * @react-navigation/native - `6.1.7`
 * @react-navigation/native-stack - `6.9.13^`
 * @react-navigation/drawer - `6.6.3`
+
+#### Expo
+
 * expo - `49.0.0^`
 * expo-google-app-auth - `10.0.0^`
 * expo-status-bar - `1.6.0^`
+* expo-sensors - `12.3.0`
+
+#### Firebase
+
 * firebase - `9.23.0^`
+* react-native-firebase - `5.6.0`
+* @react-native-firebase/app -`18.3.0^`
 * @react-native-firebase/auth - `18.1.0^`
+* @react-native-firebase/firestore - `18.1.0^`
 * @react-native-google-signin/google-signin - `10.0.1^`
+
+#### Various
+
 * yup - `1.2.0^`
 * dotenv - `16.3.1^`
 * @babel/core - `7.20.0^`
@@ -106,6 +129,7 @@ A repository for KeyBox Mobile App
 >   <br/>
 
 <!-- ------------------------------------- -->
+
 
 > ### `LogOutModal.js`
 >

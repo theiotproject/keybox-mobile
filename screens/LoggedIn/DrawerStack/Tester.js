@@ -4,11 +4,13 @@ import { Button, Switch, Text } from 'react-native-paper';
 import { AddKeyBox, EditKeybox, GetKeyBoxes, GetKeyBoxesUpdt } from '../../../utils/dataService';
 import themes from '../../../utils/themes';
 import { View } from 'react-native';
-import AddKeyboxModal from '../../../components/modals/AddKeyboxModal';
+import AddKeyboxModal from '../../../components/modals/AddKeyBoxModal';
 import EditKeyboxModal from '../../../components/modals/EditKeyboxModal';
 import { StyleSheet } from 'react-native';
 import { KeyboxContext } from '../DrawerNavigationScreen';
 
+
+// Activity for testing functionalities of this app
 const Tester = () => {
 
   const device = useContext(KeyboxContext);

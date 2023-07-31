@@ -7,12 +7,18 @@ import { KeyboxContext } from '../DrawerNavigationScreen'
 import { Text } from 'react-native-paper'
 import { FlatList } from 'react-native-gesture-handler'
 
+
+// Screen for showing all the cards (Requests and Regular ones)
 const CardsScreen = () => {
- 
+  // Variable for getting current device, so only cards that belong to this device will show up
   const device = useContext(KeyboxContext);
+  // List of all regular cards
   const [ cards, setCards ] = useState(['CEO', "Storage Worker", "Manager", "Mr. Albert", "Cleaner", "Ms. Ellen"])
+  // List of all card requests (Pending Cards)
   const [ cardsPending, setCardsPending ] = useState(['11111111111', "222222222222", "333333333333"])
 
+
+  // Showing all cards in two separate scrollable Flatlists
   return (
     <View style={styles.container}>
 

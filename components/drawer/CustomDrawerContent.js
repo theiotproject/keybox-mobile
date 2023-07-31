@@ -24,6 +24,10 @@ const CustomDrawerContent = (props) => {
         props.handleSelectDevice(props.keyboxList[index]);
     };
 
+    const handleAddDevice = () => {
+        props.handleAddDevice();
+    }
+
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -71,8 +75,22 @@ const CustomDrawerContent = (props) => {
                     {props.loading ? (
                         <ActivityIndicator size="medium" color={themes.colors.primary} />
                     ) : (
-                        // Passing separately names and whole keyboxList for it to be displayed properly
-                        <CustomSelectDropdown list={keyboxList?.map((keybox) => keybox.deviceName)} keyboxList={keyboxList} selectText={"Select Keybox"} handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} allowSearch={true}/>
+                        <View style={styles.selectContainerInner}>
+                            {/* Icon with option to add keybox on click */}
+                            <Ionicons 
+                                style={styles.iconAddDropdown} 
+                                name='add-circle' 
+                                size={25} 
+                                color={themes.colors.secondary}
+                                onPress={() => handleAddDevice()}/>
+                            {/* Passing separately names and whole keyboxList for it to be displayed properly */}
+                            <CustomSelectDropdown 
+                                style={styles.customSelectDropdown}
+                                list={keyboxList?.map((keybox) => keybox.deviceName)} 
+                                keyboxList={keyboxList} selectText={"Select Keybox"} 
+                                handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} 
+                                allowSearch={true}/>
+                        </View>
                     )}
                 </View>
 
@@ -114,7 +132,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
-    // Navigationeiro
+    // Navigation
     hamburgerIcon: {
         fontSize: 45,
         width: '100%',
@@ -153,14 +171,40 @@ const styles = StyleSheet.create({
 
     // SELECTION
     selectContainer: {
-        padding: 16,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        // backgroundColor: 'blue',
+        
+    },
+    
+    selectContainerInner: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'pink',
+
     },
 
     selectText: {
         fontSize: 16,
         color: '#333',
+    },
+
+    customSelectDropdown: {
+        flex: 4,
+        // backgroundColor: 'red',
+    },
+    
+    iconAddDropdown: {
+        flex: 1,
+        marginEnd: 5,
+        alignSelf: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'green',
     },
 
     // DRAWER ITEMS

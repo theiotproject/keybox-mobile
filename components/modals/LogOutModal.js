@@ -19,19 +19,26 @@ const LogoutModal = ({ visible, handleSignOut, handleDismiss }) => {
         <Modal visible={modalVisible} onDismiss={() => handleDismiss()} contentContainerStyle={styles.container}>
             
             <Text style={styles.title}>Confirm Log Out</Text>
+
             <Text style={styles.message}>
               Are you sure you want to logout from Key Box Dashboard?
             </Text>
+            
             <View style={styles.buttonContainer}>
-                
-                <Button mode="outlined" style={styles.buttonOutlined} onPress={() => handleDismiss()}>
+                <Button 
+                  mode="outlined" 
+                  style={styles.buttonOutlined} 
+                  onPress={() => handleDismiss()}>
                     Cancel
                 </Button>
 
-                <Button mode="contained" style={styles.button} onPress={() => handleSignOut()}>
+                <Button 
+                  mode="contained" 
+                  rippleColor={themes.colors.primaryRippleColor} 
+                  style={styles.button} 
+                  onPress={() => handleSignOut()}>
                     Logout
                 </Button>
-
             </View>
         </Modal>
     );
