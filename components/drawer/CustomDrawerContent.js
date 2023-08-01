@@ -12,6 +12,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GetKeyBoxes } from '../../utils/dataService';
 import { ActivityIndicator } from 'react-native-paper';
 import themes from '../../utils/themes';
+import TestSwipeableRow from '../custom_swipable_row/TestSwipeableRow';
+import TestDropdown from '../TestDropdown';
+
+const countries = ["Egypt", "Canada", "Australia", "Ireland", "Canada", "Australia", "Ireland"];
 
 
 const CustomDrawerContent = (props) => {
@@ -71,29 +75,20 @@ const CustomDrawerContent = (props) => {
                 </TouchableOpacity>
 
                 {/* Select Input */}
-                <View style={styles.selectContainer}>
-                    {props.loading ? (
-                        <ActivityIndicator size="medium" color={themes.colors.primary} />
-                    ) : (
-                        <View style={styles.selectContainerInner}>
-                            {/* Icon with option to add keybox on click */}
-                            <Ionicons 
-                                style={styles.iconAddDropdown} 
-                                name='add-circle' 
-                                size={25} 
-                                color={themes.colors.secondary}
-                                onPress={() => handleAddDevice()}/>
-                            {/* Passing separately names and whole keyboxList for it to be displayed properly */}
-                            <CustomSelectDropdown 
-                                style={styles.customSelectDropdown}
-                                list={keyboxList?.map((keybox) => keybox.deviceName)} 
-                                keyboxList={keyboxList} selectText={"Select Keybox"} 
-                                handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)} 
-                                allowSearch={true}/>
-                        </View>
-                    )}
-                </View>
+                
 
+                {props.loading ? (
+                    <ActivityIndicator size="medium" color={themes.colors.primary} />
+                ) : (  
+                    <TestDropdown 
+                        style={styles.customSelectDropdown}
+                        data={keyboxList?.map((keybox) => keybox.deviceName)} 
+                        keyboxList={keyboxList} selectText={"Select Keybox"} 
+                        handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}
+                    />
+                )}
+
+                
                 {/* Custom Drawer Items */}
                 <View style={styles.drawerItemsContainer}>
                    
@@ -101,6 +96,7 @@ const CustomDrawerContent = (props) => {
                     
                 </View>
             </View>    
+
             
             {/* Sign-Out Button */}
             <View style={styles.signOutContainer}>
@@ -180,11 +176,12 @@ const styles = StyleSheet.create({
     },
     
     selectContainerInner: {
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'row',
         alignContent: 'center',
         alignItems: 'center',
         // backgroundColor: 'pink',
+        position:'relative'
 
     },
 
@@ -196,6 +193,7 @@ const styles = StyleSheet.create({
     customSelectDropdown: {
         flex: 4,
         // backgroundColor: 'red',
+
     },
     
     iconAddDropdown: {
@@ -227,6 +225,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         borderTopWidth: 1,
         width: '100%',
+
     },
 
     signOutLabel: {

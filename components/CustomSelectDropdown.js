@@ -5,11 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from 'react-native-paper';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
+import CustomSwipableRow from './custom_swipable_row/CustomSwipeableRow';
+import TestSwipeableRow from './custom_swipable_row/TestSwipeableRow';
 
 const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, handleAdd, handleDelete, allowSearch }) => {
     
     const searchEnabled = allowSearch === undefined ? true : allowSearch;
 
+    const [listTest, setListTest] = useState(['er', 'ker', 'mer']);
 
     if(searchEnabled) {
         return (
@@ -56,14 +59,21 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
 
                 // Customizing rows
                 renderCustomizedRowChild={(item, index) => {
-                    
-
                     return (
-                        <Swipeable style={styles.dropdownCustomRow}>
-                            <Text style={styles.dropdownCustomRowText}>{item}</Text>
+                        // <CustomSwipableRow
+                        //     handleSwipeLeft={() => {
+                        //         // Handle left swipe action here
+                        //         alert("Left")
+                        //     }}
+                        //     handleSwipeRight={() => {
+                        //       // Handle right swipe action here
+                        //       alert("Right")
+                        //     }}
+                        // >
+                        //     <Text style={styles.dropdownCustomRowText}>{item}</Text> 
+                        // </CustomSwipableRow>
 
-                        </Swipeable>
-                        
+                        <TestSwipeableRow/>
                     );
                 }}
 
@@ -71,6 +81,7 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
         )
     } else {
         return (
+            // TODO match this dropdown with search one
             // WITHOUT SEARCHING
             <SelectDropdown
                 data={list}
@@ -97,7 +108,6 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
                     handleSelect(selectedItem);
                 }}
 
-
                 renderDropdownIcon={isOpened => {
                     return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#000'} size={18} />;
                 }}
@@ -107,9 +117,19 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
                 // Customizing rows
                 renderCustomizedRowChild={(item, index) => {
                     return (
-                        <View style={styles.dropdownCustomRow}>
-                            <Text style={styles.dropdownCustomRowText}>{item.title}</Text>
-                        </View>
+                        <CustomSwipableRow
+                            handleOnPress={() => handleSelect(item)}
+                            onLongPress={null}
+                            handleSwipeLeft={() => {
+                            // Handle left swipe action here
+                            }}
+                            handleSwipeRight={() => {
+                              // Handle right swipe action here
+                            }}
+                        >
+                            <Text onPress={() => handleSelect(item)} style={styles.dropdownCustomRowText}>{item}</Text>
+                            
+                        </CustomSwipableRow>
                     );
                 }}
             />
@@ -162,6 +182,7 @@ const styles = StyleSheet.create({
     },
     
     dropdownCustomRowText: {
+        fontSize: 18,
         color: '#000',
         textAlign: 'center',
         fontWeight: 'bold',

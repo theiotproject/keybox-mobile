@@ -8,8 +8,13 @@ import AddKeyboxModal from '../../../components/modals/AddKeyBoxModal';
 import EditKeyboxModal from '../../../components/modals/EditKeyboxModal';
 import { StyleSheet } from 'react-native';
 import { KeyboxContext } from '../DrawerNavigationScreen';
+import CustomSwipableRow from '../../../components/custom_swipable_row/CustomSwipeableRow';
+import TestSwipeableRow from '../../../components/custom_swipable_row/TestSwipeableRow';
+import CustomSelectDropdown from '../../../components/CustomSelectDropdown';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import TestDropdown from '../../../components/TestDropdown';
 
-
+const countries = ["Egypt", "Canada", "Australia", "Ireland", "Canada", "Australia", "Ireland"];
 // Activity for testing functionalities of this app
 const Tester = () => {
 
@@ -33,8 +38,17 @@ const Tester = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
+
+
+  // DROPDOWN
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleSelect = (item) => {
+    setSelectedOption(item);
+  };
   
 
   return (
@@ -55,6 +69,8 @@ const Tester = () => {
         GET DATA
       </Button>
       
+      <TestSwipeableRow/>
+
 
       {/* Showing all user keyboxes */}
       {loading ? (
@@ -72,6 +88,27 @@ const Tester = () => {
           keyExtractor={(item) => item.docId}
         />
       )}
+
+      {/* <View>
+        <CustomSwipableRow
+          style={styles.swipr}
+          handleSwipeLeft={() => {
+          // Handle left swipe action here
+          }}
+          handleSwipeRight={() => {
+            // Handle right swipe action here
+          }}
+        >
+          <Text>TEXT</Text>
+        </CustomSwipableRow>
+
+      </View> */}
+    
+
+      <TestDropdown style={{height: 200}} data={countries} onSelect={handleSelect} />
+      {/* <View style={{ marginTop: 20 }}>
+        <Text>Selected Option: {selectedOption}</Text>
+      </View> */}
 
       <AddKeyboxModal 
         visible={visibleAdd} 
@@ -99,6 +136,11 @@ const Tester = () => {
 export default Tester;
 
 const styles = StyleSheet.create({
+
+  swipr: {
+    backgroundColor: 'green',
+    alignSelf: 'center',
+  },
 
   button: {
     marginVertical: 5,

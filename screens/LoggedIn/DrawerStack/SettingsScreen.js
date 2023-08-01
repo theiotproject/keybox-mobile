@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
+import { KeyboxContext } from '../DrawerNavigationScreen';
 
 // Activity for changing settings of this app
 const SettingsScreen = () => {
