@@ -13,7 +13,7 @@ import { GetKeyBoxes } from '../../utils/dataService';
 import { ActivityIndicator } from 'react-native-paper';
 import themes from '../../utils/themes';
 import TestSwipeableRow from '../custom_swipable_row/TestSwipeableRow';
-import TestDropdown from '../TestDropdown';
+import CustomDropdown from '../CustomDropdown';
 
 const countries = ["Egypt", "Canada", "Australia", "Ireland", "Canada", "Australia", "Ireland"];
 
@@ -28,8 +28,12 @@ const CustomDrawerContent = (props) => {
         props.handleSelectDevice(props.keyboxList[index]);
     };
 
-    const handleAddDevice = () => {
+    const handleAddKeybox = () => {
         props.handleAddDevice();
+    }
+
+    const handleEditKeybox = (docId, deviceName, deviceStatus) => {
+        props.handleEditDevice(docId, deviceName, deviceStatus);
     }
 
     const { user } = useContext(AuthContext);
@@ -80,10 +84,13 @@ const CustomDrawerContent = (props) => {
                 {props.loading ? (
                     <ActivityIndicator size="medium" color={themes.colors.primary} />
                 ) : (  
-                    <TestDropdown 
+                    <CustomDropdown 
                         style={styles.customSelectDropdown}
                         data={keyboxList?.map((keybox) => keybox.deviceName)} 
-                        keyboxList={keyboxList} selectText={"Select Keybox"} 
+                        keyboxList={keyboxList} 
+                        selectText={"Select Keybox"} 
+                        handleAdd={() => handleAddKeybox()}
+                        handleEdit={(device) => handleEditKeybox(device)}
                         handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}
                     />
                 )}

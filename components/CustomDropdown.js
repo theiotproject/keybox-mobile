@@ -4,53 +4,39 @@ import { View, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { Swipeable, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Text, TouchableRipple } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
+import { AddKeyBox, EditKeybox } from '../utils/dataService';
 
-const TestDropdown = ({ data, keyboxList, handleSelect }) => {
+const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit }) => {
+  // State variables to track the selected item and its index
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null); 
   const flatListRef = useRef();
 
-  const [isOptions, setIsOptions] = useState(false)
+  // State variable to toggle the dropdown list visibility
+  const [isOptions, setIsOptions] = useState(false);
 
-
+  // Function to show/hide the dropdown list
   const showOptions = () => {
-    setIsOptions(true)
-    // flatListRef.current.scrollToIndex({ index: 0 })
-  }
+    setIsOptions(true);
+  };
 
+  // Function to handle item selection
   const handleItemSelect = (item, index) => {
-    setIsOptions(false)
+    setIsOptions(false); // Hide the dropdown list after selection
     setSelectedItem(item);
-    setSelectedIndex(index)
-    handleSelect(index);
+    setSelectedIndex(index); // Set the selected index
+    handleSelect(index); // Call the provided handleSelect function with the selected index
   };
 
-  // TODO make it work
-  const renderRightActions = (progress, dragX, item) => {
-    const onPress = () => {
-      handleItemSelect(item);
-    };
 
-    return (
-      <TouchableOpacity
-        onPress={onPress}
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'red',
-          width: 50,
-        }}
-      >
-        <Ionicons name='trash' size={25} />
-      </TouchableOpacity>
-    );
-  };
   
-  // TODO make it work
-  // copy of renderRightItem
-  const renderLeftActions = (progress, dragX, item) => {
+  // Function to render swipeable left actions (e.g., edit)
+  const renderLeftActions = (progress, dragX, item, index) => {
     const onPress = () => {
-      handleItemSelect(item);
+      // Editing of the item using handleEdit function
+      console.log(keyboxList[index]);
+      handleEdit(keyboxList[index]);
+      setIsOptions(false); // Hide the dropdown list after the action
     };
 
     return (
@@ -59,7 +45,6 @@ const TestDropdown = ({ data, keyboxList, handleSelect }) => {
         style={{
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'red',
           width: 50,
         }}
       >
@@ -68,16 +53,18 @@ const TestDropdown = ({ data, keyboxList, handleSelect }) => {
     );
   };
 
+  // Function to render each item in the dropdown list
   const renderItem = ({ item, index }) => {
     return (
       <Swipeable
         style={styles.itemContainer}
-        renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item)}
-        renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item)}
+        renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item, index)}
+        leftThreshold={50}
+        rightThreshold={50}
       >
         <TouchableRipple
           style={styles.itemTouchable} // Adjust the height of the item container
-          onPress={() => handleItemSelect(item, index)}
+          onPress={() => handleItemSelect(item, index)} // Call handleItemSelect on item press with the index
         >
           <Text>{item}</Text>
         </TouchableRipple>
@@ -87,17 +74,36 @@ const TestDropdown = ({ data, keyboxList, handleSelect }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => !isOptions ? showOptions() : setIsOptions(false)}>
+      {/* Toggle the dropdown list visibility on press */}
+      <TouchableWithoutFeedback >
         <View style={styles.dropdownButtonContainer}>
-          <Text style={styles.dropdownButtonText} variant='titleMedium'>
+          {/* Render the "Add" icon to add a new item */}
+          <Ionicons 
+            style={styles.dropdownButtonIcon} 
+            name="add-circle" 
+            size={20} 
+            onPress={() => handleAdd()} // Call handleAdd function on "Add" icon press
+          />
+          {/* Render the selected item or default text */}
+          <Text 
+            style={styles.dropdownButtonText} 
+            variant='titleMedium'
+            onPress={() => !isOptions ? showOptions() : setIsOptions(false)}>
             {selectedItem ? selectedItem : 'Select Keybox'}
           </Text>
-          <Ionicons style={styles.dropdownButtonIcon} name={isOptions ? 'chevron-up' : 'chevron-down'} size={20} />
+          {/* Render the "Chevron" icon to indicate dropdown list visibility */}
+          <Ionicons 
+            style={styles.dropdownButtonIcon} 
+            name={isOptions ? 'chevron-up' : 'chevron-down'} 
+            size={20} 
+            onPress={() => !isOptions ? showOptions() : setIsOptions(false)}/>
         </View>
       </TouchableWithoutFeedback>
 
+      {/* Render the dropdown list when isOptions is true */}
       {isOptions ? (
         <View style={styles.dropdownListContainer}>
+          {/* Render the FlatList containing the items */}
           <FlatList
             style={styles.flatList}
             ref={flatListRef}
@@ -110,6 +116,7 @@ const TestDropdown = ({ data, keyboxList, handleSelect }) => {
         </View>
       ) : null}
 
+      {/* Render the blurred background to make the dropdown list prominent */}
       {isOptions ? <View style={styles.blurView}></View> : null}
     </View>
   );
@@ -144,11 +151,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     alignSelf: 'center',
+    textAlign: 'center'
   },
 
   dropdownButtonIcon: {
     flex: 1,
     alignSelf: 'center',
+    textAlign: 'center',
   },
 
   itemContainer: {
@@ -185,4 +194,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default TestDropdown;
+export default CustomDropdown;

@@ -8,8 +8,9 @@ import LogoutModal from '../../components/modals/LogOutModal';
 import { signOut } from '../../utils/userHandler';
 import { createContext } from 'react';
 import CustomDrawer from '../../components/drawer/CustomDrawer';
-import { AddKeyBox, GetKeyBoxes, GetKeyBoxesUpdt } from '../../utils/dataService';
+import { AddKeyBox, EditKeybox, GetKeyBoxes, GetKeyBoxesUpdt } from '../../utils/dataService';
 import AddKeyboxModal from '../../components/modals/AddKeyBoxModal';
+import EditKeyboxModal from '../../components/modals/EditKeyboxModal';
 
 
 // For this activity to be using side drawer
@@ -74,6 +75,9 @@ const DrawerNavigationScreen = () => {
   const [ logout, setLogout ] = useState(false)
   // add
   const [visibleAdd, setVisibleAdd] = useState(false);
+  // edit
+  const [visibleEdit, setVisibleEdit] = useState(false);
+  const [editDevice, setEditDevice] = useState({})
 
   
   return (
@@ -84,6 +88,12 @@ const DrawerNavigationScreen = () => {
         <CustomDrawer 
           handleLogout={() => setLogout(true)} 
           handleAddDevice={() => setVisibleAdd(true)}
+          handleEditDevice={(device) => {
+            // Show modal and pass docID
+            setVisibleEdit(true);
+            setEditDevice(device)
+
+          }}
           handleSelectDevice={(device) => setCurrentDevice(device)} 
           keyboxList={keyboxList} 
           loading={loading} />
@@ -105,6 +115,16 @@ const DrawerNavigationScreen = () => {
             setVisibleAdd(false)
           }}
           handleDismiss={() => setVisibleAdd(false)}  
+        />
+
+        <EditKeyboxModal 
+          visible={visibleEdit} 
+          keybox={editDevice}
+          handleEdit={(docId, deviceName, deviceStatus) => { 
+            EditKeybox(docId, deviceName, deviceStatus)
+            setVisibleEdit(false)
+          }}
+          handleDismiss={() => setVisibleEdit(false)}  
         />
 
         

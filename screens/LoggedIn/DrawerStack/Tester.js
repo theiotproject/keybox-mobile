@@ -12,7 +12,7 @@ import CustomSwipableRow from '../../../components/custom_swipable_row/CustomSwi
 import TestSwipeableRow from '../../../components/custom_swipable_row/TestSwipeableRow';
 import CustomSelectDropdown from '../../../components/CustomSelectDropdown';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import TestDropdown from '../../../components/TestDropdown';
+import CustomDropdown from '../../../components/CustomDropdown';
 
 const countries = ["Egypt", "Canada", "Australia", "Ireland", "Canada", "Australia", "Ireland"];
 // Activity for testing functionalities of this app
@@ -89,26 +89,11 @@ const Tester = () => {
         />
       )}
 
-      {/* <View>
-        <CustomSwipableRow
-          style={styles.swipr}
-          handleSwipeLeft={() => {
-          // Handle left swipe action here
-          }}
-          handleSwipeRight={() => {
-            // Handle right swipe action here
-          }}
-        >
-          <Text>TEXT</Text>
-        </CustomSwipableRow>
-
-      </View> */}
+  
     
 
-      <TestDropdown style={{height: 200}} data={countries} onSelect={handleSelect} />
-      {/* <View style={{ marginTop: 20 }}>
-        <Text>Selected Option: {selectedOption}</Text>
-      </View> */}
+      <CustomDropdown style={{height: 200}} data={countries} onSelect={handleSelect} />
+      
 
       <AddKeyboxModal 
         visible={visibleAdd} 
@@ -146,6 +131,5 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
   }
-
 
 })

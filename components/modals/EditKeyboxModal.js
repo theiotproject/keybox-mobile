@@ -35,9 +35,9 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
     // Update keybox
     // DO NOT PUSH THIS
     console.log(isOnline)
-    
+    console.log(keybox)
     // DOES NOT WORK CAUSE THERE IS NO ID
-    handleEdit("", data.deviceName, isOnline);//DO NOT PUSH THIS
+    handleEdit(keybox?.docId, data.deviceName, isOnline);//DO NOT PUSH THIS
   };
 
   // Update the local state when the `visible` prop changes
@@ -62,7 +62,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
         {/* DEVICE ID SECTION */}
         <Text variant='titleLarge' style={styles.inputLabel}>ID number: </Text>
         {/* DEVICE ID */}
-        <Text variant='labelMedium' style={{alignSelf: 'center'}}>{keybox?.docId ? keybox.docId : "Here should be id..."}</Text>
+        <Text variant='labelMedium' style={{alignSelf: 'center'}}>{keybox?.docId}</Text>
 
 
         {/* DEVICE NAME SECTION */}
@@ -128,7 +128,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: '50%', //It works only on big devices... 
+   
     backgroundColor: 'white',
     width: '90%',
     alignSelf: 'center',
