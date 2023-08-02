@@ -12,6 +12,7 @@ import themes from '../../utils/themes';
 import CustomDrawerContent from './CustomDrawerContent';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ProfileScreen from '../../screens/LoggedIn/DrawerStack/ProfileScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -101,6 +102,7 @@ const CustomDrawer = ({ handleLogout, handleAddDevice, handleEditDevice, handleS
             <Drawer.Screen name="Cards" component={CardsScreen}/>
             <Drawer.Screen name="Settings" component={SettingsScreen} />
             <Drawer.Screen name="Tester" component={Tester} />
+            <Drawer.Screen name="Profile" component={ProfileScreen} />
         </Drawer.Navigator>
   )
 }

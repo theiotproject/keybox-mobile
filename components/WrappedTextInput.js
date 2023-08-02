@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-const WrappedTextInput = ({ label, value, onChangeText, canHide }) => {
+const WrappedTextInput = ({ label, value, onChangeText, canHide, disabled }) => {
   const [hideText, setHideText] = useState(false);
 
   return (
@@ -14,6 +14,7 @@ const WrappedTextInput = ({ label, value, onChangeText, canHide }) => {
         style={[styles.input]}
         onChangeText={onChangeText}
         secureTextEntry={canHide}
+        disabled={disabled}
         right={
           canHide ?
           (

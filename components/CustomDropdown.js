@@ -59,8 +59,6 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
       <Swipeable
         style={styles.itemContainer}
         renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item, index)}
-        leftThreshold={50}
-        rightThreshold={50}
       >
         <TouchableRipple
           style={styles.itemTouchable} // Adjust the height of the item container

@@ -10,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import renderDrawerItems from '../../utils/renderDrawerItems';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GetKeyBoxes } from '../../utils/dataService';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, TouchableRipple } from 'react-native-paper';
 import themes from '../../utils/themes';
 import TestSwipeableRow from '../custom_swipable_row/TestSwipeableRow';
 import CustomDropdown from '../CustomDropdown';
@@ -48,84 +48,106 @@ const CustomDrawerContent = (props) => {
 
     
     return (
-
-        <DrawerContentScrollView {...props} 
-            style={styles.drawerContentContainer}
-        >
-            <View style={styles.contentContainer}>
-
-                <Ionicons 
-                    name='reorder-three-outline' 
-                    style={styles.hamburgerIcon} 
-                    onPress={() => props.navigation.closeDrawer()}
-                />
-
-                {/* TODO maybe change TouchableOpacity back to View */}
-                {/* Profile Container */}
-                <TouchableOpacity style={styles.profileContainer} onPress={() => alert("Changing Profile data")}>
-                    {/* Small profile picture */}
-                    <View style={styles.profileImageContainer}>
-                        <Image
-                            source={logo}
-                            style={styles.profileImage}
-                        />
-                    </View>
-
-                    {/* User name */}
-                    <Text style={styles.userName}>{user ? user.displayName : "No Name"}</Text>
-                    {/* User email */}
-                    <Text>{user ? user.email : "No email"}</Text>
-
-                </TouchableOpacity>
-
-                {/* Select Input */}
-                
-
-                {props.loading ? (
-                    <ActivityIndicator size="medium" color={themes.colors.primary} />
-                ) : (  
-                    <CustomDropdown 
-                        style={styles.customSelectDropdown}
-                        data={keyboxList?.map((keybox) => keybox.deviceName)} 
-                        keyboxList={keyboxList} 
-                        selectText={"Select Keybox"} 
-                        handleAdd={() => handleAddKeybox()}
-                        handleEdit={(device) => handleEditKeybox(device)}
-                        handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}
+        <>
+            <View style={styles.hamburgerButtonContainer}>
+                <TouchableOpacity>
+                    <Ionicons 
+                        name='reorder-three-outline' 
+                        style={styles.hamburgerIcon} 
+                        onPress={() => props.navigation.closeDrawer()}
                     />
-                )}
-
-                
-                {/* Custom Drawer Items */}
-                <View style={styles.drawerItemsContainer}>
-                   
-                    {renderDrawerItems(props)}
-                    
-                </View>
-            </View>    
+                </TouchableOpacity>
+            </View>
+            
 
             
-            {/* Sign-Out Button */}
-            <View style={styles.signOutContainer}>
-                <DrawerItem
-                    style={styles.drawerItem}
-                    label="Sign Out"
-                    labelStyle={styles.signOutLabel}
+            <DrawerContentScrollView {...props} 
+                style={styles.drawerContentContainer}
+            >
+                <View style={styles.contentContainer}>
 
-                    onPress={() => props.handleLogout()}
-                
-                    icon={({ color, size }) => (
-                        <Ionicons name="log-out-outline" size={size} color={color} />
+
+                    {/* TODO maybe change TouchableOpacity back to View */}
+                    {/* Profile Container */}
+                    <TouchableOpacity style={styles.profileContainer} onPress={() => props.navigation.navigate("Profile")}>
+                        {/* Small profile picture */}
+                        <View style={styles.profileImageContainer}>
+                            <Image
+                                source={logo}
+                                style={styles.profileImage}
+                            />
+                        </View>
+
+                        {/* User name */}
+                        <Text style={styles.userName}>{user ? user.displayName : "No Name"}</Text>
+                        {/* User email */}
+                        <Text>{user ? user.email : "No email"}</Text>
+
+                    </TouchableOpacity>
+
+                    {/* Select Input */}
+                    
+
+                    {props.loading ? (
+                        <ActivityIndicator size="medium" color={themes.colors.primary} />
+                    ) : (  
+                        <CustomDropdown 
+                            style={styles.customSelectDropdown}
+                            data={keyboxList?.map((keybox) => keybox.deviceName)} 
+                            keyboxList={keyboxList} 
+                            selectText={"Select Keybox"} 
+                            handleAdd={() => handleAddKeybox()}
+                            handleEdit={(device) => handleEditKeybox(device)}
+                            handleSelect={(selectedItem) => handleKeyboxSelect(selectedItem)}
+                        />
                     )}
-                />
-            </View>
-        </DrawerContentScrollView>
 
+                    
+                    {/* Custom Drawer Items */}
+                    <View style={styles.drawerItemsContainer}>
+                    
+                        {renderDrawerItems(props)}
+                        
+                    </View>
+                </View>    
+
+                
+                {/* Sign-Out Button */}
+                <View style={styles.signOutContainer}>
+                    <DrawerItem
+                        style={styles.drawerItem}
+                        label="Sign Out"
+                        labelStyle={styles.signOutLabel}
+
+                        onPress={() => props.handleLogout()}
+                    
+                        icon={({ color, size }) => (
+                            <Ionicons name="log-out-outline" size={size} color={color} />
+                        )}
+                    />
+                </View>
+            </DrawerContentScrollView>
+        </>
+                           
     );
 };
 
 const styles = StyleSheet.create({
     
+    // Drawer closing
+    hamburgerButtonContainer: {
+        marginTop: 30,
+        height: 55,
+        borderBottomWidth: 1,
+    },
+
+    hamburgerIcon: {
+        fontSize: 45,
+        width: '100%',
+        paddingHorizontal: 10,
+    },
+
+
     drawerContentContainer: {
 
     },
@@ -135,14 +157,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
-    // Navigation
-    hamburgerIcon: {
-        fontSize: 45,
-        width: '100%',
-        paddingHorizontal: 10,
-        paddingVertical: 3,
-        borderBottomWidth: 1,
-    },
+   
 
     // PROFILE
     profileContainer: {
