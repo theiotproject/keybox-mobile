@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import 'expo-dev-client'
 import SignUpScreen from './screens/LoggedOut/SignUpScreen';
 import DrawerNavigationScreen from './screens/LoggedIn/DrawerNavigationScreen';
+import ResetPasswordScreen from './screens/LoggedOut/ResetPasswordScreen';
 
 
 
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignInScreen} />
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
+            <Stack.Screen name="ResetPassword" options={{ headerShown: false }} component={ResetPasswordScreen} />
             <Stack.Screen name="DrawerNavigation" options={{ headerShown: false }} component={DrawerNavigationScreen} />
           </Stack.Navigator>
         </AuthProvider>

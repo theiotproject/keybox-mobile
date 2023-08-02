@@ -1,5 +1,4 @@
 import { MD3LightTheme as DefaultTheme, MD3DarkTheme as DarkTheme } from 'react-native-paper'
-import { convertToRGBA } from 'react-native-reanimated'
 
 // File to be imported into App.js (Main file) for changing app theme
 

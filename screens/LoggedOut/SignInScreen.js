@@ -69,13 +69,13 @@ const SignInScreen = () => {
             style={{height}}
         >
             {/* CONTAINER FOR LOGO AND WELCOME TEXT  */}
-            <View style={styles.logoTextContainer}>
+            <View style={styles.logoContainer}>
 
                 {/* It may be stupid, but it works*/}
                 <Spacer />
                 <Spacer />
 
-                <View style={styles.logoContainer}>
+                <View style={styles.logoImageContainer}>
 
                     <AnimatedLogo />
 
@@ -105,7 +105,8 @@ const SignInScreen = () => {
                         value={ password }
                         style={styles.input}
                         onChangeText={ text => setPassword(text)}
-                        canHide={true}
+                        secureTextEntry={true}
+                        toggleVisibility={true}
                     />
 
                     <View style={styles.checkboxContainer}>
@@ -161,7 +162,7 @@ const SignInScreen = () => {
                     <ClickableText
                         style={styles.clickableText}
                         text="Forgot Password?"
-                        handlePress={() => alert("Here will be passwor recovery")}
+                        handlePress={() => navigation.navigate("ResetPassword")}
                     />
 
                     <ClickableText
@@ -188,11 +189,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    logoTextContainer: {
-        flex: 3,
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
-    },
+   
 
     formContainer: {
         flex: 5,
@@ -257,9 +254,14 @@ const styles = StyleSheet.create({
         // Style Checkbox here
     },
 
-    // IMAGE STYLES
-
+    // LOGO CONTAINER
     logoContainer: {
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+
+    logoImageContainer: {
         marginVertical: 25, //Idk how it makes it look better, but it looks better
         width: 75,
         height: 75,

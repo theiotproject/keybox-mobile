@@ -118,7 +118,7 @@ const SignUpScreen = () => {
                                 error={errors.username ? errors.username.message : null}
                             />
                             {errors.username && (
-                            <Text style={styles.error}>{errors.username.message}</Text>
+                                <Text style={styles.error}>{errors.username.message}</Text>
                             )}
                         </>
                     )}
@@ -173,7 +173,7 @@ const SignUpScreen = () => {
                                 secureTextEntry
                             />
                             {errors.password && (
-                            <Text style={styles.error}>{errors.password.message}</Text>
+                                <Text style={styles.error}>{errors.password.message}</Text>
                             )}
                         </>
                     )}
@@ -315,6 +315,7 @@ const styles = StyleSheet.create({
     },
 
     inputText: {
+        
     },
 
     error: {
