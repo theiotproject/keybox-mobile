@@ -60,16 +60,16 @@ const CustomDrawerContent = (props) => {
             </View>
             
 
-            
             <DrawerContentScrollView {...props} 
                 style={styles.drawerContentContainer}
             >
                 <View style={styles.contentContainer}>
 
-
-                    {/* TODO maybe change TouchableOpacity back to View */}
-                    {/* Profile Container */}
-                    <TouchableOpacity style={styles.profileContainer} onPress={() => props.navigation.navigate("Profile")}>
+                    {/* TODO try to delete margin/ sth that makes it apper like 20pixels under navigation container (with hamburger icon) */}
+                    {/* Profile Container - on touch navigates to Profile */}
+                    <TouchableOpacity 
+                        style={styles.profileContainer} 
+                        onPress={() => props.navigation.navigate("Profile")}>
                         {/* Small profile picture */}
                         <View style={styles.profileImageContainer}>
                             <Image
@@ -137,17 +137,20 @@ const styles = StyleSheet.create({
     // Drawer closing
     hamburgerButtonContainer: {
         marginTop: 30,
-        height: 55,
+        height: 53,
+        justifyContent: 'center',
         borderBottomWidth: 1,
     },
 
     hamburgerIcon: {
-        fontSize: 45,
+        fontSize: 43,
         width: '100%',
+        alignSelf: 'center',
         paddingHorizontal: 10,
     },
 
 
+    // ScrollView
     drawerContentContainer: {
 
     },

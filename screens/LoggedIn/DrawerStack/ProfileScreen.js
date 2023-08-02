@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, TextInput, Button, Text } from 'react-native-paper';
 import themes from '../../../utils/themes';
 import WrappedTextInput from '../../../components/WrappedTextInput';
 import { logo } from '../../../assets';
+import { AuthContext } from '../../../context/AuthContext';
 
 const ProfileScreen = () => {
+
+  const { user } = useContext(AuthContext);
+  const [userName, setUserName] = useState(user?.displayName);
+  const [userEmail, setUserEmail] = useState(user?.email);
+
+
+  const handleChangeEmail = () => {
+    alert("Change email")
+  }
+  
+  const handleChangePassword = () => {
+    alert("Change password")
+  }
+
   return (
     <View style={styles.container}>
 
@@ -23,7 +38,7 @@ const ProfileScreen = () => {
         <WrappedTextInput
           label="Username"
           mode="outlined"
-          value="JohnDoe"
+          value={userName}
           disabled
           style={styles.input}
         />
@@ -32,7 +47,7 @@ const ProfileScreen = () => {
         <WrappedTextInput
           label="Email"
           mode="outlined"
-          value="johndoe@example.com"
+          value={userEmail}
           disabled
           style={styles.input}
         />

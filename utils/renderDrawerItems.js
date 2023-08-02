@@ -12,9 +12,15 @@ import { Ionicons } from "@expo/vector-icons";
 export default renderDrawerItems = (props) => {
   // Destructure 'state' and 'navigation' from 'props'.
   const { state, navigation } = props;
+  
+   // Assuming you have the routeNames array in the state object
+   const { routeNames } = state;
 
-  // Map through the 'state.routeNames' to render each drawer item.
-  return state.routeNames.map((routeName, index) => {
+   // Function to filter routeNames and exclude "Profile" (so it will be accissible only by clicking on profile section in drawer)
+   const filteredRouteNames = routeNames.filter((name) => name !== 'Profile');
+
+  // Map through the 'filteredRouteNames' to render each drawer item.
+  return filteredRouteNames.map((routeName, index) => {
     // Determine if the current drawer item is focused based on the index in 'state'.
     const focused = index === state.index;
 
