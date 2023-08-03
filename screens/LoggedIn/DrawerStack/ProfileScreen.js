@@ -48,7 +48,6 @@ const ProfileScreen = () => {
           label="Email"
           mode="outlined"
           value={userEmail}
-          disabled
           style={styles.input}
         />
       </View>
@@ -62,7 +61,7 @@ const ProfileScreen = () => {
           mode="outlined" 
           style={styles.button} 
           textColor={themes.colors.secondaryDark}
-          rippleColor={themes.colors.rippleColor}>
+          rippleColor={themes.colors.primaryRippleColor}>
           Change Password
         </Button>
 
@@ -73,7 +72,7 @@ const ProfileScreen = () => {
           mode="outlined" 
           style={styles.button} 
           textColor={themes.colors.secondaryDark}
-          rippleColor={themes.colors.rippleColor}>
+          rippleColor={themes.colors.primaryRippleColor}>
           Change Email
         </Button>
       </View>

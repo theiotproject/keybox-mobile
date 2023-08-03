@@ -10,7 +10,9 @@ import themes from '../../utils/themes';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import { changePasswordValidationSchema } from '../../utils/yupShema';
-import firebase from 'react-native-firebase';
+import { firebase } from '@react-native-firebase/auth';
+import { resetPassword } from '../../utils/userHandler';
+// import firebase from 'react-native-firebase'; //oes not work in expo
 
 const ResetPasswordScreen = () => {
 
@@ -35,20 +37,15 @@ const ResetPasswordScreen = () => {
 
   // When form is submitted (Works only if every field is filled correctly)
   const onSubmit = (data) => {
+    alert("working")
     console.log('Email:', data.email);
     console.log('New Password:', data.newPassword);
     console.log('Confirm Password:', data.confirmNewPassword);
-    // resetPassword()
+    resetPassword(data.email)
   };
 
 
-  const resetPassword = () => {
-    console.log('Email:', email);
-    console.log('New Password:', newPassword);
-    console.log('Confirm Password:', confirmPassword);
-
-    // TODO make it work (obviously fu***** expo go does not support sending emails via firebase)
-  };
+ 
 
   return (
     <View style={styles.container}>
@@ -162,7 +159,7 @@ const ResetPasswordScreen = () => {
           mode="contained" 
           onPress={handleSubmit(onSubmit)} 
           style={styles.button}
-          rippleColor={themes.colors.rippleColor}>
+          rippleColor={themes.colors.primaryRippleColor}>
           Reset Password
         </Button>
 

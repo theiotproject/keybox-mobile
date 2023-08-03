@@ -33,6 +33,7 @@ if (getApps().length === 0){
 const auth = getAuth();
 export { auth }
 
+export { app }
 
 // TODO FIRESTORE
 

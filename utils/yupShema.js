@@ -50,9 +50,9 @@ export const changePasswordValidationSchema = yup.object().shape({
     .string()
     .email('Enter a valid email')
     .required('Email is required'),
-  password: yup
-    .string()
-    .required("You must provide your current password to change"),
+  // password: yup
+  //   .string()
+  //   .required("You must provide your current password to change"),
   newPassword: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
@@ -60,7 +60,7 @@ export const changePasswordValidationSchema = yup.object().shape({
     .required('Password is required'),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('newPassword'), null], 'Passwords must match')
     .required('Password confirmation is required'),
 
 })

@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut as signOutFirebase } from "firebase/auth";
 import { auth } from "../firebase";
+import { firebase } from '@react-native-firebase/auth';
 import LogoutModal from "../components/modals/LogOutModal";
 import {AsyncStorage} from 'react-native';
 
@@ -43,7 +44,7 @@ export const signIn = ( email, password, rememberUser ) => {
 }
 
 
-// > GOOGLE
+// > GOOGLE SIGN IN/UP
 
 
 
@@ -54,3 +55,17 @@ export const signIn = ( email, password, rememberUser ) => {
 export const signOut = () => {
     signOutFirebase(auth);    
 }
+
+
+
+// -------------------------------------------------
+// RESETTING PASSWORD
+export const resetPassword = (userEmail) => [
+    // It will probably work after building app
+    firebase.auth().sendPasswordResetEmail(userEmail)
+    .then(() => {
+        alert("password reset send")
+    }).catch((error) => {
+        alert(error)
+    })
+]

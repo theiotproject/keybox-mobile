@@ -19,12 +19,6 @@ const { height } = Dimensions.get('window');
 // Activity for signing in
 const SignUpScreen = () => {
 
-    // USER VARIABLES
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
     // Used fo navigation between activities
     const navigation = useNavigation();
     
@@ -45,9 +39,6 @@ const SignUpScreen = () => {
     const onSubmit = (data) => {
         console.log(data);
         // Set variables to form data
-        setUsername(data.username);
-        setEmail(data.email);
-        setPassword(data.password);
         console.log(errors);
         
         // Sign Up with username,email and password
