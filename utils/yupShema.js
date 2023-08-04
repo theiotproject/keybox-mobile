@@ -44,15 +44,22 @@ export const editDeviceValidationSchema = yup.object().shape({
     .required('Name is required'),
 })
 
-// Resetting password schema
-export const changePasswordValidationSchema = yup.object().shape({
-  email: yup
+// Changing email schema
+export const changeEmailValidationSchema = yup.object().shape({
+  newEmail: yup
     .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
-  // password: yup
-  //   .string()
-  //   .required("You must provide your current password to change"),
+    .email("Enter a valid email")
+    .required("You must provide New Email to change Email"),
+  currentPassword: yup
+    .string()
+    .required("You must provide your Current Password to change Email"),
+});
+
+// Changing password schema
+export const changePasswordValidationSchema = yup.object().shape({
+  currentPassword: yup
+    .string()
+    .required("You must provide your Current Password to change it"),
   newPassword: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
@@ -64,4 +71,12 @@ export const changePasswordValidationSchema = yup.object().shape({
     .required('Password confirmation is required'),
 
 })
+
+// Resetting password
+export const resetPasswordValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("You must provie your email to reset password")
+});
 

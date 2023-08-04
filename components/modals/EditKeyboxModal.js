@@ -93,9 +93,9 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
           defaultValue=""
           />
 
-   
+        {/* TODO make it impossible for user to change status here, it should only isplay evice status */}
         {/* DEVICE STATUS SECTION */}
-        <Text variant='titleLarge' style={styles.inputLabel}>Set Device status: </Text>
+        <Text variant='titleLarge' style={styles.inputLabel}>Device status: </Text>
         {/* Switch for choosing whether device should be online or offline */}
         <SwitchSelector
           style={styles.switchSelector}
@@ -106,7 +106,7 @@ const EditKeyboxModal = ({ visible, handleEdit, handleDismiss, handleDelete, key
           buttonColor={themes.colors.secondaryDark}
           borderColor={themes.colors.secondaryDark}
           hasPadding
-          onPress={value => setIsOnline(value)}
+          // onPress={value => setIsOnline(value)}
         />
 
 

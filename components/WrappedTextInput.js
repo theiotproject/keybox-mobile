@@ -38,9 +38,9 @@ const WrappedTextInput = ({ label, value, onChangeText, toggleVisibility, disabl
 
 const styles = StyleSheet.create({
   
-  // inputWrapper: {
-  //   // marginVertical: 12,
-  // },
+  inputWrapper: {
+    // marginVertical: 12,
+  },
 
   // input: {
 

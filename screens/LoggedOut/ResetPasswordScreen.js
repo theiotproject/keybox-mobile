@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import themes from '../../utils/themes';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
-import { changePasswordValidationSchema } from '../../utils/yupShema';
+import { changePasswordValidationSchema, resetPasswordValidationSchema } from '../../utils/yupShema';
 import { firebase } from '@react-native-firebase/auth';
 import { resetPassword } from '../../utils/userHandler';
 // import firebase from 'react-native-firebase'; //oes not work in expo
@@ -27,11 +27,9 @@ const ResetPasswordScreen = () => {
   // HANDLING FORM
   // Variables for handling form validation (using yup schema and yupResolver)
   const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(changePasswordValidationSchema),
+    resolver: yupResolver(resetPasswordValidationSchema),
     defaultValues: {
         email: '',
-        newPassword: '',
-        confirmNewPassword: '',
     },
   });
 
@@ -39,8 +37,6 @@ const ResetPasswordScreen = () => {
   const onSubmit = (data) => {
     alert("working")
     console.log('Email:', data.email);
-    console.log('New Password:', data.newPassword);
-    console.log('Confirm Password:', data.confirmNewPassword);
     resetPassword(data.email)
   };
 
@@ -95,61 +91,6 @@ const ResetPasswordScreen = () => {
           defaultValue=""
         />
 
-        {/* PASSWORD */}
-        <Controller
-          style={styles.controller}
-          control={control}
-          render={({ field }) => (
-            <>
-              <TextInput
-                label='New Password'
-                mode='outlined'
-                onChangeText={field.onChange}
-                onBlur={field.onBlur}
-                value={field.value}
-                placeholder="New Password"
-                style={styles.inputText}
-                error={errors.newPassword ? errors.newPassword.message : null}
-                secureTextEntry
-              />
-              {errors.newPassword && (
-                <Text style={styles.error}>{errors.newPassword.message}</Text>
-              )}
-            </>
-          )}
-          name="newPassword"
-          rules={{ required: true }}
-          defaultValue=""
-          
-        />
-
-
-        {/* REPEAT PASSWORD */}
-        <Controller
-          style={styles.controller}
-          control={control}
-          render={({ field }) => (
-            <>
-              <TextInput
-                label='Confirm New Password'
-                mode='outlined'
-                onChangeText={field.onChange}
-                onBlur={field.onBlur}
-                value={field.value}
-                placeholder="Confirm New Password"
-                style={styles.inputText}
-                error={errors.confirmNewPassword ? errors.confirmNewPassword.message : null}
-                secureTextEntry
-              />
-              {errors.confirmNewPassword && (
-                <Text style={styles.error}>{errors.confirmNewPassword.message}</Text>
-              )}
-            </>
-          )}
-          name="confirmNewPassword"
-          rules={{ required: true }}
-          defaultValue=""
-        />
         
       </KeyboardAvoidingView>
 
@@ -203,8 +144,8 @@ const styles = StyleSheet.create({
 
   logoImageContainer: {
       marginVertical: 25, //Idk how it makes it look better, but it looks better
-      width: 75,
-      height: 75,
+      width: 95,
+      height: 95,
       alignItems: 'center',
       justifyContent: 'space-evenly',
   },
@@ -217,9 +158,9 @@ const styles = StyleSheet.create({
 
   // INPUTS
   inputContainer: {
-    flex: 4,
+    flex: 1,
     width: '100%',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
 
@@ -267,6 +208,11 @@ const styles = StyleSheet.create({
       alignItems:'center',
   },
 
+  // TEXT
+  textHeadline: {
+      color: 'black',
+      fontWeight: 'bold'
+  }
 
 
 });

@@ -6,7 +6,7 @@ export default {
     "slug": "KeyBoxMobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -32,13 +32,26 @@ export default {
     },
     "plugins": ["@react-native-google-signin/google-signin"],
     "extra": {
+      "eas": {
+        "projectId": process.env.EAS,
+        "build": {
+          "development": {
+            "developmentClient": true,
+            "distribution": "internal"
+          },
+          "preview": {
+            "distribution": "internal"
+          },
+        },
+      },
+
       firebaseApiKey: process.env.FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
       firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
       firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
-      firebaseGoogleWebClientId: process.env.FIREBASE_GOOGLE_WEB_CLIENT_ID
+      firebaseGoogleWebClientId: process.env.FIREBASE_GOOGLE_WEB_CLIENT_ID,   
     },
   }
 }
