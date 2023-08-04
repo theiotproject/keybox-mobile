@@ -3,8 +3,7 @@ import React, { useState, useRef } from 'react';
 import { View, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { Swipeable, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Text, TouchableRipple } from 'react-native-paper';
-import Animated from 'react-native-reanimated';
-import { AddKeyBox, EditKeybox } from '../utils/dataService';
+import Animated, { useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 
 const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit }) => {
   // State variables to track the selected item and its index
@@ -15,14 +14,33 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
   // State variable to toggle the dropdown list visibility
   const [isOptions, setIsOptions] = useState(false);
 
-  // Function to show/hide the dropdown list
+  // ---------------------------------
+  // TODO make animation when closing
+  // ANIMATIONS
+  const scaleY = useSharedValue(0); // Initialize with starting value 0
+  const translateY = useSharedValue(-200); // Initialize with starting value -200
+
+  const animateFlatList = (toValue) => {
+    scaleY.value = withTiming(toValue, { duration: 150 });
+    translateY.value = withTiming(toValue === 1 ? 0 : -200, { duration: 150 });
+  };
+
+  // Function to show the dropdown list
   const showOptions = () => {
     setIsOptions(true);
+    animateFlatList(1)
   };
+  // Function to hide the dropdown list
+  const hideOptions = () => {
+    animateFlatList(0);
+    setIsOptions(false);
+  };
+  // ---------------------------------
+
 
   // Function to handle item selection
   const handleItemSelect = (item, index) => {
-    setIsOptions(false); // Hide the dropdown list after selection
+    hideOptions()
     setSelectedItem(item);
     setSelectedIndex(index); // Set the selected index
     handleSelect(index); // Call the provided handleSelect function with the selected index
@@ -36,7 +54,7 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
       // Editing of the item using handleEdit function
       console.log(keyboxList[index]);
       handleEdit(keyboxList[index]);
-      setIsOptions(false); // Hide the dropdown list after the action
+      hideOptions()
     };
 
     return (
@@ -63,6 +81,7 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
         <TouchableRipple
           style={styles.itemTouchable} // Adjust the height of the item container
           onPress={() => handleItemSelect(item, index)} // Call handleItemSelect on item press with the index
+          onLongPress={() => handleEdit(keyboxList[index])}
         >
           <Text>{item}</Text>
         </TouchableRipple>
@@ -86,7 +105,7 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
           <Text 
             style={styles.dropdownButtonText} 
             variant='titleMedium'
-            onPress={() => !isOptions ? showOptions() : setIsOptions(false)}>
+            onPress={() => !isOptions ? showOptions() : hideOptions()}>
             {selectedItem ? selectedItem : 'Select Keybox'}
           </Text>
           {/* Render the "Chevron" icon to indicate dropdown list visibility */}
@@ -94,13 +113,18 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
             style={styles.dropdownButtonIcon} 
             name={isOptions ? 'chevron-up' : 'chevron-down'} 
             size={20} 
-            onPress={() => !isOptions ? showOptions() : setIsOptions(false)}/>
+            onPress={() => !isOptions ? showOptions() : hideOptions()}/>
         </View>
       </TouchableWithoutFeedback>
 
       {/* Render the dropdown list when isOptions is true */}
       {isOptions ? (
-        <View style={styles.dropdownListContainer}>
+        <Animated.View
+          style={[
+            styles.dropdownListContainer,
+            { transform: [{ scaleY: scaleY }, { translateY: translateY }] }, // Apply the animated transformations
+          ]}
+        >
           {/* Render the FlatList containing the items */}
           <FlatList
             style={styles.flatList}
@@ -111,7 +135,8 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
           />
-        </View>
+        </Animated.View>
+        
       ) : null}
 
       {/* Render the blurred background to make the dropdown list prominent */}

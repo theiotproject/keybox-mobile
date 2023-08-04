@@ -111,7 +111,7 @@ const DrawerNavigationScreen = () => {
         <AddKeyboxModal 
           visible={visibleAdd} 
           handleAdd={(deviceId, deviceName) => { 
-            AddKeyBox(deviceId, deviceName)
+            AddKeyBox(deviceId, deviceName).then(fetchData())
             setVisibleAdd(false)
           }}
           handleDismiss={() => setVisibleAdd(false)}  
@@ -121,7 +121,7 @@ const DrawerNavigationScreen = () => {
           visible={visibleEdit} 
           keybox={editDevice}
           handleEdit={(docId, deviceName, deviceStatus) => { 
-            EditKeybox(docId, deviceName, deviceStatus)
+            EditKeybox(docId, deviceName, deviceStatus).then(fetchData())
             setVisibleEdit(false)
           }}
           handleDismiss={() => setVisibleEdit(false)}  
