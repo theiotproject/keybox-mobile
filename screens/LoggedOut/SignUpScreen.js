@@ -104,7 +104,6 @@ const SignUpScreen = () => {
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
-                                placeholder="Username"
                                 style={styles.inputText}
                                 error={errors.username ? errors.username.message : null}
                             />
@@ -131,7 +130,6 @@ const SignUpScreen = () => {
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
-                                placeholder="Email Address"
                                 style={styles.inputText}
                                 error={errors.email ? errors.email.message : null}
                             />
@@ -158,7 +156,6 @@ const SignUpScreen = () => {
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
-                                placeholder="Password"
                                 style={styles.inputText}
                                 error={errors.password ? errors.password.message : null}
                                 secureTextEntry
@@ -186,7 +183,6 @@ const SignUpScreen = () => {
                                 onChangeText={field.onChange}
                                 onBlur={field.onBlur}
                                 value={field.value}
-                                placeholder="Confirm Password"
                                 style={styles.inputText}
                                 error={errors.confirmPassword ? errors.confirmPassword.message : null}
                                 secureTextEntry

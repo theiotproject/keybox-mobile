@@ -92,14 +92,17 @@ const SignInScreen = () => {
                 {/* CONTAINER FOR INPUTS */}
                 <View style={styles.inputContainer}>
 
+                    {/* EMAIL */}
                     <WrappedTextInput
                         label="Email Address"
                         value={ email }
                         style={styles.input}
+                        keyboardType='email'
                         onChangeText={text => setEmail(text)}
                         canHide={false}
                     />
 
+                    {/* PASSWORD */}
                     <WrappedTextInput
                         label="Password"
                         value={ password }

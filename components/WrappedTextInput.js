@@ -1,9 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
-const WrappedTextInput = ({ label, value, onChangeText, toggleVisibility, disabled, keyboardType, secureTextEntry }) => {
+const WrappedTextInput = ({ label, value, onChangeText, toggleVisibility, disabled, secureTextEntry }) => {
   const [hideText, setHideText] = useState(true);
 
   return (
@@ -15,7 +15,6 @@ const WrappedTextInput = ({ label, value, onChangeText, toggleVisibility, disabl
         style={[styles.input]}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry && hideText}
-        keyboardType={keyboardType}
         disabled={disabled}
         underlineColorAndroid={'#000'}
         right={

@@ -79,6 +79,7 @@ const ChangeEmailModal = ({ visible, handleChangeEmail, handleDismiss }) => {
                   onBlur={field.onBlur}
                   value={field.value}
                   placeholder="Current Password"
+                  secureTextEntry
                   style={styles.inputText}
                   error={errors.currentPassword ? errors.currentPassword.message : null}
               />

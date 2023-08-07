@@ -7,6 +7,7 @@ import { logo } from '../../../assets';
 import { AuthContext } from '../../../context/AuthContext';
 import ChangePasswordModal from '../../../components/modals/ChangePasswordModal';
 import ChangeEmailModal from '../../../components/modals/ChangeEmailModal';
+import Spacer from '../../../components/Spacer';
 
 const ProfileScreen = () => {
 
@@ -31,8 +32,8 @@ const ProfileScreen = () => {
   }
 
   return (
-    <>
-      <View style={styles.container}>
+    <View style={styles.outerContainer}>
+      <View style={styles.innerContainer}>
 
         <View style={styles.avatarContainer}>
           {/* User Avatar */}
@@ -47,6 +48,8 @@ const ProfileScreen = () => {
 
         </View>
 
+
+        <Spacer />
         
 
         {/* View containing buttons to make them flex horizontally */}
@@ -99,25 +102,32 @@ const ProfileScreen = () => {
         }}
         handleDismiss={() => setVisibleEmail(false)}
       />
-    </>
+    </View>
     
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  outerContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignContent: 'space-around',
+    alignContent: 'space-evenly',
     alignItems: 'center',
     padding: 16,
-    paddingVertical: 100,
+    // paddingVertical: 100,
   },
 
-  // Avatar
-  avatarContainer: {
+  innerContainer: {
+    // paddingVertical: 100,
     flex: 1,
-    justifyContent: 'center',
+    width: '100%'
+  },
+
+  // AVATAR CONTAINER
+  avatarContainer: {
+    flex: 1,    
+    justifyContent: 'flex-end',
+    alignContent:'center',
     // backgroundColor: 'pink',
   },
 
@@ -125,35 +135,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
 
-  // INPUTS
-  inputContainer: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'space-around',
-    // backgroundColor: 'red'
-  },
-
-  input: {
-    flex: 1,
-    width: '100%',
-    marginVertical: 10,
-  },
-
-  // TEXT DATA
-  textDataLabel: {
-    alignSelf: 'center',
-    fontWeight: 'bold',
-  },
+  // -> TEXT DATA
 
   textData: {
     alignSelf: 'center',
+    // backgroundColor:'red',
   },
 
   // BUTTONS
   buttonContainer: {
     flex: 1,
-    // flexDirection: 'row',
-    width: '100%',
     justifyContent: 'center',
     // backgroundColor: 'green',
   },
