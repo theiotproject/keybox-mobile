@@ -41,6 +41,7 @@ const CustomSelectDropdown = ({ list, keyboxList, selectText, handleSelect, hand
                     console.log(selectedItem, index);
                     handleSelect(index);
                 }}
+                
 
                 renderDropdownIcon={isOpened => {
                     return <Ionicons name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#000'} size={18} />;

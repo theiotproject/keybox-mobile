@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "765568439761",
+    "firebase_url": "https://keybox-project-default-rtdb.firebaseio.com",
+    "project_id": "keybox-project",
+    "storage_bucket": "keybox-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765568439761:android:4493c522b922b5d278bcf0",
+        "android_client_info": {
+          "package_name": "com.theiotproject.keyboxmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765568439761-behrgfaagke1uus45unjbba3f34obihd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWykpPLFY8rLWlkslPb-DmWYg6Y36C7uM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765568439761-behrgfaagke1uus45unjbba3f34obihd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765568439761:android:7710133eba9d49ba78bcf0",
+        "android_client_info": {
+          "package_name": "com.theiotproject.keyboxmobile.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765568439761-behrgfaagke1uus45unjbba3f34obihd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWykpPLFY8rLWlkslPb-DmWYg6Y36C7uM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765568439761-behrgfaagke1uus45unjbba3f34obihd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

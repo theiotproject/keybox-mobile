@@ -15,24 +15,13 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
   const [isOptions, setIsOptions] = useState(false);
 
   // ---------------------------------
-  // TODO make animation when closing
-  // ANIMATIONS
-  const scaleY = useSharedValue(0); // Initialize with starting value 0
-  const translateY = useSharedValue(-200); // Initialize with starting value -200
-
-  const animateFlatList = (toValue) => {
-    scaleY.value = withTiming(toValue, { duration: 150 });
-    translateY.value = withTiming(toValue === 1 ? 0 : -200, { duration: 150 });
-  };
 
   // Function to show the dropdown list
   const showOptions = () => {
     setIsOptions(true);
-    animateFlatList(1)
   };
   // Function to hide the dropdown list
   const hideOptions = () => {
-    animateFlatList(0);
     setIsOptions(false);
   };
   // ---------------------------------
@@ -120,10 +109,7 @@ const CustomDropdown = ({ data, keyboxList, handleSelect, handleAdd, handleEdit 
       {/* Render the dropdown list when isOptions is true */}
       {isOptions ? (
         <Animated.View
-          style={[
-            styles.dropdownListContainer,
-            { transform: [{ scaleY: scaleY }, { translateY: translateY }] }, // Apply the animated transformations
-          ]}
+          style={styles.dropdownListContainer}
         >
           {/* Render the FlatList containing the items */}
           <FlatList

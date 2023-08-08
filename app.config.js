@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
   "expo": {
-    "name": "KeyBoxMobile",
-    "slug": "KeyBoxMobile",
+    "name": "KeyBoxMobileDev",
+    "slug": "keyboxmobiledev",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -20,7 +20,7 @@ export default {
       "supportsTablet": true
     },
     "android": {
-      "package": process.env.ANDROID_PACKAGE_NAME,
+      "package": "com.theiotproject.keyboxmobile.dev",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -33,7 +33,7 @@ export default {
     "plugins": ["@react-native-google-signin/google-signin"],
     "extra": {
       "eas": {
-        "projectId": process.env.EAS,
+        "projectId": "0169478a-9842-4509-ac0a-da8738a08894",
         "build": {
           "development": {
             "developmentClient": true,
